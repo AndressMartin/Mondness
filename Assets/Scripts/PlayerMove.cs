@@ -19,10 +19,13 @@ public class PlayerMove : MonoBehaviour
     public FaceEnum faceAtual = FaceEnum.Cima;
     public FaceEnum proximaFace = FaceEnum.Frente;
     public Direction direcao = Direction.W;
+    public Direction direcaoAnterior = Direction.S;
     private bool pressionouUmAxis = true;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
     public Vector3 pontoEstatico;
     public Transform pontoMov;
+    private bool rotacionando;
+
     private void Awake()
     {
         pontoMov.position = transform.position;
@@ -44,31 +47,31 @@ public class PlayerMove : MonoBehaviour
         //Movimenta-se se o ponto seguinte tem um bloco para sustentar o player
         if (DetectBlocos.hitColliders.Length > 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
             //TODO: Verificar se tem um bloco logo em frente ao player, já que ele não pode trombar com outro bloco.
         }
-        //else
-        //{
-        //    pontoMov.position = pontoEstatico;
-        //}
-        else if (pressionouUmAxis) //Rotaciona o player por não ter encontrado nenhum bloco em frente
+        else
         {
-            Debug.Log(DetectBlocos.hitColliders.Length);
-            Rotacionar();
+            pontoMov.position = pontoEstatico;
+            //if (!rotacionando) Rotacionar();
         }
     }
 
     private void Rotacionar()
     {
+        rotacionando = true;
         Debug.Log("Rotacionar");
-        transform.rotation = Quaternion.AngleAxis(90, transform.forward) * transform.rotation;
-        pontoMov.position = transform.position;
+        Quaternion myQuat = transform.rotation;
+        transform.Rotate(0, 0, 90/* * velocidade * Time.deltaTime*/);
+        //transform.Rotate(0, Input.GetAxis("Rotate") * 60 * Time.deltaTime, 0)
+        //transform.rotation = Quaternion.AngleAxis(90, transform.right) * velocidade * Time.deltaTime;
+        //pontoMov.position = transform.position;
         //pontoMov.rotation = transform.rotation;
-        pressionouUmAxis = false;
     }
 
     public void WaitForInput()
     {
+        direcaoAnterior = direcao;
         myCamPos = CameraRotate.cameraPos;
         Debug.LogWarning(myCamPos);
         if (Input.GetAxisRaw("Horizontal") > 0)
@@ -93,16 +96,24 @@ public class PlayerMove : MonoBehaviour
         }
         direcao = corrigirDirecao();
         //pressionouUmAxis = true;
-        OlharParaDirecao();
-        if (DetectBlocos.hitColliders.Length > 0) Andar();
-        else pontoMov.position = pontoEstatico;
+        OlharParaDirecao2();
+        pontoMov.position = pontoEstatico;
+        Andar();
     }
 
     private void OlharParaDirecao()
     {
+        int num = (int)direcaoAnterior - (int)direcao;
+        Debug.Log($"{direcaoAnterior} - {direcao} = {Math.Abs((int)direcaoAnterior - (int)direcao)} e sem modulo = {direcaoAnterior - direcao}");
+        transform.Rotate(0, 90 * num, 0);
+    }
+
+    private void OlharParaDirecao2()
+    {
         if (direcao == Direction.W)
         {
             transform.rotation = Quaternion.AngleAxis(0, transform.up);
+
         }
         if (direcao == Direction.D)
         {
@@ -117,11 +128,10 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(270, transform.up);
         }
     }
-
     private void Andar()
     {
-        Debug.Log($"Andando em {direcao}");
-        pontoMov.position += Vector3Int.FloorToInt(transform.forward * 1);
+        Debug.Log($"Colocando {pontoMov.position} de rotação {pontoMov.rotation} em {direcao} a {transform.forward}");
+        pontoMov.position = pontoMov.position + transform.forward * 1;
     }
 
     //int newDirection = direction + (int)cameraPos;
@@ -145,6 +155,11 @@ public class PlayerMove : MonoBehaviour
             return (Direction)num;
         }
     }
+
+
+
+
+
     public void TrocarFace()
     {
         //Se negativo soma 360, se >=360, subtrai 360.
