@@ -20,17 +20,17 @@ public class PlayerMove : MonoBehaviour
     public Direction direcao = Direction.W;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
     public Vector3 pontoEstatico;
-    public Vector3 pontoMov;
+    public Transform pontoMov;
     private void Awake()
     {
-        pontoMov = transform.position;
-        pontoEstatico = pontoMov;
+        pontoMov.position = transform.position;
+        pontoEstatico = pontoMov.position;
     }
     private void Update()
     {
         if (transform.position == pontoEstatico) Move();
-        if (transform.position == pontoMov) pontoEstatico = pontoMov;
-        transform.position = Vector3.MoveTowards(transform.position, pontoMov, velocidade * Time.deltaTime);
+        if (transform.position == pontoMov.position) pontoEstatico = pontoMov.position;
+        transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
     }
     public void Move()
     {
@@ -62,21 +62,22 @@ public class PlayerMove : MonoBehaviour
 
     private void Andar()
     {
+        Debug.Log($"Andando em {direcao}");
         if (direcao == Direction.W)
         {
-            pontoMov = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+            pontoMov.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
         }
         if (direcao == Direction.D)
         {
-            pontoMov = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+            pontoMov.position = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
         }
         if (direcao == Direction.S)
         {
-            pontoMov = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+            pontoMov.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
         }
         if (direcao == Direction.A)
         {
-            pontoMov = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
+            pontoMov.position = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
         }
     }
 
