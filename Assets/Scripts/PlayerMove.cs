@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField]GameObject camPivot;
+    [SerializeField] GameObject camPivot;
+    [SerializeField] GameObject personagem;
     float horizontal;
     float vertical;
     float velocidade = 5f;
@@ -18,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     public FaceEnum faceAtual = FaceEnum.Cima;
     public FaceEnum proximaFace = FaceEnum.Frente;
     public Direction direcao = Direction.W;
+    private bool pressionouUmAxis = true;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
     public Vector3 pontoEstatico;
     public Transform pontoMov;
@@ -28,11 +30,44 @@ public class PlayerMove : MonoBehaviour
     }
     private void Update()
     {
-        if (transform.position == pontoEstatico) Move();
-        if (transform.position == pontoMov.position) pontoEstatico = pontoMov.position;
-        transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
+
+        //Se está parado
+        if (transform.position == pontoEstatico) 
+        { 
+            WaitForInput(); 
+        }
+        //Se terminou de se movimentar
+        if (transform.position == pontoMov.position)
+        {
+            pontoEstatico = pontoMov.position;
+        }
+        //Movimenta-se se o ponto seguinte tem um bloco para sustentar o player
+        if (DetectBlocos.hitColliders.Length > 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
+            //TODO: Verificar se tem um bloco logo em frente ao player, já que ele não pode trombar com outro bloco.
+        }
+        //else
+        //{
+        //    pontoMov.position = pontoEstatico;
+        //}
+        else if (pressionouUmAxis) //Rotaciona o player por não ter encontrado nenhum bloco em frente
+        {
+            Debug.Log(DetectBlocos.hitColliders.Length);
+            Rotacionar();
+        }
     }
-    public void Move()
+
+    private void Rotacionar()
+    {
+        Debug.Log("Rotacionar");
+        transform.rotation = Quaternion.AngleAxis(90, transform.forward) * transform.rotation;
+        pontoMov.position = transform.position;
+        //pontoMov.rotation = transform.rotation;
+        pressionouUmAxis = false;
+    }
+
+    public void WaitForInput()
     {
         myCamPos = CameraRotate.cameraPos;
         Debug.LogWarning(myCamPos);
@@ -57,28 +92,36 @@ public class PlayerMove : MonoBehaviour
             return;
         }
         direcao = corrigirDirecao();
-        Andar();
+        //pressionouUmAxis = true;
+        OlharParaDirecao();
+        if (DetectBlocos.hitColliders.Length > 0) Andar();
+        else pontoMov.position = pontoEstatico;
+    }
+
+    private void OlharParaDirecao()
+    {
+        if (direcao == Direction.W)
+        {
+            transform.rotation = Quaternion.AngleAxis(0, transform.up);
+        }
+        if (direcao == Direction.D)
+        {
+            transform.rotation = Quaternion.AngleAxis(90, transform.up);
+        }
+        if (direcao == Direction.S)
+        {
+            transform.rotation = Quaternion.AngleAxis(180, transform.up);
+        }
+        if (direcao == Direction.A)
+        {
+            transform.rotation = Quaternion.AngleAxis(270, transform.up);
+        }
     }
 
     private void Andar()
     {
         Debug.Log($"Andando em {direcao}");
-        if (direcao == Direction.W)
-        {
-            pontoMov.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-        }
-        if (direcao == Direction.D)
-        {
-            pontoMov.position = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
-        }
-        if (direcao == Direction.S)
-        {
-            pontoMov.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
-        }
-        if (direcao == Direction.A)
-        {
-            pontoMov.position = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
-        }
+        pontoMov.position += Vector3Int.FloorToInt(transform.forward * 1);
     }
 
     //int newDirection = direction + (int)cameraPos;
