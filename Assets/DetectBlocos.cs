@@ -18,7 +18,7 @@ public class DetectBlocos : MonoBehaviour
         MyCollisions();
     }
 
-    void MyCollisions()
+    public void MyCollisions()
     {
         //Use the OverlapBox to detect if there are any other colliders within this box area.
         //Use the GameObject's centre, half the size (as a radius) and rotation. This creates an invisible box around your GameObject.

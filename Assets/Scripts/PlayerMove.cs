@@ -9,23 +9,27 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] GameObject personagem;
     float horizontal;
     float vertical;
-    float velocidade = 5f;
+    float velocidade = 90f;
 
     bool caindo;
 
     public enum FaceEnum { Cima, Baixo, Esquerda, Direita, Frente, Costas}
     public enum Direction { W, D, S, A}
 
+    public enum State { parado, andar, virarY, virarCorpo}
+
     public FaceEnum faceAtual = FaceEnum.Cima;
     public FaceEnum proximaFace = FaceEnum.Frente;
     public Direction direcao = Direction.W;
     public Direction direcaoAnterior = Direction.S;
+    public State estado = State.parado;
     private bool pressionouUmAxis = true;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
     public Vector3 pontoEstatico;
     public Transform pontoMov;
     private bool rotacionando;
-
+    int maxRot = 90;
+    int rot;
     private void Awake()
     {
         pontoMov.position = transform.position;
@@ -34,56 +38,62 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         //Se está parado
-        if (transform.position == pontoEstatico) 
-        { 
-            WaitForInput(); 
-        }
-        //Se terminou de se movimentar
-        if (transform.position == pontoMov.position)
+        if (estado == State.parado)
         {
-            pontoEstatico = pontoMov.position;
+            if (transform.position == pontoEstatico)
+            {
+                WaitForInput();
+            }
+            //Se terminou de se movimentar
+            
         }
         //Movimenta-se se o ponto seguinte tem um bloco para sustentar o player
-        if (DetectBlocos.hitColliders.Length > 0)
+        else if (estado == State.andar)
         {
-            //transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
+            if (transform.position == pontoMov.position)
+            {
+                pontoEstatico = pontoMov.position;
+                estado = State.parado;
+            }
             //TODO: Verificar se tem um bloco logo em frente ao player, já que ele não pode trombar com outro bloco.
         }
-        if (Input.GetKeyDown(KeyCode.Space)) Rotacionar();
-            pontoMov.position = transform.position;
+        if (estado == State.virarCorpo)
+        {
+            if (!rotacionando) rot = maxRot;
+            Rotacionar();
+        }
     }
 
     private void Rotacionar()
     {
+        
         rotacionando = true;
         Debug.Log("Rotacionar");
         if (direcao == Direction.D)
         {
-            transform.Rotate(0, 0, 90);
+            transform.Rotate(0, 0, velocidade * Time.deltaTime);
         }
         if (direcao == Direction.A)
         {
-            transform.Rotate(0, 0, -90);
+            transform.Rotate(0, 0, velocidade * Time.deltaTime);
         }
         if (direcao == Direction.W)
         {
-            transform.Rotate(90, 0, 0);
+            transform.Rotate(velocidade * Time.deltaTime, 0, 0);
         }
         if (direcao == Direction.S)
         {
-            transform.Rotate(-90, 0, 0);
+            transform.Rotate(velocidade * Time.deltaTime, 0, 0);
         }
-        //transform.Rotate(0, Input.GetAxis("Rotate") * 60 * Time.deltaTime, 0)
-        //transform.rotation = Quaternion.AngleAxis(90, transform.right) * velocidade * Time.deltaTime;
-        //pontoMov.position = transform.position;
-        //pontoMov.rotation = transform.rotation;
+        pontoMov.position = transform.position;
     }
 
     public void WaitForInput()
     {
-        direcaoAnterior = direcao;
+        direcaoAnterior = corrigirDirecao(direcao);
         myCamPos = CameraRotate.cameraPos;
-        Debug.LogWarning(myCamPos);
+        //Debug.LogWarning(myCamPos);
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
             direcao = Direction.A;
@@ -100,47 +110,70 @@ public class PlayerMove : MonoBehaviour
         {
             direcao = Direction.S;
         }
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
-            direcao = corrigirDirecao();
-            //pressionouUmAxis = true;
-            OlharParaDirecao();
-            pontoMov.position = pontoEstatico;
-            Andar();
+            return;
         }
+        direcao = corrigirDirecao();
+        OlharParaDirecao();
+        pontoMov.position = pontoEstatico;
+        Andar();
     }
 
     private void OlharParaDirecao()
     {
         int num = (int)direcaoAnterior - (int)direcao;
-        Debug.Log($"{direcaoAnterior} - {direcao} = {Math.Abs((int)direcaoAnterior - (int)direcao)} e sem modulo = {direcaoAnterior - direcao}");
+        //Debug.Log($"{direcaoAnterior} - {direcao} = {Math.Abs((int)direcaoAnterior - (int)direcao)} e sem modulo = {direcaoAnterior - direcao}");
         personagem.transform.Rotate(0, 90 * num, 0);
     }
 
-    private void OlharParaDirecao2()
+    private Direction corrigirDirecao(Direction direcao)
     {
-        if (direcao == Direction.W)
+        int num = (int)direcao + ((int)myCamPos);
+        if (num > 3)
         {
-            transform.rotation = Quaternion.AngleAxis(0, transform.up);
-
+            return (Direction)(num - 4);
         }
-        if (direcao == Direction.D)
+        else if (num < 0)
         {
-            transform.rotation = Quaternion.AngleAxis(90, transform.up);
+            return (Direction)(num + 4);
         }
-        if (direcao == Direction.S)
+        else
         {
-            transform.rotation = Quaternion.AngleAxis(180, transform.up);
-        }
-        if (direcao == Direction.A)
-        {
-            transform.rotation = Quaternion.AngleAxis(270, transform.up);
+            return (Direction)num;
         }
     }
+
     private void Andar()
     {
         Debug.Log($"Colocando {pontoMov.position} de rotação {pontoMov.rotation} em {direcao} a {transform.forward}");
-        pontoMov.position = pontoMov.position + transform.forward * 1;
+        if (direcao == Direction.D)
+        {
+            pontoMov.position -= transform.right * 1;
+        }
+        if (direcao == Direction.A)
+        {
+            pontoMov.position += transform.right * 1;
+        }
+        if (direcao == Direction.W)
+        {
+            pontoMov.position += transform.forward * 1;
+        }
+        if (direcao == Direction.S)
+        {
+            pontoMov.position -= transform.forward * 1;
+        }
+        pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+        if (DetectBlocos.hitColliders.Length > 0)
+        {
+            Debug.LogWarning(DetectBlocos.hitColliders.Length);
+            estado = State.andar;
+        }
+        else
+        {
+            pontoMov.position = pontoEstatico;
+            estado = State.virarCorpo;
+        }
     }
 
     //int newDirection = direction + (int)cameraPos;
@@ -158,6 +191,10 @@ public class PlayerMove : MonoBehaviour
         if (num > 3)
         {
             return (Direction)(num - 4);
+        }
+        else if (num < 0)
+        {
+            return (Direction)(num + 4);
         }
         else
         {
