@@ -33,7 +33,6 @@ public class PlayerMove : MonoBehaviour
     }
     private void Update()
     {
-
         //Se está parado
         if (transform.position == pontoEstatico) 
         { 
@@ -50,19 +49,30 @@ public class PlayerMove : MonoBehaviour
             //transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
             //TODO: Verificar se tem um bloco logo em frente ao player, já que ele não pode trombar com outro bloco.
         }
-        else
-        {
-            pontoMov.position = pontoEstatico;
-            //if (!rotacionando) Rotacionar();
-        }
+        if (Input.GetKeyDown(KeyCode.Space)) Rotacionar();
+            pontoMov.position = transform.position;
     }
 
     private void Rotacionar()
     {
         rotacionando = true;
         Debug.Log("Rotacionar");
-        Quaternion myQuat = transform.rotation;
-        transform.Rotate(0, 0, 90/* * velocidade * Time.deltaTime*/);
+        if (direcao == Direction.D)
+        {
+            transform.Rotate(0, 0, 90);
+        }
+        if (direcao == Direction.A)
+        {
+            transform.Rotate(0, 0, -90);
+        }
+        if (direcao == Direction.W)
+        {
+            transform.Rotate(90, 0, 0);
+        }
+        if (direcao == Direction.S)
+        {
+            transform.Rotate(-90, 0, 0);
+        }
         //transform.Rotate(0, Input.GetAxis("Rotate") * 60 * Time.deltaTime, 0)
         //transform.rotation = Quaternion.AngleAxis(90, transform.right) * velocidade * Time.deltaTime;
         //pontoMov.position = transform.position;
@@ -76,11 +86,11 @@ public class PlayerMove : MonoBehaviour
         Debug.LogWarning(myCamPos);
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            direcao = Direction.D;
+            direcao = Direction.A;
         }
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            direcao = Direction.A;
+            direcao = Direction.D;
         }
         if (Input.GetAxisRaw("Vertical") > 0)
         {
@@ -90,22 +100,21 @@ public class PlayerMove : MonoBehaviour
         {
             direcao = Direction.S;
         }
-        if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            return;
+            direcao = corrigirDirecao();
+            //pressionouUmAxis = true;
+            OlharParaDirecao();
+            pontoMov.position = pontoEstatico;
+            Andar();
         }
-        direcao = corrigirDirecao();
-        //pressionouUmAxis = true;
-        OlharParaDirecao2();
-        pontoMov.position = pontoEstatico;
-        Andar();
     }
 
     private void OlharParaDirecao()
     {
         int num = (int)direcaoAnterior - (int)direcao;
         Debug.Log($"{direcaoAnterior} - {direcao} = {Math.Abs((int)direcaoAnterior - (int)direcao)} e sem modulo = {direcaoAnterior - direcao}");
-        transform.Rotate(0, 90 * num, 0);
+        personagem.transform.Rotate(0, 90 * num, 0);
     }
 
     private void OlharParaDirecao2()
