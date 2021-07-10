@@ -1,61 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField]GameObject mainCamParent;
-    Vector3 cameraV3;
+    [SerializeField]GameObject camPivot;
     float horizontal;
     float vertical;
-    float velocidade;
+    float velocidade = 5f;
 
     bool caindo;
 
     public enum FaceEnum { Cima, Baixo, Esquerda, Direita, Frente, Costas}
-    public enum CameraPos { pos1, pos2, pos3, pos4}
     public enum Direction { W, D, S, A}
+
     public FaceEnum faceAtual = FaceEnum.Cima;
     public FaceEnum proximaFace = FaceEnum.Frente;
-    public CameraPos cameraPos = CameraPos.pos1;
     public Direction direcao = Direction.W;
+    private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
+    public Vector3 pontoEstatico;
+    public Vector3 pontoMov;
     private void Awake()
     {
-        cameraV3 = new Vector3(0, 45, 0);
+        pontoMov = transform.position;
+        pontoEstatico = pontoMov;
     }
-    public void ChecarCamera()
-    {
-        Debug.Log(mainCamParent.transform.rotation);
-        //Se a câmera está no ponto inicial
-        if (mainCamParent.transform.rotation == Quaternion.Euler(mainCamParent.transform.rotation.x, 45, mainCamParent.transform.rotation.z))
-        {
-            Debug.Log(45);
-            cameraPos = CameraPos.pos1;
-        }
-        else if (mainCamParent.transform.rotation == Quaternion.Euler(mainCamParent.transform.rotation.x, 135, mainCamParent.transform.rotation.z))
-        {
-            Debug.Log(135);
-            cameraPos = CameraPos.pos2;
-        }
-        else if (mainCamParent.transform.rotation == Quaternion.Euler(mainCamParent.transform.rotation.x, 225, mainCamParent.transform.rotation.z))
-        {
-            Debug.Log(225);
-            cameraPos = CameraPos.pos3;
-        }
-        else if (mainCamParent.transform.rotation == Quaternion.Euler(mainCamParent.transform.rotation.x, 315, mainCamParent.transform.rotation.z))
-        {
-            Debug.Log(315);
-            cameraPos = CameraPos.pos4;
-        }
-    }
-
     private void Update()
     {
-        Move();
+        if (transform.position == pontoEstatico) Move();
+        if (transform.position == pontoMov) pontoEstatico = pontoMov;
+        transform.position = Vector3.MoveTowards(transform.position, pontoMov, velocidade * Time.deltaTime);
     }
     public void Move()
     {
-        ChecarCamera();
+        myCamPos = CameraRotate.cameraPos;
+        Debug.LogWarning(myCamPos);
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
             direcao = Direction.D;
@@ -77,20 +57,41 @@ public class PlayerMove : MonoBehaviour
             return;
         }
         direcao = corrigirDirecao();
-        Debug.Log("Direcao = " + direcao);
-        //int newDirection = direction + (int)cameraPos;
-        //Indice + (cameraPos)
-        // W = 0
-        // D = 1
-        // S = 2
-        // A = 3
-        // 0 + (0) -> W
-        // 0 + (3) -> A
-        // 3 + (3) -> S
+        Andar();
     }
+
+    private void Andar()
+    {
+        if (direcao == Direction.W)
+        {
+            pontoMov = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+        }
+        if (direcao == Direction.D)
+        {
+            pontoMov = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+        }
+        if (direcao == Direction.S)
+        {
+            pontoMov = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+        }
+        if (direcao == Direction.A)
+        {
+            pontoMov = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
+        }
+    }
+
+    //int newDirection = direction + (int)cameraPos;
+    //Indice + (cameraPos)
+    // W = 0
+    // D = 1
+    // S = 2
+    // A = 3
+    // 0 + (0) -> W
+    // 0 + (3) -> A
+    // 3 + (3) -> S
     public Direction corrigirDirecao()
     {
-        int num = (int)direcao + ((int)cameraPos);
+        int num = (int)direcao + ((int)myCamPos);
         if (num > 3)
         {
             return (Direction)(num - 4);
@@ -100,7 +101,7 @@ public class PlayerMove : MonoBehaviour
             return (Direction)num;
         }
     }
-    public void trocarDirecao()
+    public void TrocarFace()
     {
         //Se negativo soma 360, se >=360, subtrai 360.
         //Cima 0, 0, 0
