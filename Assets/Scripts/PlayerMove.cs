@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
     public Vector3 pontoEstatico;
     public Transform pontoMov;
     private bool rotacionando;
-    float maxRotTime = 2f;
+    float maxRotTime = 1f;
     float rotTime;
     private Vector3 currentEulerAngles;
     float totalRot;
@@ -79,93 +79,14 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void Rotacionar()
-    {
-        rotTime -= Time.fixedDeltaTime;
-        rotacionando = true;
-        Debug.Log(rotTime);
-        totalRot = rotVel * Time.fixedDeltaTime;
-        if (totalRot < 90)
-            totalRot = 90;
-        if (transform.rotation.y <= 90)
-        {
-            if (direcao == Direction.D)
-            {
-                transform.Rotate(0, 0, rotVel * Time.fixedDeltaTime);
-            }
-            if (direcao == Direction.A)
-            {
-                transform.Rotate(0, 0, rotVel * Time.fixedDeltaTime);
-            }
-            if (direcao == Direction.W)
-            {
-                transform.Rotate(rotVel * Time.fixedDeltaTime, 0, 0);
-            }
-            if (direcao == Direction.S)
-            {
-                transform.Rotate(rotVel * Time.fixedDeltaTime, 0, 0);
-            }
-            
-        }
-        else
-        {
-            //transform.rotation = Quaternion.AngleAxis;
-            pontoMov.position = transform.position;
-        }
-    }
-
     void Rotacionar2()
     {
         rotTime -= Time.deltaTime;
-        if (direcao == Direction.D)
-        {
-            if (!rotacionando)
-            {
-                currentEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90);
-                targetToRotate = Quaternion.Euler(currentEulerAngles);
-                Debug.LogWarning("currentEulerAngles " + currentEulerAngles);
-                Debug.LogWarning("transform.eulerAngles " + transform.eulerAngles);
-            }
-
-            transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.eulerAngles), targetToRotate, Time.deltaTime * rotsmooth);
-        }
-        if (direcao == Direction.A)
-        {
-            if (!rotacionando)
-            {
-                currentEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z - 90);
-                targetToRotate = Quaternion.Euler(currentEulerAngles);
-                Debug.LogWarning("currentEulerAngles " + currentEulerAngles);
-            }
-
-            transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.eulerAngles), targetToRotate, Time.deltaTime * rotsmooth);
-        }
-        if (direcao == Direction.W)
-        {
-            if (!rotacionando)
-            {
-                currentEulerAngles = new Vector3(transform.rotation.x + 90, transform.rotation.y, transform.rotation.z);
-                targetToRotate = Quaternion.Euler(currentEulerAngles);
-                Debug.LogWarning("currentEulerAngles " + currentEulerAngles);
-            }
-
-            transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.eulerAngles), targetToRotate, Time.deltaTime * rotsmooth);
-        }
-        if (direcao == Direction.S)
-        {
-            if (!rotacionando)
-            {
-                currentEulerAngles = new Vector3(transform.rotation.x - 90, transform.rotation.y, transform.rotation.z);
-                targetToRotate = Quaternion.Euler(currentEulerAngles);
-                Debug.LogWarning("currentEulerAngles " + currentEulerAngles);
-            }
-
-            transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.eulerAngles), targetToRotate, Time.deltaTime * rotsmooth);
-        }
+        transform.Rotate(personagem.transform.right * (rotVel * Time.deltaTime));
         if (transform.rotation == targetToRotate)
         {
             rotTime = 0;
-            Debug.LogWarning("You can stop now! Transform is " + transform.eulerAngles);
+            pontoMov.position = transform.position;
         }
         if (!rotacionando) Debug.LogWarning("END: " + targetToRotate);
         rotacionando = true;
@@ -267,6 +188,8 @@ public class PlayerMove : MonoBehaviour
             return (Direction)num;
         }
     }
+
+
 
 
 
