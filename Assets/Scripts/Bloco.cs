@@ -113,6 +113,7 @@ public class Bloco : MonoBehaviour
                     {
                         caindo = false;
                         transform.position = collision.transform.position;
+                        collision.gameObject.GetComponent<Bloco>().Desativar();
                     }
                     else if(collision.gameObject.GetComponent<Bloco>().tipo == TipoBloco.Vidro)
                     {
@@ -136,6 +137,13 @@ public class Bloco : MonoBehaviour
     }
 
     private void Quebrar()
+    {
+        boxCollider.enabled = false;
+        rigidBody.isKinematic = true;
+        meshRenderer.enabled = false;
+    }
+
+    private void Desativar()
     {
         boxCollider.enabled = false;
         rigidBody.isKinematic = true;
