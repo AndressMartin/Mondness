@@ -10,8 +10,9 @@ public class PlayerMove : MonoBehaviour
     FMOD.Studio.EventInstance passosSfx;
     FMOD.Studio.EventInstance puloSfx;
     FMOD.Studio.EventInstance quedaSfx;
-    [SerializeField] GameObject camPivot;
     [SerializeField] GameObject personagem;
+    [SerializeField] GameObject teleportTrail;
+    private GameObject myTrail;
     float horizontal;
     float vertical;
     float movVel = 5f;
@@ -21,13 +22,14 @@ public class PlayerMove : MonoBehaviour
     UnityEvent DerrubarCuboAnterior;
     public enum Direction { W, D, S, A}
 
-    public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda}
+    public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda, Teleportando}
 
     public Direction direcao = Direction.W;
     public Direction direcaoAnterior = Direction.S;
     public State estado = State.Parado;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
     public Vector3 pontoEstatico;
+    public Vector3 teleportTarget;
     public Transform pontoMov;
     private bool rotacionando;
     float maxRotTime = 1f;
@@ -120,13 +122,39 @@ public class PlayerMove : MonoBehaviour
         }
         else if (estado == State.TerminandoQueda)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, 30f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, 60f * Time.deltaTime);
             if (transform.position == pontoMov.position)
             {
                 pontoEstatico = pontoMov.position;
                 estado = State.Parado;
             }
         }
+        else if (estado == State.Teleportando)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, teleportTarget, 15f * Time.deltaTime);
+            transform.Rotate(transform.up * 60f * Time.deltaTime);
+            transform.Rotate(transform.forward * 60f * Time.deltaTime);
+            transform.Rotate(transform.right * 60f * Time.deltaTime);
+            if (transform.position == teleportTarget)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                pontoMov.position = transform.position;
+                pontoEstatico = transform.position;
+                estado = State.Parado;
+                StartCoroutine(DestroyTrail());
+            }
+        }
+    }
+
+    private IEnumerator DestroyTrail()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(myTrail);
+    }
+
+    private void CreateTrail()
+    {
+        myTrail = Instantiate(teleportTrail, transform.GetChild(0).position, transform.GetChild(0).rotation, transform);
     }
 
     private void Cair()
@@ -302,12 +330,11 @@ public class PlayerMove : MonoBehaviour
 
     public void Teleport(Vector3 position)
     {
+        estado = State.Teleportando;
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        transform.position = position;
-        pontoMov.position = position;
-        pontoEstatico = position;
-        estado = State.Parado;
         targetToRotate = transform.rotation;
         rotacionando = false;
+        CreateTrail();
+        teleportTarget = position;
 }
 }
