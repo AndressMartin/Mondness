@@ -58,6 +58,7 @@ public class PlayerMove : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, movVel * Time.deltaTime);
             if (transform.position == pontoMov.position)
             {
+                //CorrectPositions();
                 pontoEstatico = pontoMov.position;
                 estado = State.parado;
             }
@@ -72,6 +73,8 @@ public class PlayerMove : MonoBehaviour
             if (rotTime > 0 ) Rotacionar2();
             else
             {
+                CorrectRotation();
+                rotTime = 0;
                 targetToRotate = transform.rotation;
                 estado = State.parado;
                 rotacionando = false;
@@ -85,13 +88,30 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("rotVel = " + rotVel);
         rotTime -= Time.deltaTime;
         transform.Rotate(personagem.transform.right * (rotVel * Time.deltaTime), Space.World);
-        if (transform.rotation == targetToRotate)
-        {
-            rotTime = 0;
-            pontoMov.position = transform.position;
-        }
+        //if (transform.rotation == targetToRotate)
+        //{
+        //    rotTime = 0;
+        //    pontoMov.position = transform.position;
+        //}
         if (!rotacionando) Debug.LogWarning("END: " + targetToRotate);
         rotacionando = true;
+    }
+
+    private void CorrectRotation()
+    {
+        var vec = transform.eulerAngles;
+        vec.x = Mathf.Round(vec.x / 90) * 90;
+        vec.y = Mathf.Round(vec.y / 90) * 90;
+        vec.z = Mathf.Round(vec.z / 90) * 90;
+        transform.eulerAngles = vec;
+    }
+    private void CorrectPositions(Vector3 pos)
+    {
+        Vector3 tmp = pos;
+        tmp.x = Mathf.Round(tmp.x);
+        tmp.y = Mathf.Round(tmp.y);
+        tmp.z = Mathf.Round(tmp.z);
+        pos = tmp;
     }
 
     public void WaitForInput()
@@ -149,7 +169,12 @@ public class PlayerMove : MonoBehaviour
             {
                 Debug.LogWarning(DetectBlocos.hitColliders.Length);
                 pontoMov.position += personagem.transform.up * -1;
-                estado = State.andar;
+                pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+                if (DetectBlocos.hitColliders.Length > 0)
+                {
+                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                    estado = State.andar;
+                }
             }
             else
             {
@@ -196,7 +221,47 @@ public class PlayerMove : MonoBehaviour
     }
 
 
+    public static float ClampAngle(float angle, float min, float max)
+    {
+        angle = Mathf.Repeat(angle, 360);
+        min = Mathf.Repeat(min, 360);
+        max = Mathf.Repeat(max, 360);
+        bool inverse = false;
+        var tmin = min;
+        var tangle = angle;
+        if (min > 180)
+        {
+            inverse = !inverse;
+            tmin -= 180;
+        }
+        if (angle > 180)
+        {
+            inverse = !inverse;
+            tangle -= 180;
+        }
+        var result = !inverse ? tangle > tmin : tangle < tmin;
+        if (!result)
+            angle = min;
 
+        inverse = false;
+        tangle = angle;
+        var tmax = max;
+        if (angle > 180)
+        {
+            inverse = !inverse;
+            tangle -= 180;
+        }
+        if (max > 180)
+        {
+            inverse = !inverse;
+            tmax -= 180;
+        }
+
+        result = !inverse ? tangle < tmax : tangle > tmax;
+        if (!result)
+            angle = max;
+        return angle;
+    }
 
 
 
