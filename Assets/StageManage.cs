@@ -24,6 +24,27 @@ public class StageManage : MonoBehaviour
         StartCoroutine(FindStageStartPoints());
     }
 
+    private void Update()
+    {
+        StageHackTool();
+    }
+
+    private void StageHackTool()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            player.GetComponent<PlayerMove>().Teleport(startPoints[stages[0]].transform.position);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            player.GetComponent<PlayerMove>().Teleport(startPoints[stages[1]].transform.position);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            player.GetComponent<PlayerMove>().Teleport(startPoints[stages[2]].transform.position);
+        }
+    }
+
     private IEnumerator FindStageStartPoints()
     {
         yield return new WaitForSeconds(1);

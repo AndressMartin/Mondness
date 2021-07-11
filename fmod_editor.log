@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000021327082218 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000002132707D6B8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,25 +16,25 @@
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] SoundI::release                          : Tema Gameplay e Derivados - Intro (00000213276730B8)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (000002132706BB28)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (000002135CE128F8)
-[LOG] SoundI::release                          :  (00000212A34C5BD8)
-[LOG] SoundI::release                          :     Pulo Salto (000002132706D048)
-[LOG] SoundI::release                          :  (00000212A34C5D48)
-[LOG] SoundI::release                          :     Andando 1 (0000021327068DA8)
-[LOG] SoundI::release                          :  (00000212A34C7898)
-[LOG] SoundI::release                          :     Andando 2 (00000213270690E8)
-[LOG] SoundI::release                          :  (00000212A34C6BA8)
-[LOG] SoundI::release                          :     Andando 3 (000002132706B168)
-[LOG] SoundI::release                          :  (00000212A34C5A68)
-[LOG] SoundI::release                          :     Andando 4 (000002132706A2C8)
-[LOG] SoundI::release                          :  (00000212A34CA978)
-[LOG] SoundI::release                          :     Andando 5 (000002132706C008)
-[LOG] SoundI::release                          :  (00000212A34C54A8)
-[LOG] SoundI::release                          :     Rotacao de Camera (000002132706B308)
-[LOG] SoundI::release                          :  (00000212A34C51C8)
-[LOG] SoundI::release                          :     Pulo Impacto Chao (000002132706F408)
+[LOG] SoundI::release                          : Tema Gameplay e Derivados - Intro (00000210F1CA4218)
+[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (00000213270791A8)
+[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (0000021322338CB8)
+[LOG] SoundI::release                          :  (00000212A34CE8B8)
+[LOG] SoundI::release                          :     Pulo Salto (0000021327077FC8)
+[LOG] SoundI::release                          :  (00000212A34CE188)
+[LOG] SoundI::release                          :     Andando 1 (000002132707B3C8)
+[LOG] SoundI::release                          :  (00000212A34CFFB8)
+[LOG] SoundI::release                          :     Andando 2 (0000021327076288)
+[LOG] SoundI::release                          :  (00000212A34CD1B8)
+[LOG] SoundI::release                          :     Andando 3 (00000213270765C8)
+[LOG] SoundI::release                          :  (00000212A34CE748)
+[LOG] SoundI::release                          :     Andando 4 (00000213270760E8)
+[LOG] SoundI::release                          :  (00000212A34CD328)
+[LOG] SoundI::release                          :     Andando 5 (000002132707A048)
+[LOG] SoundI::release                          :  (00000212A34CADC8)
+[LOG] SoundI::release                          :     Rotacao de Camera (0000021327076428)
+[LOG] SoundI::release                          :  (00000212A34D0578)
+[LOG] SoundI::release                          :     Pulo Impacto Chao (000002132707AD48)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
