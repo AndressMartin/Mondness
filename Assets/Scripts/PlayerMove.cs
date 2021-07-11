@@ -9,8 +9,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] GameObject personagem;
     float horizontal;
     float vertical;
-    float velocidade = 90f;
-
+    float movVel = 5f;
+    float rotVel = 90f;
+    float rotsmooth = 30f;
     bool caindo;
 
     public enum FaceEnum { Cima, Baixo, Esquerda, Direita, Frente, Costas}
@@ -28,8 +29,12 @@ public class PlayerMove : MonoBehaviour
     public Vector3 pontoEstatico;
     public Transform pontoMov;
     private bool rotacionando;
-    int maxRot = 90;
-    int rot;
+    float maxRotTime = 2f;
+    float rotTime;
+    private Vector3 currentEulerAngles;
+    float totalRot;
+    private Quaternion targetToRotate;
+
     private void Awake()
     {
         pontoMov.position = transform.position;
@@ -50,7 +55,7 @@ public class PlayerMove : MonoBehaviour
         //Movimenta-se se o ponto seguinte tem um bloco para sustentar o player
         else if (estado == State.andar)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, movVel * Time.deltaTime);
             if (transform.position == pontoMov.position)
             {
                 pontoEstatico = pontoMov.position;
@@ -60,35 +65,111 @@ public class PlayerMove : MonoBehaviour
         }
         if (estado == State.virarCorpo)
         {
-            if (!rotacionando) rot = maxRot;
-            Rotacionar();
+            if (!rotacionando)
+            {
+                rotTime = maxRotTime;
+            }
+            if (rotTime > 0 ) Rotacionar2();
+            else
+            {
+                targetToRotate = transform.rotation;
+                estado = State.parado;
+                rotacionando = false;
+            }
         }
     }
 
     private void Rotacionar()
     {
-        
+        rotTime -= Time.fixedDeltaTime;
         rotacionando = true;
-        Debug.Log("Rotacionar");
+        Debug.Log(rotTime);
+        totalRot = rotVel * Time.fixedDeltaTime;
+        if (totalRot < 90)
+            totalRot = 90;
+        if (transform.rotation.y <= 90)
+        {
+            if (direcao == Direction.D)
+            {
+                transform.Rotate(0, 0, rotVel * Time.fixedDeltaTime);
+            }
+            if (direcao == Direction.A)
+            {
+                transform.Rotate(0, 0, rotVel * Time.fixedDeltaTime);
+            }
+            if (direcao == Direction.W)
+            {
+                transform.Rotate(rotVel * Time.fixedDeltaTime, 0, 0);
+            }
+            if (direcao == Direction.S)
+            {
+                transform.Rotate(rotVel * Time.fixedDeltaTime, 0, 0);
+            }
+            
+        }
+        else
+        {
+            //transform.rotation = Quaternion.AngleAxis;
+            pontoMov.position = transform.position;
+        }
+    }
+
+    void Rotacionar2()
+    {
+        rotTime -= Time.deltaTime;
         if (direcao == Direction.D)
         {
-            transform.Rotate(0, 0, velocidade * Time.deltaTime);
+            if (!rotacionando)
+            {
+                currentEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90);
+                targetToRotate = Quaternion.Euler(currentEulerAngles);
+                Debug.LogWarning("currentEulerAngles " + currentEulerAngles);
+                Debug.LogWarning("transform.eulerAngles " + transform.eulerAngles);
+            }
+
+            transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.eulerAngles), targetToRotate, Time.deltaTime * rotsmooth);
         }
         if (direcao == Direction.A)
         {
-            transform.Rotate(0, 0, velocidade * Time.deltaTime);
+            if (!rotacionando)
+            {
+                currentEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z - 90);
+                targetToRotate = Quaternion.Euler(currentEulerAngles);
+                Debug.LogWarning("currentEulerAngles " + currentEulerAngles);
+            }
+
+            transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.eulerAngles), targetToRotate, Time.deltaTime * rotsmooth);
         }
         if (direcao == Direction.W)
         {
-            transform.Rotate(velocidade * Time.deltaTime, 0, 0);
+            if (!rotacionando)
+            {
+                currentEulerAngles = new Vector3(transform.rotation.x + 90, transform.rotation.y, transform.rotation.z);
+                targetToRotate = Quaternion.Euler(currentEulerAngles);
+                Debug.LogWarning("currentEulerAngles " + currentEulerAngles);
+            }
+
+            transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.eulerAngles), targetToRotate, Time.deltaTime * rotsmooth);
         }
         if (direcao == Direction.S)
         {
-            transform.Rotate(velocidade * Time.deltaTime, 0, 0);
-        }
-        pontoMov.position = transform.position;
-    }
+            if (!rotacionando)
+            {
+                currentEulerAngles = new Vector3(transform.rotation.x - 90, transform.rotation.y, transform.rotation.z);
+                targetToRotate = Quaternion.Euler(currentEulerAngles);
+                Debug.LogWarning("currentEulerAngles " + currentEulerAngles);
+            }
 
+            transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.eulerAngles), targetToRotate, Time.deltaTime * rotsmooth);
+        }
+        if (transform.rotation == targetToRotate)
+        {
+            rotTime = 0;
+            Debug.LogWarning("You can stop now! Transform is " + transform.eulerAngles);
+        }
+        if (!rotacionando) Debug.LogWarning("END: " + targetToRotate);
+        rotacionando = true;
+    }
     public void WaitForInput()
     {
         direcaoAnterior = corrigirDirecao(direcao);
@@ -129,7 +210,7 @@ public class PlayerMove : MonoBehaviour
 
     private Direction corrigirDirecao(Direction direcao)
     {
-        int num = (int)direcao + ((int)myCamPos);
+        int num = (int)direcao - ((int)myCamPos);
         if (num > 3)
         {
             return (Direction)(num - 4);
