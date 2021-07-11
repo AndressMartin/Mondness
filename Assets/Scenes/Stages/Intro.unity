@@ -3207,23 +3207,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7268376877683674024, guid: fd4e9bde985288740993498f600ce2b0, type: 3}
   m_PrefabInstance: {fileID: 7268376877587469269}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &901765200
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901765197}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!114 &901765201
+--- !u!114 &901765199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3246,6 +3230,22 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
+--- !u!54 &901765200
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901765197}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &920025930
 GameObject:
   m_ObjectHideFlags: 0
@@ -4410,6 +4410,7 @@ GameObject:
   - component: {fileID: 1380196995}
   - component: {fileID: 1380196996}
   - component: {fileID: 1308977339}
+  - component: {fileID: 1380196997}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Player
@@ -4471,6 +4472,20 @@ MonoBehaviour:
   pontoEstatico: {x: 0, y: 0, z: 0}
   teleportTarget: {x: 0, y: 0, z: 0}
   pontoMov: {fileID: 2117059960}
+--- !u!114 &1380196997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380196993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1 &1416643370
 GameObject:
   m_ObjectHideFlags: 0

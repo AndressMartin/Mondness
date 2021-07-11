@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,10 +7,12 @@ using UnityEngine.Events;
 
 public class Estrela : MonoBehaviour
 {
+    FMOD.Studio.EventInstance coletaSfx;
     public static UnityEvent coleta;
     private Transform stagePortal;
     private void Start()
     {
+        coletaSfx = RuntimeManager.CreateInstance("event:/sfx/coleta_de_estrela");
         stagePortal = transform.parent.Find("Portal");
         if (coleta == null)
         {
@@ -29,6 +32,8 @@ public class Estrela : MonoBehaviour
 
     private void Coletar()
     {
+        RuntimeManager.AttachInstanceToGameObject(coletaSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        coletaSfx.start();
         //Fazer pozinho de conquista
         //Tocar musiquinha
         coleta.Invoke();

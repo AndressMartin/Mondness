@@ -118,10 +118,11 @@ public class PlayerMove : MonoBehaviour
         {
             if (estadoAnterior != estado)
             {
+                RuntimeManager.AttachInstanceToGameObject(passosSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+                passosSfx.start();
                 startRun.Invoke();
                 estadoAnterior = estado;
             }
-            passosSfx.start();
             transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, movVel * Time.deltaTime);
             if (transform.position == pontoMov.position)
             {
@@ -136,6 +137,8 @@ public class PlayerMove : MonoBehaviour
         {
             if (!rotacionando)
             {
+                RuntimeManager.AttachInstanceToGameObject(passosSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+                passosSfx.start();
                 rotTime = maxRotTime;
             }
             if (rotTime > 0 ) Rotacionar();
@@ -258,9 +261,11 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator Pulo()
     {
         //TODO: ANIMACAO DE PULO!
+        RuntimeManager.AttachInstanceToGameObject(puloSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
         puloSfx.start();
         yield return new WaitForSeconds(/*tamanho Animação*/.6f);
         Debug.Log("Pulo Coroutine after yield");
+        RuntimeManager.AttachInstanceToGameObject(quedaSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
         quedaSfx.start();
         DerrubarCuboAnterior.Invoke();
         DerrubarCuboAnterior.RemoveAllListeners();
