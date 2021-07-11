@@ -1,31 +1,45 @@
+//Attach this script to a GameObject
+//This script creates a UnityEvent that calls a method when a key is pressed
+//Note that 'q' exits this application.
 using UnityEngine;
+using UnityEngine.Events;
 
-// To use this script, attach it to the GameObject that you would like to rotate towards another game object.
-// After attaching it, go to the inspector and drag the GameObject you would like to rotate towards into the target field.
-// Move the target around in the scene view to see the GameObject continuously rotate towards it.
 public class Example : MonoBehaviour
 {
-    // The target marker.
-    public Transform target;
+    UnityEvent m_MyEvent = new UnityEvent();
 
-    // Angular speed in radians per sec.
-    public float speed = 1.0f;
+    void Start()
+    {
+        //Add a listener to the new Event. Calls MyAction method when invoked
+        m_MyEvent.AddListener(MyAction);
+    }
 
     void Update()
     {
-        // Determine which direction to rotate towards
-        Vector3 targetDirection = target.position - transform.position;
+        // Press Q to close the Listener
+        if (Input.GetKeyDown("q") && m_MyEvent != null)
+        {
+            Debug.Log("Quitting");
+            m_MyEvent.RemoveListener(MyAction);
 
-        // The step size is equal to speed times frame time.
-        float singleStep = speed * Time.deltaTime;
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
 
-        // Rotate the forward vector towards the target direction by one step
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+            Application.Quit();
+        }
 
-        // Draw a ray pointing at our target in
-        Debug.DrawRay(transform.position, newDirection, Color.red);
+        //Press any other key to begin the action if the Event exists
+        if (Input.anyKeyDown && m_MyEvent != null)
+        {
+            //Begin the action
+            m_MyEvent.Invoke();
+        }
+    }
 
-        // Calculate a rotation a step closer to the target and applies rotation to this object
-        transform.rotation = Quaternion.LookRotation(newDirection);
+    void MyAction()
+    {
+        //Output message to the console
+        Debug.Log("Do Stuff");
     }
 }

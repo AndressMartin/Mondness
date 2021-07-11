@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -10,20 +11,20 @@ public class PlayerMove : MonoBehaviour
     float horizontal;
     float vertical;
     float movVel = 5f;
+    float quedaVel = 13f;
     float rotVel = 90f;
-    float rotsmooth = 30f;
-    bool caindo;
 
+    UnityEvent DerrubarCuboAnterior;
     public enum FaceEnum { Cima, Baixo, Esquerda, Direita, Frente, Costas}
     public enum Direction { W, D, S, A}
 
-    public enum State { parado, andar, virarY, virarCorpo}
+    public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda}
 
     public FaceEnum faceAtual = FaceEnum.Cima;
     public FaceEnum proximaFace = FaceEnum.Frente;
     public Direction direcao = Direction.W;
     public Direction direcaoAnterior = Direction.S;
-    public State estado = State.parado;
+    public State estado = State.Parado;
     private bool pressionouUmAxis = true;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
     public Vector3 pontoEstatico;
@@ -31,8 +32,6 @@ public class PlayerMove : MonoBehaviour
     private bool rotacionando;
     float maxRotTime = 1f;
     float rotTime;
-    private Vector3 currentEulerAngles;
-    float totalRot;
     private Quaternion targetToRotate;
 
     private void Awake()
@@ -40,10 +39,18 @@ public class PlayerMove : MonoBehaviour
         pontoMov.position = transform.position;
         pontoEstatico = pontoMov.position;
     }
-    private void FixedUpdate()
+
+    private void Start()
+    {
+        if (DerrubarCuboAnterior == null)
+        {
+            DerrubarCuboAnterior = new UnityEvent();
+        }
+    }
+    private void Update()
     {
         //Se está parado
-        if (estado == State.parado)
+        if (estado == State.Parado)
         {
             if (transform.position == pontoEstatico)
             {
@@ -53,18 +60,19 @@ public class PlayerMove : MonoBehaviour
             
         }
         //Movimenta-se se o ponto seguinte tem um bloco para sustentar o player
-        else if (estado == State.andar)
+        else if (estado == State.Andando)
         {
             transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, movVel * Time.deltaTime);
             if (transform.position == pontoMov.position)
             {
                 //CorrectPositions();
+                DerrubarCuboAnterior.Invoke();
                 pontoEstatico = pontoMov.position;
-                estado = State.parado;
+                estado = State.Parado;
             }
             //TODO: Verificar se tem um bloco logo em frente ao player, já que ele não pode trombar com outro bloco.
         }
-        if (estado == State.virarCorpo)
+        else if (estado == State.ViraCorpo)
         {
             if (!rotacionando)
             {
@@ -76,10 +84,59 @@ public class PlayerMove : MonoBehaviour
                 CorrectRotation();
                 rotTime = 0;
                 targetToRotate = transform.rotation;
-                estado = State.parado;
+                estado = State.Parado;
                 rotacionando = false;
             }
         }
+        else if (estado == State.Pulando)
+        {
+            Debug.Log("Pulando");
+            AvisarCubo();
+            StartCoroutine(Pulo());
+
+        }
+        else if (estado == State.Caindo)
+        {
+            Debug.Log("Caindo");
+            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+            if (DetectBlocos.hitColliders.Length <= 0)
+            {
+                Cair();
+            }
+            else
+            {
+                if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false)
+                {
+                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                    estado = State.TerminandoQueda;
+                }
+            }
+        }
+        else if (estado == State.TerminandoQueda)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, 30f * Time.deltaTime);
+            if (transform.position == pontoMov.position)
+            {
+                pontoEstatico = pontoMov.position;
+                estado = State.Parado;
+            }
+        }
+    }
+
+    private void Cair()
+    {
+        pontoMov.position += transform.up * -1 * quedaVel * Time.deltaTime;
+        transform.position = pontoMov.position;
+    }
+
+    private IEnumerator Pulo()
+    {
+        //TODO: ANIMACAO DE PULO!
+        yield return new WaitForSeconds(/*tamanho Animação*/2);
+        Debug.Log("Pulo Coroutine after yield");
+        DerrubarCuboAnterior.Invoke();
+        DerrubarCuboAnterior.RemoveAllListeners();
+        estado = State.Caindo;
     }
 
     void Rotacionar2()
@@ -119,6 +176,12 @@ public class PlayerMove : MonoBehaviour
         direcaoAnterior = direcao;
         myCamPos = CameraRotate.cameraPos;
         //Debug.LogWarning(myCamPos);
+        if (Input.GetButtonDown("Jump"))
+        {
+            Debug.Log("Press Space");
+            estado = State.Pulando;
+            return;
+        }
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
             direcao = Direction.A;
@@ -139,9 +202,16 @@ public class PlayerMove : MonoBehaviour
         {
             return;
         }
+        AvisarCubo();
         direcao = corrigirDirecao();
         OlharParaDirecao();
         Andar();
+    }
+
+    private void AvisarCubo()
+    {
+        DerrubarCuboAnterior.AddListener(DetectBlocos.hitColliders[0].GetComponent<Bloco>().ChecarQueda);
+        DetectBlocos.hitColliders[0].GetComponent<Bloco>().PegarDir(transform.up * -1);
     }
 
     private void OlharParaDirecao()
@@ -149,8 +219,6 @@ public class PlayerMove : MonoBehaviour
         int num = (int)direcaoAnterior - (int)direcao;
         //Debug.Log($"{direcaoAnterior} - {direcao} = {Math.Abs((int)direcaoAnterior - (int)direcao)} e sem modulo = {direcaoAnterior - direcao}");
         personagem.transform.Rotate(0, 90 * num, 0);
-
-
     }
 
     private void Andar()
@@ -162,7 +230,6 @@ public class PlayerMove : MonoBehaviour
         if (DetectBlocos.hitColliders.Length > 0)
         {
             Debug.LogWarning(DetectBlocos.hitColliders.Length);
-
             pontoMov.position += personagem.transform.up * 1;
             pontoMov.GetComponent<DetectBlocos>().MyCollisions();
             if (!(DetectBlocos.hitColliders.Length > 0))
@@ -173,7 +240,7 @@ public class PlayerMove : MonoBehaviour
                 if (DetectBlocos.hitColliders.Length > 0)
                 {
                     pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
-                    estado = State.andar;
+                    estado = State.Andando;
                 }
             }
             else
@@ -188,7 +255,7 @@ public class PlayerMove : MonoBehaviour
             if (!(DetectBlocos.hitColliders.Length > 0))
             {
                 Debug.LogWarning(DetectBlocos.hitColliders.Length);
-                estado = State.virarCorpo;
+                estado = State.ViraCorpo;
             }
             pontoMov.position = pontoEstatico;
         }
