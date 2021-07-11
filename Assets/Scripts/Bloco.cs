@@ -10,6 +10,23 @@ public class Bloco : MonoBehaviour
     public bool caindo;
     float velocity = 15f;
     Vector3 quedaDir;
+    Vector3 posIni;
+    Quaternion rotIni;
+    private void Start()
+    {
+        posIni = transform.position;
+        rotIni = transform.rotation;
+        CuboManager.ResetarCena.AddListener(ResetParams);
+    }
+
+    private void ResetParams()
+    {
+        transform.position = posIni;
+        transform.rotation = rotIni;
+        caindo = false;
+        playerEntrou = false;
+    }
+
     public virtual void ChecarQueda()
     {
         if (caiQuandoPlayerSai)

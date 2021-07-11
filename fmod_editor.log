@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001435EA41D68 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 00000143718D4A98 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,63 +16,25 @@
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] SystemI::createSound                     : filename = FMOD/FmodElla/Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 0000014299C94AC8 : node = 000001432E253DE0
-[LOG] SystemI::createSound                     : add node to async list : head = 0000014333A87308.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000014299C94AC8
-[LOG] SystemI::createSound                     : filename = FMOD/FmodElla/Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     Create name='FMOD/FmodElla/Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     setdata soundi = 000001436ED56178 : node = 000001432E253520
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3025856
-[LOG] SystemI::createSound                     :     add node to async list : head = 0000014333A87308.  list count = 0
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 24544
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001432E253EF0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Tema Gameplay e Derivados - Pad', format=5, channels=2, frequency=48000, lengthbytes=624320, lengthpcm=3766154, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.118849.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000014299C94AC8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001436ED56178
-[LOG] SystemI::createSoundInternal             :     Create name='FMOD/FmodElla/Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3025856
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 24544
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001432E253630
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Tema Gameplay e Derivados - Piano', format=5, channels=2, frequency=48000, lengthbytes=943648, lengthpcm=3766154, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.076557.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001436ED56178
-[LOG] SoundI::release                          : Tema Gameplay e Derivados - Intro (000001432E21E8C8)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (000001432D875518)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (000001432E21E058)
-[LOG] SoundI::release                          : Tema Gameplay e Derivados - Piano (000001436ED56178)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Piano (000001432D875038)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Piano (00000142A0F14768)
-[LOG] SoundI::release                          : Tema Gameplay e Derivados - Pad (0000014299C94AC8)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Pad (000001432D870098)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Pad (00000142A0F14AC8)
-[LOG] SoundI::release                          :  (000001435F12EF38)
-[LOG] SoundI::release                          :     Pulo Salto (000001432D870F38)
-[LOG] SoundI::release                          :  (000001435F12F668)
-[LOG] SoundI::release                          :     Andando 1 (000001432D8759F8)
-[LOG] SoundI::release                          :  (000001435F12F7D8)
-[LOG] SoundI::release                          :     Andando 2 (000001432D871418)
-[LOG] SoundI::release                          :  (000001435F12F388)
-[LOG] SoundI::release                          :     Andando 3 (000001432D871DD8)
-[LOG] SoundI::release                          :  (000001435F12F218)
-[LOG] SoundI::release                          :     Andando 4 (000001432D871A98)
-[LOG] SoundI::release                          :  (000001435F12FC28)
-[LOG] SoundI::release                          :     Andando 5 (000001432D870A58)
-[LOG] SoundI::release                          :  (000001435F12F4F8)
-[LOG] SoundI::release                          :     Rotacao de Camera (000001432D8725F8)
-[LOG] SoundI::release                          :  (000001435F12F0A8)
-[LOG] SoundI::release                          :     Pulo Impacto Chao (000001432D870578)
+[LOG] SoundI::release                          : Tema Gameplay e Derivados - Intro (000001435F089B98)
+[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (00000142C70E22E8)
+[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (00000143339C1668)
+[LOG] SoundI::release                          :  (00000140E9ECB608)
+[LOG] SoundI::release                          :     Pulo Salto (00000142C70DE6C8)
+[LOG] SoundI::release                          :  (00000140E9ECC8B8)
+[LOG] SoundI::release                          :     Andando 1 (00000142C70DE1E8)
+[LOG] SoundI::release                          :  (00000140E9ECBEA8)
+[LOG] SoundI::release                          :     Andando 2 (00000142C70DF708)
+[LOG] SoundI::release                          :  (00000140E9ECBA58)
+[LOG] SoundI::release                          :     Andando 3 (00000142C70E2CA8)
+[LOG] SoundI::release                          :  (00000140E9ECD158)
+[LOG] SoundI::release                          :     Andando 4 (00000142C70DF228)
+[LOG] SoundI::release                          :  (00000140E9ECD2C8)
+[LOG] SoundI::release                          :     Andando 5 (00000142C70E0C28)
+[LOG] SoundI::release                          :  (00000140E9ECBBC8)
+[LOG] SoundI::release                          :     Rotacao de Camera (00000142C70DE528)
+[LOG] SoundI::release                          :  (00000140E9ECB778)
+[LOG] SoundI::release                          :     Pulo Impacto Chao (00000142C70E2968)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients

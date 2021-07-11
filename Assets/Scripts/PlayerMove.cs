@@ -25,6 +25,7 @@ public class PlayerMove : MonoBehaviour
     public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda, Teleportando}
 
     public Direction direcao = Direction.W;
+    public Direction direcaoIni;
     public Direction direcaoAnterior = Direction.S;
     public State estado = State.Parado;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
@@ -36,6 +37,10 @@ public class PlayerMove : MonoBehaviour
     float rotTime;
     private Quaternion targetToRotate;
 
+    Vector3 posIni;
+    Quaternion rotIni;
+    Quaternion perRotIni;
+
     private void Awake()
     {
         pontoMov.position = transform.position;
@@ -44,6 +49,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
+        SetParamsOriginais();
+        CuboManager.ResetarCena.AddListener(ResetParams);
         passosSfx = RuntimeManager.CreateInstance("event:/sfx/passos");
         puloSfx = RuntimeManager.CreateInstance("event:/sfx/salto_pulo");
         quedaSfx = RuntimeManager.CreateInstance("event:/sfx/salto_queda");
@@ -53,7 +60,25 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void SetParamsOriginais()
+    {
+        posIni = transform.position;
+        rotIni = transform.rotation;
+        perRotIni = personagem.transform.rotation;
+        estado = State.Parado;
+        direcaoIni = direcao;
+    }
 
+    private void ResetParams()
+    {
+        transform.position = posIni;
+        transform.rotation = rotIni;
+        personagem.transform.rotation = perRotIni;
+        estado = State.Parado;
+        pontoMov.position = transform.position;
+        pontoEstatico = transform.position;
+        direcao = direcaoIni;
+    }
     private void Update()
     {
         //Se está parado
@@ -140,8 +165,8 @@ public class PlayerMove : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 pontoMov.position = transform.position;
                 pontoEstatico = transform.position;
-                estado = State.Parado;
                 StartCoroutine(DestroyTrail());
+                SetParamsOriginais();
             }
         }
 
