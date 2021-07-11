@@ -5,7 +5,7 @@
 			<value>bloco_nuvem</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{02de41c8-dd3e-4ce4-ac28-c84f8ea259c2}</destination>
@@ -125,6 +125,7 @@
 	<object class="MixerBusEffectChain" id="{20944800-61cf-47b5-977b-d608157b9ec2}">
 		<relationship name="effects">
 			<destination>{e30e7ed0-6508-4f86-855f-23880f839e41}</destination>
+			<destination>{a65c2622-6aad-4525-b4cc-5374cd4438b9}</destination>
 			<destination>{192b0de1-859f-498d-ac16-bfcd33fd25a8}</destination>
 		</relationship>
 	</object>
@@ -145,6 +146,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{ee76d469-4b34-41bc-8537-0729f159558c}" />
 	<object class="MixerBusFader" id="{e30e7ed0-6508-4f86-855f-23880f839e41}" />
+	<object class="SpatialiserEffect" id="{a65c2622-6aad-4525-b4cc-5374cd4438b9}">
+		<property name="minimumDistance">
+			<value>0</value>
+		</property>
+		<property name="maximumDistance">
+			<value>10000</value>
+		</property>
+	</object>
 	<object class="LoudnessMeter" id="{192b0de1-859f-498d-ac16-bfcd33fd25a8}" />
 	<object class="AutomationPoint" id="{c1bf9a7c-c995-470b-9341-e4239dd3949a}">
 		<property name="position">

@@ -5,7 +5,7 @@
 			<value>bloco_gelo</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{02de41c8-dd3e-4ce4-ac28-c84f8ea259c2}</destination>
@@ -116,6 +116,7 @@
 	<object class="MixerBusEffectChain" id="{1826f2a2-4a9f-405e-8e39-8b8f01ccec16}">
 		<relationship name="effects">
 			<destination>{965758ea-f483-4c37-95ee-6372f4b69bfa}</destination>
+			<destination>{a46a70b3-f86e-4cf0-97ed-7f2be9ea7794}</destination>
 			<destination>{1c7f871d-db2b-48f9-aa0a-921b899b6c1e}</destination>
 		</relationship>
 	</object>
@@ -128,6 +129,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{d6b1c2e3-6166-40c1-a2fb-45d7c0c0dd03}" />
 	<object class="MixerBusFader" id="{965758ea-f483-4c37-95ee-6372f4b69bfa}" />
+	<object class="SpatialiserEffect" id="{a46a70b3-f86e-4cf0-97ed-7f2be9ea7794}">
+		<property name="minimumDistance">
+			<value>0</value>
+		</property>
+		<property name="maximumDistance">
+			<value>10000</value>
+		</property>
+	</object>
 	<object class="LoudnessMeter" id="{1c7f871d-db2b-48f9-aa0a-921b899b6c1e}" />
 	<object class="MixerBusFader" id="{2d0b101d-289a-4cbe-8513-e202b5e086c8}" />
 </objects>

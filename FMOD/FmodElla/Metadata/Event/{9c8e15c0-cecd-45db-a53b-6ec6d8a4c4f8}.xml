@@ -5,7 +5,7 @@
 			<value>bloco_vidro_quebrando</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{02de41c8-dd3e-4ce4-ac28-c84f8ea259c2}</destination>
@@ -119,6 +119,7 @@
 	<object class="MixerBusEffectChain" id="{f0677514-4b8a-41dd-9279-b717867692db}">
 		<relationship name="effects">
 			<destination>{a6c85b6d-6569-4386-b573-9e79220f620a}</destination>
+			<destination>{b64fd059-94a0-4043-aef9-082837a8c8b8}</destination>
 			<destination>{108feceb-7044-4b92-b3d6-eb2447d7a6e7}</destination>
 		</relationship>
 	</object>
@@ -131,6 +132,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{837114a8-7de1-4afe-8a0f-b3ab08f8f209}" />
 	<object class="MixerBusFader" id="{a6c85b6d-6569-4386-b573-9e79220f620a}" />
+	<object class="SpatialiserEffect" id="{b64fd059-94a0-4043-aef9-082837a8c8b8}">
+		<property name="minimumDistance">
+			<value>0</value>
+		</property>
+		<property name="maximumDistance">
+			<value>10000</value>
+		</property>
+	</object>
 	<object class="LoudnessMeter" id="{108feceb-7044-4b92-b3d6-eb2447d7a6e7}" />
 	<object class="MixerBusFader" id="{63d8669a-5e0f-4c26-a5af-6a25a1d9e744}" />
 </objects>
