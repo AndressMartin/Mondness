@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     float rotVel = 90f;
 
     float tempoCaindo = 0;
-    float maxTempoCaindo = 0.5f;
+    float maxTempoCaindo = 0.9f;
     Vector3 velF;
 
     UnityEvent DerrubarCuboAnterior;
@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
 
     public enum Direction { W, D, S, A}
     
-    public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda, Teleportando, Flutuando }
+    public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda, Teleportando, Flutuando, Esperando}
     public State estado = State.Parado;
     public State estadoAnterior = State.Parado; //TODO: SETTAR E RESETTAR
 
@@ -151,11 +151,12 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("Pulando");
             AvisarCubo();
             StartCoroutine(Pulo());
+            estado = State.Esperando;
 
         }
         else if (estado == State.Caindo)
         {
-            Debug.Log("Caindo");
+            //Debug.Log("Caindo");
             pontoMov.GetComponent<DetectBlocos>().MyCollisions();
             if (DetectBlocos.hitColliders.Length <= 0)
             {
@@ -192,6 +193,7 @@ public class PlayerMove : MonoBehaviour
         }
         else if (estado == State.Teleportando)
         {
+            Debug.Log("Teleportando");
             transform.position = Vector3.MoveTowards(transform.position, teleportTarget, 15f * Time.deltaTime);
             transform.Rotate(transform.up * 60f * Time.deltaTime);
             transform.Rotate(transform.forward * 60f * Time.deltaTime);
@@ -203,6 +205,7 @@ public class PlayerMove : MonoBehaviour
                 pontoEstatico = transform.position;
                 StartCoroutine(DestroyTrail());
                 SetParamsOriginais();
+                Debug.Log("Fim do Teleporte");
             }
         }
         else if (estado == State.Flutuando)
@@ -346,18 +349,25 @@ public class PlayerMove : MonoBehaviour
         pontoMov.GetComponent<DetectBlocos>().MyCollisions();
         if (DetectBlocos.hitColliders.Length > 0)
         {
-            Debug.LogWarning(DetectBlocos.hitColliders.Length);
-            pontoMov.position += personagem.transform.up * 1;
-            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-            if (!(DetectBlocos.hitColliders.Length > 0))
+            if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false && DetectBlocos.hitColliders[0].GetComponent<Bloco>().flutuando == false)
             {
                 Debug.LogWarning(DetectBlocos.hitColliders.Length);
-                pontoMov.position += personagem.transform.up * -1;
+                pontoMov.position += personagem.transform.up * 1;
                 pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-                if (DetectBlocos.hitColliders.Length > 0)
+                if (!(DetectBlocos.hitColliders.Length > 0))
                 {
-                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
-                    estado = State.Andando;
+                    Debug.LogWarning(DetectBlocos.hitColliders.Length);
+                    pontoMov.position += personagem.transform.up * -1;
+                    pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+                    if (DetectBlocos.hitColliders.Length > 0)
+                    {
+                        pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                        estado = State.Andando;
+                    }
+                }
+                else
+                {
+                    pontoMov.position = pontoEstatico;
                 }
             }
             else
@@ -408,6 +418,7 @@ public class PlayerMove : MonoBehaviour
     public void Teleport(Vector3 position)
     {
         estado = State.Teleportando;
+        tempoCaindo = 0;
         transform.rotation = Quaternion.Euler(0, 0, 0);
         targetToRotate = transform.rotation;
         rotacionando = false;

@@ -349,7 +349,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.034665354, g: 0.2147304, b: 0.38679248, a: 1}
+  m_Color: {r: 0.36078432, g: 0.3019608, b: 0.49019608, a: 1}
   m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
@@ -461,6 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &60988290
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -537,6 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &77729909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -695,6 +697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &179609570
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1173,6 +1176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &407619190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1336,6 +1340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &444528397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1581,6 +1586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &507837796
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1701,6 +1707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &511160858
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2018,6 +2025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &551473359
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2344,6 +2352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &664925968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2483,7 +2492,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.4269313, g: 0.6055699, b: 0.7735849, a: 1}
+  m_Color: {r: 0.7176471, g: 0.03529412, b: 0.29803923, a: 1}
   m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
@@ -2595,6 +2604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &725377633
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3032,6 +3042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &845154023
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3363,6 +3374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &955479092
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3482,6 +3494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &978836652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3558,6 +3571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &985345784
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3716,6 +3730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1025694288
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4099,6 +4114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1229316440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4339,6 +4355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1272431783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4501,6 +4518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1416643373
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4680,6 +4698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1487912908
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4839,6 +4858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1579415581
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5120,6 +5140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1677157414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5405,6 +5426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1714599035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5719,6 +5741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1812873416
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5761,6 +5784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1847069638
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5818,7 +5842,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.222351, g: 0.095185116, b: 0.2924528, a: 1}
+  m_Color: {r: 0, g: 0.5686275, b: 0.6784314, a: 1}
   m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
@@ -6013,6 +6037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1887448534
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6220,6 +6245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &1973370240
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6422,6 +6448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
+  flutuando: 0
 --- !u!65 &2060752327
 BoxCollider:
   m_ObjectHideFlags: 0
