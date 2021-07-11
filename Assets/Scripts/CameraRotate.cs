@@ -54,6 +54,7 @@ public class CameraRotate : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    RuntimeManager.AttachInstanceToGameObject(rotateSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
                     rotateSfx.start();
                     //transform.Rotate(0, 90, 0);
                     posNum++;
@@ -64,6 +65,7 @@ public class CameraRotate : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Q))
                 {
+                    RuntimeManager.AttachInstanceToGameObject(rotateSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
                     rotateSfx.start();
                     //transform.Rotate(0, -90, 0);
                     posNum--;

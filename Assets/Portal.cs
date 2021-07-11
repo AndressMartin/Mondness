@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
+    FMOD.Studio.EventInstance portalSfx;
+    FMOD.Studio.EventInstance fanfarraSfx;
     private enum PortalType { next, last }
     [SerializeField] PortalType portal = PortalType.next;
 
@@ -12,6 +15,8 @@ public class Portal : MonoBehaviour
     [SerializeField] int starnum;
     private void Start()
     {
+        fanfarraSfx = RuntimeManager.CreateInstance("event:/sfx/fanfarra_vitoria"); 
+        portalSfx = RuntimeManager.CreateInstance("event:/sfx/entrando_no_portal");
         CheckIfOpen();
     }
     public void Open()
@@ -28,6 +33,8 @@ public class Portal : MonoBehaviour
         }
         if (open)
         {
+            RuntimeManager.AttachInstanceToGameObject(fanfarraSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+            fanfarraSfx.start();
             transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         }
         else
@@ -42,6 +49,8 @@ public class Portal : MonoBehaviour
         {
             if (other.gameObject.tag == "PlayerModel")
             {
+                RuntimeManager.AttachInstanceToGameObject(portalSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+                portalSfx.start();
                 if (portal == PortalType.next) TeleportNext();
                 else if (portal == PortalType.last) LoadNextScene();
             }

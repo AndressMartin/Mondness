@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SFX3D : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [FMODUnity.EventRef]
+    public string selectsound;
+    FMOD.Studio.EventInstance soundEvent;
+
+    public KeyCode pressToPlay;
+    private void Start()
     {
-        
+
+        soundEvent = FMODUnity.RuntimeManager.CreateInstance(selectsound);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void Playsound()
     {
-        
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(soundEvent, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        soundEvent.start();
     }
 }
