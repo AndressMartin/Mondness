@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
         pontoMov.position = transform.position;
         pontoEstatico = pontoMov.position;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         //Se está parado
         if (estado == State.parado)
@@ -81,8 +81,10 @@ public class PlayerMove : MonoBehaviour
 
     void Rotacionar2()
     {
+        Debug.Log("Personagem.transform.right = " + personagem.transform.right);
+        Debug.Log("rotVel = " + rotVel);
         rotTime -= Time.deltaTime;
-        transform.Rotate(personagem.transform.right * (rotVel * Time.deltaTime));
+        transform.Rotate(personagem.transform.right * (rotVel * Time.deltaTime), Space.World);
         if (transform.rotation == targetToRotate)
         {
             rotTime = 0;
@@ -91,6 +93,7 @@ public class PlayerMove : MonoBehaviour
         if (!rotacionando) Debug.LogWarning("END: " + targetToRotate);
         rotacionando = true;
     }
+
     public void WaitForInput()
     {
         direcaoAnterior = direcao;
@@ -100,7 +103,7 @@ public class PlayerMove : MonoBehaviour
         {
             direcao = Direction.A;
         }
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        else if (Input.GetAxisRaw("Horizontal") < 0)
         {
             direcao = Direction.D;
         }
@@ -108,7 +111,7 @@ public class PlayerMove : MonoBehaviour
         {
             direcao = Direction.W;
         }
-        if (Input.GetAxisRaw("Vertical") < 0)
+        else if (Input.GetAxisRaw("Vertical") < 0)
         {
             direcao = Direction.S;
         }
@@ -126,30 +129,15 @@ public class PlayerMove : MonoBehaviour
         int num = (int)direcaoAnterior - (int)direcao;
         //Debug.Log($"{direcaoAnterior} - {direcao} = {Math.Abs((int)direcaoAnterior - (int)direcao)} e sem modulo = {direcaoAnterior - direcao}");
         personagem.transform.Rotate(0, 90 * num, 0);
+
+
     }
 
     private void Andar()
     {
-        Debug.Log($"Colocando {pontoMov.position} de rotação {pontoMov.rotation} em {direcao} a {transform.forward}");
+        //Debug.Log($"Colocando {pontoMov.position} de rotação {pontoMov.rotation} em {direcao} a {transform.forward}");
         pontoMov.position += personagem.transform.forward * 1;
-        /*
-        if (direcao == Direction.D)
-        {
-            pontoMov.position -= transform.right * 1;
-        }
-        if (direcao == Direction.A)
-        {
-            pontoMov.position += transform.right * 1;
-        }
-        if (direcao == Direction.W)
-        {
-            pontoMov.position += transform.forward * 1;
-        }
-        if (direcao == Direction.S)
-        {
-            pontoMov.position -= transform.forward * 1;
-        }
-        */
+
         pontoMov.GetComponent<DetectBlocos>().MyCollisions();
         if (DetectBlocos.hitColliders.Length > 0)
         {

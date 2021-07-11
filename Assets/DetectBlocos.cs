@@ -28,7 +28,7 @@ public class DetectBlocos : MonoBehaviour
         while (i < hitColliders.Length)
         {
             //Output all of the collider names
-            Debug.Log("Hit : " + hitColliders[i].transform.parent.name + i);
+            //Debug.Log("Hit : " + hitColliders[i].transform.parent.name + i);
             //Increase the number of Colliders in the array
             i++;
         }
