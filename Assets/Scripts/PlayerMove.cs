@@ -1,54 +1,236 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField]GameObject camPivot;
+    FMOD.Studio.EventInstance passosSfx;
+    FMOD.Studio.EventInstance puloSfx;
+    FMOD.Studio.EventInstance quedaSfx;
+    [SerializeField] GameObject personagem;
+    [SerializeField] GameObject teleportTrail;
+    private GameObject myTrail;
     float horizontal;
     float vertical;
-    float velocidade = 5f;
+    float movVel = 5f;
+    float quedaVel = 13f;
+    float rotVel = 90f;
 
-    bool caindo;
-
-    public enum FaceEnum { Cima, Baixo, Esquerda, Direita, Frente, Costas}
+    UnityEvent DerrubarCuboAnterior;
     public enum Direction { W, D, S, A}
 
-    public FaceEnum faceAtual = FaceEnum.Cima;
-    public FaceEnum proximaFace = FaceEnum.Frente;
+    public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda, Teleportando}
+
     public Direction direcao = Direction.W;
+    public Direction direcaoAnterior = Direction.S;
+    public State estado = State.Parado;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
     public Vector3 pontoEstatico;
+    public Vector3 teleportTarget;
     public Transform pontoMov;
+    private bool rotacionando;
+    float maxRotTime = 1f;
+    float rotTime;
+    private Quaternion targetToRotate;
+
     private void Awake()
     {
         pontoMov.position = transform.position;
         pontoEstatico = pontoMov.position;
     }
+
+    private void Start()
+    {
+        passosSfx = RuntimeManager.CreateInstance("event:/sfx/passos");
+        puloSfx = RuntimeManager.CreateInstance("event:/sfx/salto_pulo");
+        quedaSfx = RuntimeManager.CreateInstance("event:/sfx/salto_queda");
+        if (DerrubarCuboAnterior == null)
+        {
+            DerrubarCuboAnterior = new UnityEvent();
+        }
+    }
+
+
     private void Update()
     {
-        if (transform.position == pontoEstatico) Move();
-        if (transform.position == pontoMov.position) pontoEstatico = pontoMov.position;
-        transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, velocidade * Time.deltaTime);
+        //Se está parado
+        if (estado == State.Parado)
+        {
+            if (transform.position == pontoEstatico)
+            {
+                WaitForInput();
+            }
+            //Se terminou de se movimentar
+            
+        }
+        //Movimenta-se se o ponto seguinte tem um bloco para sustentar o player
+        else if (estado == State.Andando)
+        {
+            passosSfx.start();
+            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, movVel * Time.deltaTime);
+            if (transform.position == pontoMov.position)
+            {
+                //CorrectPositions();
+                DerrubarCuboAnterior.Invoke();
+                pontoEstatico = pontoMov.position;
+                estado = State.Parado;
+            }
+            //TODO: Verificar se tem um bloco logo em frente ao player, já que ele não pode trombar com outro bloco.
+        }
+        else if (estado == State.ViraCorpo)
+        {
+            if (!rotacionando)
+            {
+                rotTime = maxRotTime;
+            }
+            if (rotTime > 0 ) Rotacionar();
+            else
+            {
+                CorrectRotation();
+                rotTime = 0;
+                targetToRotate = transform.rotation;
+                estado = State.Parado;
+                rotacionando = false;
+            }
+        }
+        else if (estado == State.Pulando)
+        {
+            Debug.Log("Pulando");
+            AvisarCubo();
+            StartCoroutine(Pulo());
+
+        }
+        else if (estado == State.Caindo)
+        {
+            Debug.Log("Caindo");
+            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+            if (DetectBlocos.hitColliders.Length <= 0)
+            {
+                Cair();
+            }
+            else
+            {
+                if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false)
+                {
+                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                    estado = State.TerminandoQueda;
+                }
+            }
+        }
+        else if (estado == State.TerminandoQueda)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, 60f * Time.deltaTime);
+            if (transform.position == pontoMov.position)
+            {
+                pontoEstatico = pontoMov.position;
+                estado = State.Parado;
+            }
+        }
+        else if (estado == State.Teleportando)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, teleportTarget, 15f * Time.deltaTime);
+            transform.Rotate(transform.up * 60f * Time.deltaTime);
+            transform.Rotate(transform.forward * 60f * Time.deltaTime);
+            transform.Rotate(transform.right * 60f * Time.deltaTime);
+            if (transform.position == teleportTarget)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                pontoMov.position = transform.position;
+                pontoEstatico = transform.position;
+                estado = State.Parado;
+                StartCoroutine(DestroyTrail());
+            }
+        }
     }
-    public void Move()
+
+    private IEnumerator DestroyTrail()
     {
+        yield return new WaitForSeconds(1f);
+        Destroy(myTrail);
+    }
+
+    private void CreateTrail()
+    {
+        myTrail = Instantiate(teleportTrail, transform.GetChild(0).position, transform.GetChild(0).rotation, transform);
+    }
+
+    private void Cair()
+    {
+        pontoMov.position += transform.up * -1 * quedaVel * Time.deltaTime;
+        transform.position = pontoMov.position;
+    }
+
+    private IEnumerator Pulo()
+    {
+        //TODO: ANIMACAO DE PULO!
+        puloSfx.start();
+        yield return new WaitForSeconds(/*tamanho Animação*/1);
+        Debug.Log("Pulo Coroutine after yield");
+        quedaSfx.start();
+        DerrubarCuboAnterior.Invoke();
+        DerrubarCuboAnterior.RemoveAllListeners();
+        estado = State.Caindo;
+    }
+
+    void Rotacionar()
+    {
+        Debug.Log("Personagem.transform.right = " + personagem.transform.right);
+        Debug.Log("rotVel = " + rotVel);
+        rotTime -= Time.deltaTime;
+        transform.Rotate(personagem.transform.right * (rotVel * Time.deltaTime), Space.World);
+        //if (transform.rotation == targetToRotate)
+        //{
+        //    rotTime = 0;
+        //    pontoMov.position = transform.position;
+        //}
+        if (!rotacionando) Debug.LogWarning("END: " + targetToRotate);
+        rotacionando = true;
+    }
+
+    private void CorrectRotation()
+    {
+        var vec = transform.eulerAngles;
+        vec.x = Mathf.Round(vec.x / 90) * 90;
+        vec.y = Mathf.Round(vec.y / 90) * 90;
+        vec.z = Mathf.Round(vec.z / 90) * 90;
+        transform.eulerAngles = vec;
+    }
+    private void CorrectPositions(Vector3 pos)
+    {
+        Vector3 tmp = pos;
+        tmp.x = Mathf.Round(tmp.x);
+        tmp.y = Mathf.Round(tmp.y);
+        tmp.z = Mathf.Round(tmp.z);
+        pos = tmp;
+    }
+
+    public void WaitForInput()
+    {
+        direcaoAnterior = direcao;
         myCamPos = CameraRotate.cameraPos;
-        Debug.LogWarning(myCamPos);
+        //Debug.LogWarning(myCamPos);
+        if (Input.GetButtonDown("Jump"))
+        {
+            Debug.Log("Press Space");
+            estado = State.Pulando;
+            return;
+        }
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            direcao = Direction.D;
-        }
-        if (Input.GetAxisRaw("Horizontal") < 0)
-        {
             direcao = Direction.A;
+        }
+        else if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            direcao = Direction.D;
         }
         if (Input.GetAxisRaw("Vertical") > 0)
         {
             direcao = Direction.W;
         }
-        if (Input.GetAxisRaw("Vertical") < 0)
+        else if (Input.GetAxisRaw("Vertical") < 0)
         {
             direcao = Direction.S;
         }
@@ -56,28 +238,66 @@ public class PlayerMove : MonoBehaviour
         {
             return;
         }
+        AvisarCubo();
         direcao = corrigirDirecao();
+        OlharParaDirecao();
         Andar();
+    }
+
+    private void AvisarCubo()
+    {
+        DerrubarCuboAnterior.RemoveAllListeners();
+        if (DetectBlocos.hitColliders.Length > 0)
+        {
+            DerrubarCuboAnterior.AddListener(DetectBlocos.hitColliders[0].GetComponent<Bloco>().ChecarQueda);
+            DetectBlocos.hitColliders[0].GetComponent<Bloco>().PegarDir(transform.up * -1);
+        }
+    }
+
+    private void OlharParaDirecao()
+    {
+        int num = (int)direcaoAnterior - (int)direcao;
+        //Debug.Log($"{direcaoAnterior} - {direcao} = {Math.Abs((int)direcaoAnterior - (int)direcao)} e sem modulo = {direcaoAnterior - direcao}");
+        personagem.transform.Rotate(0, 90 * num, 0);
     }
 
     private void Andar()
     {
-        Debug.Log($"Andando em {direcao}");
-        if (direcao == Direction.W)
+        //Debug.Log($"Colocando {pontoMov.position} de rotação {pontoMov.rotation} em {direcao} a {transform.forward}");
+        pontoMov.position += personagem.transform.forward * 1;
+
+        pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+        if (DetectBlocos.hitColliders.Length > 0)
         {
-            pontoMov.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+            Debug.LogWarning(DetectBlocos.hitColliders.Length);
+            pontoMov.position += personagem.transform.up * 1;
+            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+            if (!(DetectBlocos.hitColliders.Length > 0))
+            {
+                Debug.LogWarning(DetectBlocos.hitColliders.Length);
+                pontoMov.position += personagem.transform.up * -1;
+                pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+                if (DetectBlocos.hitColliders.Length > 0)
+                {
+                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                    estado = State.Andando;
+                }
+            }
+            else
+            {
+                pontoMov.position = pontoEstatico;
+            }
         }
-        if (direcao == Direction.D)
+        else
         {
-            pontoMov.position = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
-        }
-        if (direcao == Direction.S)
-        {
-            pontoMov.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
-        }
-        if (direcao == Direction.A)
-        {
-            pontoMov.position = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
+            pontoMov.position += personagem.transform.up * 1;
+            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+            if (!(DetectBlocos.hitColliders.Length > 0))
+            {
+                Debug.LogWarning(DetectBlocos.hitColliders.Length);
+                estado = State.ViraCorpo;
+            }
+            pontoMov.position = pontoEstatico;
         }
     }
 
@@ -92,32 +312,29 @@ public class PlayerMove : MonoBehaviour
     // 3 + (3) -> S
     public Direction corrigirDirecao()
     {
-        int num = (int)direcao + ((int)myCamPos);
+        int num = (int)direcao - ((int)myCamPos);
         if (num > 3)
         {
             return (Direction)(num - 4);
+        }
+        else if (num < 0)
+        {
+            return (Direction)(num + 4);
         }
         else
         {
             return (Direction)num;
         }
     }
-    public void TrocarFace()
-    {
-        //Se negativo soma 360, se >=360, subtrai 360.
-        //Cima 0, 0, 0
-        //Esquerda 0, 0, 90
-        //Baixo 0, 0, 180 ou 180, 0, 0
-        //Direita 0, 0, 270
-        //Frente 90, 0, 0
-        //Costas 270, 0, 0
 
-        if (faceAtual == FaceEnum.Cima)
-        {
-            if (vertical == 1) proximaFace = FaceEnum.Frente;
-            if (vertical == -1) proximaFace = FaceEnum.Costas;
-            if (horizontal == 1) proximaFace = FaceEnum.Direita;
-            if (horizontal == -1) proximaFace = FaceEnum.Esquerda;
-        }
-    }
+
+    public void Teleport(Vector3 position)
+    {
+        estado = State.Teleportando;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        targetToRotate = transform.rotation;
+        rotacionando = false;
+        CreateTrail();
+        teleportTarget = position;
+}
 }
