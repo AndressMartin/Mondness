@@ -10,6 +10,7 @@ public class StageManage : MonoBehaviour
     
     [SerializeField]public List<GameObject> stages = new List<GameObject>();
     [SerializeField] public Dictionary<GameObject, BoxCollider> startPoints = new Dictionary<GameObject, BoxCollider>();
+    [SerializeField] public Dictionary<GameObject, BoxCollider> estrelas = new Dictionary<GameObject, BoxCollider>();
     public static UnityEvent portalTeleport;
     public int i = 0;
     public int f = 0;
@@ -36,14 +37,17 @@ public class StageManage : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             player.GetComponent<PlayerMove>().Teleport(startPoints[stages[0]].transform.position);
+            i = 0;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             player.GetComponent<PlayerMove>().Teleport(startPoints[stages[1]].transform.position);
+            i = 1;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             player.GetComponent<PlayerMove>().Teleport(startPoints[stages[2]].transform.position);
+            i = 2;
         }
     }
 

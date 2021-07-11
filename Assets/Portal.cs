@@ -9,14 +9,23 @@ public class Portal : MonoBehaviour
     [SerializeField] PortalType portal = PortalType.next;
 
     [SerializeField] bool open;
-
+    [SerializeField] int starnum;
     private void Start()
     {
         CheckIfOpen();
     }
-
+    public void Open()
+    {
+        starnum--;
+        if (starnum <= 0) open = true;
+        CheckIfOpen();
+    }
     private void CheckIfOpen()
     {
+        if (!open && starnum <= 0)
+        {
+            open = true;
+        }
         if (open)
         {
             transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
