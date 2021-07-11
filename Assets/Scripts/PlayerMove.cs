@@ -208,9 +208,10 @@ public class PlayerMove : MonoBehaviour
         else if (estado == State.Flutuando)
         {
             personagem.transform.Rotate(velF * Time.deltaTime);
+            transform.Rotate((velF / 4) * Time.deltaTime);
         }
 
-            if (estado == State.Parado)
+        if (estado == State.Parado)
         {
             CameraRotate.AtualizarJogadorParado(true);
         }
