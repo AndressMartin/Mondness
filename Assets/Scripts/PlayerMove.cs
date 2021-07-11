@@ -233,12 +233,30 @@ public class PlayerMove : MonoBehaviour
         if (DetectBlocos.hitColliders.Length > 0)
         {
             Debug.LogWarning(DetectBlocos.hitColliders.Length);
-            estado = State.andar;
+
+            pontoMov.position += personagem.transform.up * 1;
+            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+            if (!(DetectBlocos.hitColliders.Length > 0))
+            {
+                Debug.LogWarning(DetectBlocos.hitColliders.Length);
+                pontoMov.position += personagem.transform.up * -1;
+                estado = State.andar;
+            }
+            else
+            {
+                pontoMov.position = pontoEstatico;
+            }
         }
         else
         {
+            pontoMov.position += personagem.transform.up * 1;
+            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+            if (!(DetectBlocos.hitColliders.Length > 0))
+            {
+                Debug.LogWarning(DetectBlocos.hitColliders.Length);
+                estado = State.virarCorpo;
+            }
             pontoMov.position = pontoEstatico;
-            estado = State.virarCorpo;
         }
     }
 
