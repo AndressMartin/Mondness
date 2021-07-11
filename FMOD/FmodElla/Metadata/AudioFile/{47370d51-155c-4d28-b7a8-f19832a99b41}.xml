@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{47370d51-155c-4d28-b7a8-f19832a99b41}">
+		<property name="assetPath">
+			<value>sfx/Interface Point.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.040604166666666663</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{492b6185-bc6f-4abd-9da7-dd4c932086b0}</destination>
+		</relationship>
+	</object>
+</objects>
