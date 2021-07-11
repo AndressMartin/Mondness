@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class Bloco : MonoBehaviour
 {
+    [SerializeField] public TipoBloco tipo;
+
+    BoxCollider boxCollider;
+    Rigidbody rigidBody;
+    MeshRenderer meshRenderer;
+
     bool playerEntrou;
     bool caiQuandoPlayerSai = true;
     public bool caindo,
@@ -24,6 +30,18 @@ public class Bloco : MonoBehaviour
         CuboManager.ResetarCena.AddListener(ResetParams);
 
         velF = new Vector3(0, 0, 0);
+
+        boxCollider = GetComponent<BoxCollider>();
+        rigidBody = GetComponent<Rigidbody>();
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+    }
+
+    public enum TipoBloco
+    {
+        Normal,
+        Gelo,
+        Vidro,
+        Nuvem
     }
 
     private void ResetParams()
@@ -33,6 +51,10 @@ public class Bloco : MonoBehaviour
         caindo = false;
         flutuando = false;
         playerEntrou = false;
+
+        boxCollider.enabled = true;
+        rigidBody.isKinematic = false;
+        meshRenderer.enabled = true;
     }
 
     public virtual void ChecarQueda()
@@ -81,9 +103,22 @@ public class Bloco : MonoBehaviour
                 Debug.LogWarning("ITS A BLOCK!");
                 if (collision.gameObject.GetComponent<Bloco>().flutuando == false)
                 {
-                    caindo = false;
-                    transform.position = collision.transform.position;
-                    transform.position += quedaDir * -1;
+                    if(collision.gameObject.GetComponent<Bloco>().tipo == TipoBloco.Normal || collision.gameObject.GetComponent<Bloco>().tipo == TipoBloco.Gelo)
+                    {
+                        caindo = false;
+                        transform.position = collision.transform.position;
+                        transform.position += quedaDir * -1;
+                    }
+                    else if(collision.gameObject.GetComponent<Bloco>().tipo == TipoBloco.Nuvem)
+                    {
+                        caindo = false;
+                        transform.position = collision.transform.position;
+                    }
+                    else if(collision.gameObject.GetComponent<Bloco>().tipo == TipoBloco.Vidro)
+                    {
+                        collision.gameObject.GetComponent<Bloco>().Quebrar();
+                    }
+                  
                 }
                 else
                 {
@@ -98,6 +133,13 @@ public class Bloco : MonoBehaviour
     {
         velF = new Vector3(UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f));
         flutuando = true;
+    }
+
+    private void Quebrar()
+    {
+        boxCollider.enabled = false;
+        rigidBody.isKinematic = true;
+        meshRenderer.enabled = false;
     }
 
 }

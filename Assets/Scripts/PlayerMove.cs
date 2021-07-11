@@ -168,14 +168,25 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
-                if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false)
+                if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Nuvem)
                 {
-                    if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().flutuando == false)
+                    if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false)
                     {
-                        pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
-                        estado = State.TerminandoQueda;
-                    }
-                    else
+                        if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().flutuando == false)
+                        {
+                            pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                            estado = State.TerminandoQueda;
+                        }
+                        else
+                        {
+                            Flutuar();
+                        }
+                    } 
+                }
+                else
+                {
+                    Cair();
+                    if (tempoCaindo > maxTempoCaindo)
                     {
                         Flutuar();
                     }
@@ -347,7 +358,7 @@ public class PlayerMove : MonoBehaviour
         pontoMov.position += personagem.transform.forward * 1;
 
         pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-        if (DetectBlocos.hitColliders.Length > 0)
+        if (DetectBlocos.hitColliders.Length > 0 && DetectBlocos.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Nuvem)
         {
             if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false && DetectBlocos.hitColliders[0].GetComponent<Bloco>().flutuando == false)
             {
