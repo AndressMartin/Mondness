@@ -20,14 +20,17 @@ public class PlayerMove : MonoBehaviour
     float rotVel = 90f;
 
     UnityEvent DerrubarCuboAnterior;
+    public static UnityEvent startIdle;
+    public static UnityEvent startRun;
+
     public enum Direction { W, D, S, A}
 
     public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda, Teleportando}
-
+    public State estado = State.Parado;
+    public State estadoAnterior = State.Parado; //TODO: SETTAR E RESETTAR
     public Direction direcao = Direction.W;
     public Direction direcaoIni;
     public Direction direcaoAnterior = Direction.S;
-    public State estado = State.Parado;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
     public Vector3 pontoEstatico;
     public Vector3 teleportTarget;
@@ -43,6 +46,18 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
+        if (DerrubarCuboAnterior == null)
+        {
+            DerrubarCuboAnterior = new UnityEvent();
+        }
+        if (startIdle == null)
+        {
+            startIdle = new UnityEvent();
+        }
+        if (startRun == null)
+        {
+            startRun = new UnityEvent();
+        }
         pontoMov.position = transform.position;
         pontoEstatico = pontoMov.position;
     }
@@ -54,10 +69,7 @@ public class PlayerMove : MonoBehaviour
         passosSfx = RuntimeManager.CreateInstance("event:/sfx/passos");
         puloSfx = RuntimeManager.CreateInstance("event:/sfx/salto_pulo");
         quedaSfx = RuntimeManager.CreateInstance("event:/sfx/salto_queda");
-        if (DerrubarCuboAnterior == null)
-        {
-            DerrubarCuboAnterior = new UnityEvent();
-        }
+        
     }
 
     private void SetParamsOriginais()
@@ -84,16 +96,24 @@ public class PlayerMove : MonoBehaviour
         //Se está parado
         if (estado == State.Parado)
         {
+            if (estadoAnterior != estado)
+            {
+                startIdle.Invoke();
+                estadoAnterior = estado;
+            }
             if (transform.position == pontoEstatico && CameraRotate.rotacionando == false)
             {
                 WaitForInput();
             }
-            //Se terminou de se movimentar
-            
         }
         //Movimenta-se se o ponto seguinte tem um bloco para sustentar o player
         else if (estado == State.Andando)
         {
+            if (estadoAnterior != estado)
+            {
+                startRun.Invoke();
+                estadoAnterior = estado;
+            }
             passosSfx.start();
             transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, movVel * Time.deltaTime);
             if (transform.position == pontoMov.position)
@@ -103,7 +123,7 @@ public class PlayerMove : MonoBehaviour
                 pontoEstatico = pontoMov.position;
                 estado = State.Parado;
             }
-            //TODO: Verificar se tem um bloco logo em frente ao player, já que ele não pode trombar com outro bloco.
+            
         }
         else if (estado == State.ViraCorpo)
         {
@@ -201,7 +221,7 @@ public class PlayerMove : MonoBehaviour
     {
         //TODO: ANIMACAO DE PULO!
         puloSfx.start();
-        yield return new WaitForSeconds(/*tamanho Animação*/1);
+        yield return new WaitForSeconds(/*tamanho Animação*/.6f);
         Debug.Log("Pulo Coroutine after yield");
         quedaSfx.start();
         DerrubarCuboAnterior.Invoke();
