@@ -19,10 +19,14 @@ public class PlayerMove : MonoBehaviour
     float quedaVel = 13f;
     float rotVel = 90f;
 
+    float tempoCaindo = 0;
+    float maxTempoCaindo = 0.5f;
+    Vector3 velF;
+
     UnityEvent DerrubarCuboAnterior;
     public enum Direction { W, D, S, A}
 
-    public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda, Teleportando}
+    public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda, Teleportando, Flutuando}
 
     public Direction direcao = Direction.W;
     public Direction direcaoIni;
@@ -58,6 +62,8 @@ public class PlayerMove : MonoBehaviour
         {
             DerrubarCuboAnterior = new UnityEvent();
         }
+
+        velF = new Vector3(0, 0, 0);
     }
 
     private void SetParamsOriginais()
@@ -135,13 +141,24 @@ public class PlayerMove : MonoBehaviour
             if (DetectBlocos.hitColliders.Length <= 0)
             {
                 Cair();
+                if (tempoCaindo > maxTempoCaindo)
+                {
+                    Flutuar();
+                }
             }
             else
             {
                 if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false)
                 {
-                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
-                    estado = State.TerminandoQueda;
+                    if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().flutuando == false)
+                    {
+                        pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                        estado = State.TerminandoQueda;
+                    }
+                    else
+                    {
+                        Flutuar();
+                    }
                 }
             }
         }
@@ -169,8 +186,12 @@ public class PlayerMove : MonoBehaviour
                 SetParamsOriginais();
             }
         }
+        else if (estado == State.Flutuando)
+        {
+            personagem.transform.Rotate(velF * Time.deltaTime);
+        }
 
-        if(estado == State.Parado)
+            if (estado == State.Parado)
         {
             CameraRotate.AtualizarJogadorParado(true);
         }
@@ -195,6 +216,7 @@ public class PlayerMove : MonoBehaviour
     {
         pontoMov.position += transform.up * -1 * quedaVel * Time.deltaTime;
         transform.position = pontoMov.position;
+        tempoCaindo += Time.deltaTime;
     }
 
     private IEnumerator Pulo()
@@ -206,6 +228,7 @@ public class PlayerMove : MonoBehaviour
         quedaSfx.start();
         DerrubarCuboAnterior.Invoke();
         DerrubarCuboAnterior.RemoveAllListeners();
+        tempoCaindo = 0;
         estado = State.Caindo;
     }
 
@@ -370,5 +393,11 @@ public class PlayerMove : MonoBehaviour
         rotacionando = false;
         CreateTrail();
         teleportTarget = position;
-}
+    }
+
+    private void Flutuar()
+    {
+        velF = new Vector3(UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f));
+        estado = State.Flutuando;
+    }
 }
