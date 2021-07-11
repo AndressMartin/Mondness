@@ -101,6 +101,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{193189ae-5dc8-4afd-89e8-b718c1dc2093}">
+		<property name="volume">
+			<value>5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{dffb46a4-08e2-44a4-895b-a14a380c4df7}</destination>
 		</relationship>
@@ -190,6 +193,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{cf33ed1b-7cca-43bc-971a-2e6b236f3fa3}">
+		<property name="volume">
+			<value>2</value>
+		</property>
 		<property name="name">
 			<value>Audio 2</value>
 		</property>
@@ -254,6 +260,7 @@
 	<object class="MixerBusEffectChain" id="{dffb46a4-08e2-44a4-895b-a14a380c4df7}">
 		<relationship name="effects">
 			<destination>{84dc59dc-df6a-4f84-bf89-f7463ec5a70d}</destination>
+			<destination>{410a488d-175d-4e84-9066-da40815c166e}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{83cd5e1a-1288-4ba2-b7ac-2ddb9c6627a6}" />
@@ -267,6 +274,7 @@
 	<object class="MixerBusEffectChain" id="{974b92c3-f3c0-4e2d-ad7f-1aab296ac8ec}">
 		<relationship name="effects">
 			<destination>{85deb3a3-61fa-4c2e-8724-a2358b21cac4}</destination>
+			<destination>{c33c4fd7-0b68-4a7d-adc5-a9a566c6c9b5}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{0df0ad51-3e21-4423-9b11-1d3c3d4038f8}" />
@@ -277,7 +285,16 @@
 	</object>
 	<object class="MixerBusPanner" id="{c3919266-95ee-4275-9860-c569866793ff}" />
 	<object class="MixerBusFader" id="{84dc59dc-df6a-4f84-bf89-f7463ec5a70d}" />
+	<object class="LoudnessMeter" id="{410a488d-175d-4e84-9066-da40815c166e}" />
 	<object class="MixerBusFader" id="{78a15704-da16-472e-9db7-c92708290735}" />
 	<object class="MixerBusFader" id="{85deb3a3-61fa-4c2e-8724-a2358b21cac4}" />
+	<object class="SFXReverbEffect" id="{c33c4fd7-0b68-4a7d-adc5-a9a566c6c9b5}">
+		<property name="decayTime">
+			<value>800</value>
+		</property>
+		<property name="wetLevel">
+			<value>-7.5</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{80812813-b411-4973-84b8-2794d923ea7d}" />
 </objects>
