@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5362059257520655150}
   - component: {fileID: 8884588715247022010}
   m_Layer: 0
-  m_Name: default
+  m_Name: Vidro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
