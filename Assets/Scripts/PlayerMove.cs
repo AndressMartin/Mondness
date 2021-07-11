@@ -210,6 +210,7 @@ public class PlayerMove : MonoBehaviour
 
     private void AvisarCubo()
     {
+        DerrubarCuboAnterior.RemoveAllListeners();
         DerrubarCuboAnterior.AddListener(DetectBlocos.hitColliders[0].GetComponent<Bloco>().ChecarQueda);
         DetectBlocos.hitColliders[0].GetComponent<Bloco>().PegarDir(transform.up * -1);
     }

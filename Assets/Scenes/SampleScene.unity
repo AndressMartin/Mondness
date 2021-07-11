@@ -141,9 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &105874306
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -155,7 +152,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &105874307
 Rigidbody:
@@ -171,7 +168,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &128549957 stripped
 Transform:
@@ -196,9 +193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &166424369
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -210,7 +204,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &166424370
 Rigidbody:
@@ -226,7 +220,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &171253942 stripped
 GameObject:
@@ -246,9 +240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &171253944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -260,7 +251,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &171253945
 Rigidbody:
@@ -276,7 +267,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &181766161 stripped
 GameObject:
@@ -296,9 +287,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &181766163
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -310,7 +298,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &181766164
 Rigidbody:
@@ -326,7 +314,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1001 &298234076
 PrefabInstance:
@@ -422,7 +410,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &298234081
 MonoBehaviour:
@@ -437,10 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!54 &298234082
+--- !u!54 &298234085
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,7 +439,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &301810942 stripped
 Transform:
@@ -479,9 +464,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &329786159
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -493,7 +475,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &329786160
 Rigidbody:
@@ -509,7 +491,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1001 &383919079
 PrefabInstance:
@@ -602,9 +584,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &386656480
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -616,7 +595,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &386656481
 Rigidbody:
@@ -632,7 +611,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &395108054 stripped
 Transform:
@@ -773,9 +752,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &661397509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -787,7 +763,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &661397510
 Rigidbody:
@@ -803,7 +779,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &664925966 stripped
 GameObject:
@@ -823,9 +799,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &664925968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -837,7 +810,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &664925969
 Rigidbody:
@@ -853,7 +826,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &686787046 stripped
 Transform:
@@ -1011,9 +984,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &862372759
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1025,7 +995,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &862372760
 Rigidbody:
@@ -1041,7 +1011,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1001 &906518299
 PrefabInstance:
@@ -1134,9 +1104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &955479092
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1148,7 +1115,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &955479093
 Rigidbody:
@@ -1164,7 +1131,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1001 &960210831
 PrefabInstance:
@@ -1262,9 +1229,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &984756929
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1276,7 +1240,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &984756930
 Rigidbody:
@@ -1292,7 +1256,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &1039670346 stripped
 Transform:
@@ -1317,9 +1281,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &1056127385
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1331,7 +1292,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1056127386
 Rigidbody:
@@ -1347,7 +1308,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &1166461820 stripped
 Transform:
@@ -1372,9 +1333,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &1181472770
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1386,7 +1344,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1181472771
 Rigidbody:
@@ -1402,7 +1360,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1001 &1214346326
 PrefabInstance:
@@ -1884,9 +1842,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &1746021978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1898,7 +1853,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1746021979
 Rigidbody:
@@ -1914,7 +1869,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &1760729834 stripped
 Transform:
@@ -2085,9 +2040,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caindo: 0
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!65 &1847069638
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2099,7 +2051,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1847069639
 Rigidbody:
@@ -2115,7 +2067,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1001 &1900283228
 PrefabInstance:
