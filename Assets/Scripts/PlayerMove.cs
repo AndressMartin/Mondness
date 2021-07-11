@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] GameObject personagem;
     float horizontal;
     float vertical;
-    float velocidade = 90f;
+    float velocidade = 10f;
 
     bool caindo;
 
@@ -91,7 +91,7 @@ public class PlayerMove : MonoBehaviour
 
     public void WaitForInput()
     {
-        direcaoAnterior = corrigirDirecao(direcao);
+        direcaoAnterior = direcao;
         myCamPos = CameraRotate.cameraPos;
         //Debug.LogWarning(myCamPos);
         if (Input.GetAxisRaw("Horizontal") > 0)
@@ -116,7 +116,6 @@ public class PlayerMove : MonoBehaviour
         }
         direcao = corrigirDirecao();
         OlharParaDirecao();
-        pontoMov.position = pontoEstatico;
         Andar();
     }
 
@@ -127,26 +126,11 @@ public class PlayerMove : MonoBehaviour
         personagem.transform.Rotate(0, 90 * num, 0);
     }
 
-    private Direction corrigirDirecao(Direction direcao)
-    {
-        int num = (int)direcao + ((int)myCamPos);
-        if (num > 3)
-        {
-            return (Direction)(num - 4);
-        }
-        else if (num < 0)
-        {
-            return (Direction)(num + 4);
-        }
-        else
-        {
-            return (Direction)num;
-        }
-    }
-
     private void Andar()
     {
         Debug.Log($"Colocando {pontoMov.position} de rotação {pontoMov.rotation} em {direcao} a {transform.forward}");
+        pontoMov.position += personagem.transform.forward * 1;
+        /*
         if (direcao == Direction.D)
         {
             pontoMov.position -= transform.right * 1;
@@ -163,6 +147,7 @@ public class PlayerMove : MonoBehaviour
         {
             pontoMov.position -= transform.forward * 1;
         }
+        */
         pontoMov.GetComponent<DetectBlocos>().MyCollisions();
         if (DetectBlocos.hitColliders.Length > 0)
         {
@@ -187,7 +172,7 @@ public class PlayerMove : MonoBehaviour
     // 3 + (3) -> S
     public Direction corrigirDirecao()
     {
-        int num = (int)direcao + ((int)myCamPos);
+        int num = (int)direcao - ((int)myCamPos);
         if (num > 3)
         {
             return (Direction)(num - 4);
