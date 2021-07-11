@@ -19,17 +19,13 @@ public class PlayerMove : MonoBehaviour
     float rotVel = 90f;
 
     UnityEvent DerrubarCuboAnterior;
-    public enum FaceEnum { Cima, Baixo, Esquerda, Direita, Frente, Costas}
     public enum Direction { W, D, S, A}
 
     public enum State { Parado, Andando, ViraFace, ViraCorpo, Caindo, Pulando, TerminandoQueda}
 
-    public FaceEnum faceAtual = FaceEnum.Cima;
-    public FaceEnum proximaFace = FaceEnum.Frente;
     public Direction direcao = Direction.W;
     public Direction direcaoAnterior = Direction.S;
     public State estado = State.Parado;
-    private bool pressionouUmAxis = true;
     private Enums.CameraPos myCamPos = Enums.CameraPos.pos1;
     public Vector3 pontoEstatico;
     public Transform pontoMov;
@@ -54,6 +50,8 @@ public class PlayerMove : MonoBehaviour
             DerrubarCuboAnterior = new UnityEvent();
         }
     }
+
+
     private void Update()
     {
         //Se está parado
@@ -86,7 +84,7 @@ public class PlayerMove : MonoBehaviour
             {
                 rotTime = maxRotTime;
             }
-            if (rotTime > 0 ) Rotacionar2();
+            if (rotTime > 0 ) Rotacionar();
             else
             {
                 CorrectRotation();
@@ -141,7 +139,7 @@ public class PlayerMove : MonoBehaviour
     {
         //TODO: ANIMACAO DE PULO!
         puloSfx.start();
-        yield return new WaitForSeconds(/*tamanho Animação*/2);
+        yield return new WaitForSeconds(/*tamanho Animação*/1);
         Debug.Log("Pulo Coroutine after yield");
         quedaSfx.start();
         DerrubarCuboAnterior.Invoke();
@@ -149,7 +147,7 @@ public class PlayerMove : MonoBehaviour
         estado = State.Caindo;
     }
 
-    void Rotacionar2()
+    void Rotacionar()
     {
         Debug.Log("Personagem.transform.right = " + personagem.transform.right);
         Debug.Log("rotVel = " + rotVel);
@@ -221,8 +219,11 @@ public class PlayerMove : MonoBehaviour
     private void AvisarCubo()
     {
         DerrubarCuboAnterior.RemoveAllListeners();
-        DerrubarCuboAnterior.AddListener(DetectBlocos.hitColliders[0].GetComponent<Bloco>().ChecarQueda);
-        DetectBlocos.hitColliders[0].GetComponent<Bloco>().PegarDir(transform.up * -1);
+        if (DetectBlocos.hitColliders.Length > 0)
+        {
+            DerrubarCuboAnterior.AddListener(DetectBlocos.hitColliders[0].GetComponent<Bloco>().ChecarQueda);
+            DetectBlocos.hitColliders[0].GetComponent<Bloco>().PegarDir(transform.up * -1);
+        }
     }
 
     private void OlharParaDirecao()
@@ -299,67 +300,14 @@ public class PlayerMove : MonoBehaviour
     }
 
 
-    public static float ClampAngle(float angle, float min, float max)
+    public void Teleport(Vector3 position)
     {
-        angle = Mathf.Repeat(angle, 360);
-        min = Mathf.Repeat(min, 360);
-        max = Mathf.Repeat(max, 360);
-        bool inverse = false;
-        var tmin = min;
-        var tangle = angle;
-        if (min > 180)
-        {
-            inverse = !inverse;
-            tmin -= 180;
-        }
-        if (angle > 180)
-        {
-            inverse = !inverse;
-            tangle -= 180;
-        }
-        var result = !inverse ? tangle > tmin : tangle < tmin;
-        if (!result)
-            angle = min;
-
-        inverse = false;
-        tangle = angle;
-        var tmax = max;
-        if (angle > 180)
-        {
-            inverse = !inverse;
-            tangle -= 180;
-        }
-        if (max > 180)
-        {
-            inverse = !inverse;
-            tmax -= 180;
-        }
-
-        result = !inverse ? tangle < tmax : tangle > tmax;
-        if (!result)
-            angle = max;
-        return angle;
-    }
-
-
-
-
-    public void TrocarFace()
-    {
-        //Se negativo soma 360, se >=360, subtrai 360.
-        //Cima 0, 0, 0
-        //Esquerda 0, 0, 90
-        //Baixo 0, 0, 180 ou 180, 0, 0
-        //Direita 0, 0, 270
-        //Frente 90, 0, 0
-        //Costas 270, 0, 0
-
-        if (faceAtual == FaceEnum.Cima)
-        {
-            if (vertical == 1) proximaFace = FaceEnum.Frente;
-            if (vertical == -1) proximaFace = FaceEnum.Costas;
-            if (horizontal == 1) proximaFace = FaceEnum.Direita;
-            if (horizontal == -1) proximaFace = FaceEnum.Esquerda;
-        }
-    }
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.position = position;
+        pontoMov.position = position;
+        pontoEstatico = position;
+        estado = State.Parado;
+        targetToRotate = transform.rotation;
+        rotacionando = false;
+}
 }
