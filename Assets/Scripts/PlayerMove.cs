@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,9 @@ using UnityEngine.Events;
 
 public class PlayerMove : MonoBehaviour
 {
+    FMOD.Studio.EventInstance passosSfx;
+    FMOD.Studio.EventInstance puloSfx;
+    FMOD.Studio.EventInstance quedaSfx;
     [SerializeField] GameObject camPivot;
     [SerializeField] GameObject personagem;
     float horizontal;
@@ -42,6 +46,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
+        passosSfx = RuntimeManager.CreateInstance("event:/sfx/passos");
+        puloSfx = RuntimeManager.CreateInstance("event:/sfx/salto_pulo");
+        quedaSfx = RuntimeManager.CreateInstance("event:/sfx/salto_queda");
         if (DerrubarCuboAnterior == null)
         {
             DerrubarCuboAnterior = new UnityEvent();
@@ -62,6 +69,7 @@ public class PlayerMove : MonoBehaviour
         //Movimenta-se se o ponto seguinte tem um bloco para sustentar o player
         else if (estado == State.Andando)
         {
+            passosSfx.start();
             transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, movVel * Time.deltaTime);
             if (transform.position == pontoMov.position)
             {
@@ -132,8 +140,10 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator Pulo()
     {
         //TODO: ANIMACAO DE PULO!
+        puloSfx.start();
         yield return new WaitForSeconds(/*tamanho Animação*/2);
         Debug.Log("Pulo Coroutine after yield");
+        quedaSfx.start();
         DerrubarCuboAnterior.Invoke();
         DerrubarCuboAnterior.RemoveAllListeners();
         estado = State.Caindo;
