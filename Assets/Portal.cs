@@ -8,14 +8,44 @@ public class Portal : MonoBehaviour
     private enum PortalType { next, last }
     [SerializeField] PortalType portal = PortalType.next;
 
+    [SerializeField] bool open;
+    [SerializeField] int starnum;
+    private void Start()
+    {
+        CheckIfOpen();
+    }
+    public void Open()
+    {
+        starnum--;
+        if (starnum <= 0) open = true;
+        CheckIfOpen();
+    }
+    private void CheckIfOpen()
+    {
+        if (!open && starnum <= 0)
+        {
+            open = true;
+        }
+        if (open)
+        {
+            transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "PlayerModel")
+        if (open)
         {
-            if (portal == PortalType.next) TeleportNext();
-            else if (portal == PortalType.last) LoadNextScene();
+            if (other.gameObject.tag == "PlayerModel")
+            {
+                if (portal == PortalType.next) TeleportNext();
+                else if (portal == PortalType.last) LoadNextScene();
+            }
         }
-        
     }
 
     private void TeleportNext()

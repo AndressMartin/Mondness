@@ -59,7 +59,7 @@ public class PlayerMove : MonoBehaviour
         //Se está parado
         if (estado == State.Parado)
         {
-            if (transform.position == pontoEstatico)
+            if (transform.position == pontoEstatico && CameraRotate.rotacionando == false)
             {
                 WaitForInput();
             }
@@ -143,6 +143,15 @@ public class PlayerMove : MonoBehaviour
                 estado = State.Parado;
                 StartCoroutine(DestroyTrail());
             }
+        }
+
+        if(estado == State.Parado)
+        {
+            CameraRotate.AtualizarJogadorParado(true);
+        }
+        else
+        {
+            CameraRotate.AtualizarJogadorParado(false);
         }
     }
 
