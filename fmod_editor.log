@@ -16,3 +16,41 @@
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] SoundI::release                          : Tema Gameplay e Derivados - Intro (00000142C4DD4A98)
+[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (000001432D8725F8)
+[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (0000014332FA48E8)
+[LOG] SoundI::release                          :  (00000142C6D987E8)
+[LOG] SoundI::release                          :     Pulo Salto (000001432D86F878)
+[LOG] SoundI::release                          :  (00000142C6D97DD8)
+[LOG] SoundI::release                          :     Andando 1 (000001432D871F78)
+[LOG] SoundI::release                          :  (00000142C6D98678)
+[LOG] SoundI::release                          :     Andando 2 (000001432D871C38)
+[LOG] SoundI::release                          :  (00000142C6D991F8)
+[LOG] SoundI::release                          :     Andando 3 (000001432D874338)
+[LOG] SoundI::release                          :  (00000142C6D980B8)
+[LOG] SoundI::release                          :     Andando 4 (000001432D871278)
+[LOG] SoundI::release                          :  (00000142C6D98228)
+[LOG] SoundI::release                          :     Andando 5 (000001432D871DD8)
+[LOG] SoundI::release                          :  (00000142C6D98958)
+[LOG] SoundI::release                          :     Rotacao de Camera (000001432D872458)
+[LOG] SoundI::release                          :  (00000142C6D98398)
+[LOG] SoundI::release                          :     Pulo Impacto Chao (000001432D872C78)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
