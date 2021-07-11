@@ -26,7 +26,9 @@ public class StageManage : MonoBehaviour
 
     private void Update()
     {
+        #if UNITY_EDITOR
         StageHackTool();
+        # endif
     }
 
     private void StageHackTool()
