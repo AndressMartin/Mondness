@@ -14,15 +14,23 @@ public class Estrela : MonoBehaviour
     {
         coletaSfx = RuntimeManager.CreateInstance("event:/sfx/coleta_de_estrela");
         stagePortal = transform.parent.Find("Portal");
+        CuboManager.ResetarCena.AddListener(ResetParams);
         if (coleta == null)
         {
             coleta = new UnityEvent();
         }
         coleta.AddListener(stagePortal.GetComponent<Portal>().Open);
     }
+
+    private void ResetParams()
+    {
+        Ativar(true);
+        coleta.AddListener(stagePortal.GetComponent<Portal>().Open);
+        stagePortal.GetComponent<Portal>().Close();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("COLIDIU");
         if (other.gameObject.tag == "PlayerModel")
         {
             Debug.Log("COLIDIU COM JOGADOR");
@@ -38,6 +46,12 @@ public class Estrela : MonoBehaviour
         //Tocar musiquinha
         coleta.Invoke();
         coleta.RemoveAllListeners();
-        Destroy(gameObject);
+        Ativar(false);
+    }
+
+    void Ativar(bool v)
+    {
+        transform.GetComponent<BoxCollider>().enabled = v;
+        transform.GetChild(0).gameObject.SetActive(v);
     }
 }

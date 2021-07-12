@@ -24,6 +24,13 @@ public class Portal : MonoBehaviour
         if (starnum <= 0) open = true;
         CheckIfOpen();
     }
+    public void Close()
+    {
+        Debug.Log("CLOSE");
+        starnum++;
+        if (starnum > 0) open = false;
+        CheckIfOpen();
+    }
     private void CheckIfOpen()
     {
         if (!open && starnum <= 0)
