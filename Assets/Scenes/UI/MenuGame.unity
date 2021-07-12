@@ -1891,9 +1891,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Zago @Twitter
+  m_text: 'Zago - Itch.io: zagoiris
 
-    Julia @Twitter'
+    Julia - Itch.io: kyaramero'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2155,7 +2155,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 7.902, y: 158}
-  m_SizeDelta: {x: 493.162, y: 148.174}
+  m_SizeDelta: {x: 600.162, y: 148.174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &925889375
 MonoBehaviour:
@@ -2177,7 +2177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mewmew @Mewmewdevart
+  m_text: 'Mewmew - Itch.io: mewmewdevart'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3048,7 +3048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.902, y: 157}
+  m_AnchoredPosition: {x: 7.902, y: 135}
   m_SizeDelta: {x: 493.162, y: 148.174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1044126915
@@ -3071,7 +3071,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Giovani @Twitter
+  m_text: 'Giovani - SoundCloud: giovani-desiderio'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3341,7 +3341,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 7.902, y: 145}
-  m_SizeDelta: {x: 493.162, y: 148.174}
+  m_SizeDelta: {x: 600.162, y: 148.174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1111538414
 MonoBehaviour:
@@ -3363,9 +3363,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Andress @Twitter
+  m_text: 'Andress - Itch.io: andressmartin
 
-    Didiei @Twitter'
+    Kelvin - Itch.io: didiei3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4420,7 +4420,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 7.902, y: 145}
-  m_SizeDelta: {x: 493.162, y: 148.174}
+  m_SizeDelta: {x: 600.162, y: 148.174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1763776886
 MonoBehaviour:
@@ -4442,9 +4442,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Julia @Twitter
+  m_text: 'Julia - Itch.io: kyaramero
 
-    Mewmew @Mewmewdevart'
+    Mewmew - Itch.io: mewmewdevart'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
