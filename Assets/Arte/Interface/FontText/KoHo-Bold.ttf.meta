@@ -13,9 +13,12 @@ TrueTypeFontImporter:
   fallbackFontReferences:
   - {fileID: 12800000, guid: d2cb26025eaae9944b83f2f6ddcb10a0, type: 3}
   - {fileID: 12800000, guid: 53d37005f702d9d4383e852f90214893, type: 3}
+  - {fileID: 12800000, guid: 1a35d9830a934854e9697e5462292d2d, type: 3}
   - {fileID: 12800000, guid: 66e18ca5ec8639a46bce54b1e87d6b0c, type: 3}
   - {fileID: 12800000, guid: 96afdb471c984074d9e1f92b24a3a360, type: 3}
+  - {fileID: 12800000, guid: 6fc1e2b99cd21f64d9a0852d944ff245, type: 3}
   - {fileID: 12800000, guid: 71dd798f2368cda48aab637c07a97a9e, type: 3}
+  - {fileID: 12800000, guid: 1ad902d6f57ef89449bb30a610317c18, type: 3}
   - {fileID: 12800000, guid: d095d9c8348063e439455f9e1be0d085, type: 3}
   - {fileID: 12800000, guid: c082943f9ce94234b8ff2da94caf8d96, type: 3}
   - {fileID: 12800000, guid: 22b9046eab8be574fbaf27285f0d8321, type: 3}

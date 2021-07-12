@@ -7,6 +7,7 @@ public class Bloco : MonoBehaviour
 {
     [SerializeField] public TipoBloco tipo;
 
+
     BoxCollider boxCollider;
     Rigidbody rigidBody;
     MeshRenderer meshRenderer;

@@ -15,7 +15,6 @@ public class Portal : MonoBehaviour
     [SerializeField] int starnum;
     private void Start()
     {
-        fanfarraSfx = RuntimeManager.CreateInstance("event:/sfx/fanfarra_vitoria"); 
         portalSfx = RuntimeManager.CreateInstance("event:/sfx/entrando_no_portal");
         CheckIfOpen();
     }
@@ -33,8 +32,6 @@ public class Portal : MonoBehaviour
         }
         if (open)
         {
-            RuntimeManager.AttachInstanceToGameObject(fanfarraSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
-            fanfarraSfx.start();
             transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         }
         else
@@ -65,5 +62,6 @@ public class Portal : MonoBehaviour
     private void LoadNextScene()
     {
         Debug.Log("Last");
+        SceneManage.nextScene.Invoke();
     }
 }
