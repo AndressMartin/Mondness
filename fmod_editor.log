@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001D593A91988 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000002566A009858 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,36 +16,5 @@
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] SoundI::release                          : Tema Gameplay e Derivados - Intro (000001D59559D9D8)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (000001D246C7ABB8)
-[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (000001D59559CC58)
-[LOG] SoundI::release                          :  (000001D4CC9FE228)
-[LOG] SoundI::release                          :     Coletar Estrelas (000001D435DFE218)
-[LOG] SoundI::release                          :  (000001D4CCA01028)
-[LOG] SoundI::release                          :     Pulo Salto (000001D40D60A9A8)
-[LOG] SoundI::release                          :  (000001D4CC9FE0B8)
-[LOG] SoundI::release                          :     Andando 1 (000001D435DFE078)
-[LOG] SoundI::release                          :  (000001D4CCA01BA8)
-[LOG] SoundI::release                          :     Andando 2 (000001D40D60AB48)
-[LOG] SoundI::release                          :  (000001D4CC9FE508)
-[LOG] SoundI::release                          :     Andando 3 (000001D40D60B368)
-[LOG] SoundI::release                          :  (000001D4CC9FFC08)
-[LOG] SoundI::release                          :     Andando 4 (000001D40D60B1C8)
-[LOG] SoundI::release                          :  (000001D4CC9FF648)
-[LOG] SoundI::release                          :     Andando 5 (000001D40D60A808)
-[LOG] SoundI::release                          :  (000001D4CCA01D18)
-[LOG] SoundI::release                          :     Rotacao de Camera (000001D435DFE3B8)
-[LOG] SoundI::release                          :  (000001D4CCA015E8)
-[LOG] SoundI::release                          :     Pulo Impacto Chao (000001D40D60AE88)
-[LOG] SoundI::release                          :  (000001D4CCA01308)
-[LOG] SoundI::release                          :     Usar Portal (000001D40D60A668)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)

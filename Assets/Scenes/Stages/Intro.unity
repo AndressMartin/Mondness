@@ -580,6 +580,8 @@ GameObject:
   m_Component:
   - component: {fileID: 88353414}
   - component: {fileID: 88353415}
+  - component: {fileID: 88353417}
+  - component: {fileID: 88353416}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -611,6 +613,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 494885d036cb8e04bb3309c91607a93a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &88353416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88353413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/music/gameplay
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!114 &88353417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88353413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f0431962a96d6c4981306df98aa42ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &96476388
@@ -3262,29 +3299,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7268376877683674024, guid: fd4e9bde985288740993498f600ce2b0, type: 3}
   m_PrefabInstance: {fileID: 7268376877587469269}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &901765199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901765197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/music/gameplay
-  PlayEvent: 1
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 0
 --- !u!54 &901765200
 Rigidbody:
   m_ObjectHideFlags: 0
