@@ -17,6 +17,7 @@ PUZZLE GAME in 3D VOXEL ART!
 - Move the Astronaut around with WASD
 - Use  'SPACE' to jump
 - Use 'Q' and 'E' to rotate the camera
+- Use 'C' to restart the puzzle
 
 See more about this project:  Click Here to View the Document
 
