@@ -19,7 +19,7 @@ PUZZLE GAME in 3D VOXEL ART!
 - Use 'Q' and 'E' to rotate the camera
 - Use 'C' to restart the puzzle
 
-See more about this project:  Click Here to View the Document
+See more about this project:  [Click Here to View the Document](https://drive.google.com/file/d/1er2GX-BgaQ1pIQ1ZTzuBNvd8AOOYUoRL/view)
 
 
 #### ⚙️ Languages and Tools:
