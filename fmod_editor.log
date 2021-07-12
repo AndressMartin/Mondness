@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000002566A009858 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 00000255A38A8BD8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,5 +16,36 @@
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] SoundI::release                          : Tema Gameplay e Derivados - Intro (0000025636980198)
+[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (00000255A3F7A988)
+[LOG] SoundI::release                          :     Tema Gameplay e Derivados - Intro (000002560A329778)
+[LOG] SoundI::release                          :  (000002557D4F6348)
+[LOG] SoundI::release                          :     Pulo Salto (00000255A3F7B4E8)
+[LOG] SoundI::release                          :  (000002557D4F9E38)
+[LOG] SoundI::release                          :     Coletar Estrelas (00000255A3F7E0C8)
+[LOG] SoundI::release                          :  (000002557D4FA9B8)
+[LOG] SoundI::release                          :     Andando 1 (00000255A3F78288)
+[LOG] SoundI::release                          :  (000002557D4F9CC8)
+[LOG] SoundI::release                          :     Andando 2 (00000255A3F7B9C8)
+[LOG] SoundI::release                          :  (000002557D4F5AA8)
+[LOG] SoundI::release                          :     Andando 3 (00000255A3F7DF28)
+[LOG] SoundI::release                          :  (000002557D4FA6D8)
+[LOG] SoundI::release                          :     Andando 4 (00000255A3F7ACC8)
+[LOG] SoundI::release                          :  (000002557D4F99E8)
+[LOG] SoundI::release                          :     Andando 5 (00000255A3F79AE8)
+[LOG] SoundI::release                          :  (000002557D4FA568)
+[LOG] SoundI::release                          :     Rotacao de Camera (00000255A3F7BEA8)
+[LOG] SoundI::release                          :  (000002557D4F9428)
+[LOG] SoundI::release                          :     Pulo Impacto Chao (00000255A3F7CEE8)
+[LOG] SoundI::release                          :  (000002557D4F6A78)
+[LOG] SoundI::release                          :     Usar Portal (00000255A3F7BB68)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.

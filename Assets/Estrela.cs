@@ -19,13 +19,11 @@ public class Estrela : MonoBehaviour
         {
             coleta = new UnityEvent();
         }
-        coleta.AddListener(stagePortal.GetComponent<Portal>().Open);
     }
 
     private void ResetParams()
     {
         Ativar(true);
-        coleta.AddListener(stagePortal.GetComponent<Portal>().Open);
         stagePortal.GetComponent<Portal>().Close();
     }
 
@@ -42,9 +40,7 @@ public class Estrela : MonoBehaviour
     {
         RuntimeManager.AttachInstanceToGameObject(coletaSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
         coletaSfx.start();
-        //Fazer pozinho de conquista
-        //Tocar musiquinha
-        coleta.Invoke();
+        stagePortal.GetComponent<Portal>().Open();
         coleta.RemoveAllListeners();
         Ativar(false);
     }

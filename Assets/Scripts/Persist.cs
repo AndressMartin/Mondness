@@ -10,4 +10,12 @@ public class Persist : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
