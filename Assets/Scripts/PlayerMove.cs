@@ -49,6 +49,8 @@ public class PlayerMove : MonoBehaviour
     Quaternion rotIni;
     Quaternion perRotIni;
 
+    private bool andandoNoGelo = false;
+
     private void Awake()
     {
         if (DerrubarCuboAnterior == null)
@@ -367,23 +369,76 @@ public class PlayerMove : MonoBehaviour
         {
             if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false && DetectBlocos.hitColliders[0].GetComponent<Bloco>().flutuando == false)
             {
-                Debug.LogWarning(DetectBlocos.hitColliders.Length);
-                pontoMov.position += personagem.transform.up * 1;
-                pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-                if (!(DetectBlocos.hitColliders.Length > 0))
+                if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Gelo)
                 {
                     Debug.LogWarning(DetectBlocos.hitColliders.Length);
-                    pontoMov.position += personagem.transform.up * -1;
+                    pontoMov.position += personagem.transform.up * 1;
                     pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-                    if (DetectBlocos.hitColliders.Length > 0)
+                    if (!(DetectBlocos.hitColliders.Length > 0))
                     {
-                        pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
-                        estado = State.Andando;
+                        Debug.LogWarning(DetectBlocos.hitColliders.Length);
+                        pontoMov.position += personagem.transform.up * -1;
+                        pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+                        if (DetectBlocos.hitColliders.Length > 0)
+                        {
+                            pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                            estado = State.Andando;
+                        }
+                    }
+                    else
+                    {
+                        pontoMov.position = pontoEstatico;
                     }
                 }
                 else
                 {
-                    pontoMov.position = pontoEstatico;
+                    andandoNoGelo = true;
+
+                    while(andandoNoGelo == true)
+                    {
+                        pontoMov.position += personagem.transform.up * 1;
+                        pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+                        if (!(DetectBlocos.hitColliders.Length > 0))
+                        {
+                            pontoMov.position += personagem.transform.up * -1;
+                            pontoMov.position += personagem.transform.forward * 1;
+
+                            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+                            if (!(DetectBlocos.hitColliders.Length > 0))
+                            {
+                                pontoMov.position += personagem.transform.forward * -1;
+
+                                pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+                                if (DetectBlocos.hitColliders.Length > 0)
+                                {
+                                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                                    andandoNoGelo = false;
+                                }
+                            }
+                            else
+                            {
+                                if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Gelo)
+                                {
+                                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                                    andandoNoGelo = false;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            pontoMov.position += personagem.transform.up * -1;
+                            pontoMov.position += personagem.transform.forward * -1;
+
+                            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
+                            if (DetectBlocos.hitColliders.Length > 0)
+                            {
+                                pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                                andandoNoGelo = false;
+                            }
+                        }
+                    }
+
+                    estado = State.Andando;
                 }
             }
             else
