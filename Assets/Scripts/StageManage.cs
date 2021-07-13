@@ -12,14 +12,20 @@ public class StageManage : MonoBehaviour
     [SerializeField] public Dictionary<GameObject, BoxCollider> startPoints = new Dictionary<GameObject, BoxCollider>();
     [SerializeField] public Dictionary<GameObject, BoxCollider> estrelas = new Dictionary<GameObject, BoxCollider>();
     public static UnityEvent portalTeleport;
+    public static UnityEvent puzzlesLoaded;
     public int i = 0;
     public int f = 0;
     public GameObject player;
+    private void Awake()
+    {
+        if (portalTeleport == null)
+            portalTeleport = new UnityEvent();
+        if (puzzlesLoaded == null)
+            puzzlesLoaded = new UnityEvent();
+    }
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        if (portalTeleport == null)
-            portalTeleport = new UnityEvent();
         portalTeleport.AddListener(NextStage);
         if (!stages.Any())FindToList();
         StartCoroutine(FindStageStartPoints());
@@ -54,12 +60,13 @@ public class StageManage : MonoBehaviour
     private IEnumerator FindStageStartPoints()
     {
         yield return new WaitForSeconds(1);
-        while(startPoints.Count < 3)
+        while (startPoints.Count < stages.Count)
         {
             var start = Utils.FindComponentInChildWithTag<BoxCollider>(stages[f], "Start");
             startPoints.Add(stages[f], start);
             f++;
         }
+        puzzlesLoaded.Invoke();
     }
 
     private void FindToList()

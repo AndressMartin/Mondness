@@ -12,28 +12,30 @@ public class Portal : MonoBehaviour
     [SerializeField] PortalType portal = PortalType.next;
 
     [SerializeField] bool open;
-    [SerializeField] int starnum;
+    [SerializeField] int starNum;
+    private int starMax;
     private void Start()
     {
+        starMax = starNum;
         portalSfx = RuntimeManager.CreateInstance("event:/sfx/entrando_no_portal");
         CheckIfOpen();
     }
     public void Open()
     {
-        starnum--;
-        if (starnum <= 0) open = true;
+        starNum--;
+        if (starNum <= 0) open = true;
         CheckIfOpen();
     }
     public void Close()
     {
         Debug.Log("CLOSE");
-        starnum++;
-        if (starnum > 0) open = false;
+        if (starNum < starMax) starNum++;
+        if (starNum > 0) open = false;
         CheckIfOpen();
     }
     private void CheckIfOpen()
     {
-        if (!open && starnum <= 0)
+        if (!open && starNum <= 0)
         {
             open = true;
         }

@@ -50,6 +50,7 @@ public class PlayerMove : MonoBehaviour
     Quaternion perRotIni;
 
     private bool andandoNoGelo = false;
+    private bool gameStarted;
 
     private void Awake()
     {
@@ -73,10 +74,16 @@ public class PlayerMove : MonoBehaviour
     {
         SetParamsOriginais();
         CuboManager.ResetarCena.AddListener(ResetParams);
+        StageManage.puzzlesLoaded.AddListener(comecar);
         passosSfx = RuntimeManager.CreateInstance("event:/sfx/passos");
         puloSfx = RuntimeManager.CreateInstance("event:/sfx/salto_pulo");
         quedaSfx = RuntimeManager.CreateInstance("event:/sfx/salto_queda");
         velF = new Vector3(0, 0, 0);
+    }
+
+    private void comecar()
+    {
+        gameStarted = true;
     }
 
     private void SetParamsOriginais()
@@ -100,6 +107,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void Update()
     {
+        if (gameStarted != true) return;
         //Se está parado
         if (estado == State.Parado)
         {

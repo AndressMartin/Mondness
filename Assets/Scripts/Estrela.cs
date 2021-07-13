@@ -49,5 +49,6 @@ public class Estrela : MonoBehaviour
     {
         transform.GetComponent<BoxCollider>().enabled = v;
         transform.GetChild(0).gameObject.SetActive(v);
+        transform.GetChild(1).gameObject.SetActive(v);
     }
 }
