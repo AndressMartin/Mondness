@@ -28,10 +28,10 @@ public class CuboManager : MonoBehaviour
     private void Update()
     {
         if (gameStarted != true) return;
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    SendRespawnEvent();
-        //}
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            SendRespawnEvent();
+        }
     }
     public void SendRespawnEvent()
     {
