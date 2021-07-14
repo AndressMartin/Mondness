@@ -53,6 +53,7 @@ public class PlayerMove : MonoBehaviour
     private bool andandoNoGelo = false;
     private bool gameStarted;
 
+    Animator jumpingAnim;
     private void Awake()
     {
         if (DerrubarCuboAnterior == null)
@@ -73,6 +74,7 @@ public class PlayerMove : MonoBehaviour
         }
         pontoMov.position = transform.position;
         pontoEstatico = pontoMov.position;
+        jumpingAnim = personagem.transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Start()
@@ -277,8 +279,9 @@ public class PlayerMove : MonoBehaviour
         //TODO: ANIMACAO DE PULO!
         RuntimeManager.AttachInstanceToGameObject(puloSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
         puloSfx.start();
-        yield return new WaitForSeconds(/*tamanho Animação*/.6f);
-        Debug.Log("Pulo Coroutine after yield");
+        jumpingAnim.SetBool("Jumping", true);
+        yield return new WaitForSeconds(.28f);
+        jumpingAnim.SetBool("Jumping", false);
         RuntimeManager.AttachInstanceToGameObject(quedaSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
         quedaSfx.start();
         DerrubarCuboAnterior.Invoke();
