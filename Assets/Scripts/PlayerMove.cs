@@ -26,6 +26,7 @@ public class PlayerMove : MonoBehaviour
     UnityEvent DerrubarCuboAnterior;
     public static UnityEvent startIdle;
     public static UnityEvent startRun;
+    public static UnityEvent flutuando;
 
     public enum Direction { W, D, S, A}
     
@@ -57,6 +58,10 @@ public class PlayerMove : MonoBehaviour
         if (DerrubarCuboAnterior == null)
         {
             DerrubarCuboAnterior = new UnityEvent();
+        }
+        if (flutuando == null)
+        {
+            flutuando = new UnityEvent();
         }
         if (startIdle == null)
         {
@@ -101,8 +106,9 @@ public class PlayerMove : MonoBehaviour
         transform.rotation = rotIni;
         personagem.transform.rotation = perRotIni;
         estado = State.Parado;
-        pontoMov.position = transform.position;
+        estadoAnterior = State.Parado;
         pontoEstatico = transform.position;
+        pontoMov.position = transform.position;
         direcao = direcaoIni;
     }
     private void Update()
@@ -509,5 +515,6 @@ public class PlayerMove : MonoBehaviour
     {
         velF = new Vector3(UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f));
         estado = State.Flutuando;
+        flutuando.Invoke();
     }
 }
