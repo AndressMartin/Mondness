@@ -55,6 +55,9 @@ public class PlayerMove : MonoBehaviour
     private bool andandoNoGelo = false;
     private bool gameStarted;
 
+    private int blocoAtualID = 0;
+    public Collider[] hitCollidersPivot;
+
     Animator jumpingAnim;
     private void Awake()
     {
@@ -147,11 +150,24 @@ public class PlayerMove : MonoBehaviour
             if (transform.position == pontoMov.position)
             {
                 //CorrectPositions();
-                DerrubarCuboAnterior.Invoke();
+                //DerrubarCuboAnterior.Invoke();
                 pontoEstatico = pontoMov.position;
                 estado = State.Parado;
             }
-            
+
+            //Confere os blocos que estao colidindo com o Pivot
+            MyCollisionsPivot();
+            if(!(hitCollidersPivot.Length > 1) && hitCollidersPivot.Length > 0)
+            {
+                //Ve se o bloco que esta colidindo atualmente com o Pivot e diferente do bloco que estava colidindo antes
+                if(hitCollidersPivot[0].GetInstanceID() != blocoAtualID)
+                {
+                    //Derruba i bloco no qual o personagem estava antes e define o bloco em que ele esta atualmente como  bloco atual e o coloca na lista de eventos DerrubarBlocoAnterior
+                    blocoAtualID = hitCollidersPivot[0].GetInstanceID();
+                    DerrubarCuboAnterior.Invoke();
+                    AvisarCubo();
+                }
+            }
         }
         else if (estado == State.ViraCorpo)
         {
@@ -354,6 +370,10 @@ public class PlayerMove : MonoBehaviour
         {
             return;
         }
+
+        pontoMovDetector.MyCollisions();
+        blocoAtualID = pontoMovDetector.hitColliders[0].GetInstanceID();
+
         AvisarCubo();
         direcao = corrigirDirecao();
         OlharParaDirecao();
@@ -363,11 +383,22 @@ public class PlayerMove : MonoBehaviour
     private void AvisarCubo()
     {
         DerrubarCuboAnterior.RemoveAllListeners();
+
+        //Confere os blocos que estao colidindo com o Pivot
+        MyCollisionsPivot();
+        if (hitCollidersPivot.Length > 0)
+        {
+            DerrubarCuboAnterior.AddListener(hitCollidersPivot[0].GetComponent<Bloco>().ChecarQueda);
+            hitCollidersPivot[0].GetComponent<Bloco>().PegarDir(transform.up * -1);
+        }
+
+        /*
         if (pontoMovDetector.hitColliders.Length > 0)
         {
             DerrubarCuboAnterior.AddListener(pontoMovDetector.hitColliders[0].GetComponent<Bloco>().ChecarQueda);
             pontoMovDetector.hitColliders[0].GetComponent<Bloco>().PegarDir(transform.up * -1);
         }
+        */
     }
 
     private void OlharParaDirecao()
@@ -520,5 +551,12 @@ public class PlayerMove : MonoBehaviour
         velF = new Vector3(UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f));
         estado = State.Flutuando;
         flutuando.Invoke();
+    }
+
+    public void MyCollisionsPivot()
+    {
+        //Use the OverlapBox to detect if there are any other colliders within this box area.
+        //Use the GameObject's centre, half the size (as a radius) and rotation. This creates an invisible box around your GameObject.
+        hitCollidersPivot = Physics.OverlapBox(gameObject.transform.position, pontoMovDetector.transform.localScale / 2, Quaternion.identity, pontoMovDetector.m_LayerMask);
     }
 }
