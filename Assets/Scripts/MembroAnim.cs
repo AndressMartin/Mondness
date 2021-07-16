@@ -15,6 +15,7 @@ public class MembroAnim : MonoBehaviour
     }
     private void StartIdle()
     {
+        //RUNNING MANY TIMES
         Debug.LogWarning("IDLE");
         anim.SetBool("Idle", true);
         anim.SetBool("Run", false);
@@ -22,6 +23,7 @@ public class MembroAnim : MonoBehaviour
 
     private void StartRun()
     {
+        //RUNNING MANY TIMES
         Debug.LogWarning("RUN");
         anim.SetBool("Run", true);
         anim.SetBool("Idle", false);

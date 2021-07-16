@@ -15,7 +15,6 @@ public class TextFader : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Update");
         if (canFade) FadeAlpha();
         if (canFlash) StartCoroutine(FlashText());
     }
@@ -41,15 +40,12 @@ public class TextFader : MonoBehaviour
     }
     private static void SetFade(TextMeshProUGUI Externalobj)
     {
-        Debug.Log("Start Fader");
         canFade = true;
         obj = Externalobj;
         textColor = obj.color;
-        Debug.Log($"Fading {obj} with {obj.color}");
     }
     private void FadeAlpha()
     {
-        Debug.Log("Fading for " + obj);
         if (fadeStart < fadeTime)
         {
             fadeStart += Time.deltaTime * fadeTime;

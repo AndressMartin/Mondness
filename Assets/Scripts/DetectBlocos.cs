@@ -6,7 +6,7 @@ public class DetectBlocos : MonoBehaviour
 {
     bool m_Started;
     public LayerMask m_LayerMask;
-    public static Collider[] hitColliders;
+    public Collider[] hitColliders;
     void Start()
     {
         //Use this to ensure that the Gizmos are being drawn when in Play Mode.

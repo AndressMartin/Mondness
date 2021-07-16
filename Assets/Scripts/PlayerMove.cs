@@ -41,6 +41,8 @@ public class PlayerMove : MonoBehaviour
     public Vector3 pontoEstatico;
     public Vector3 teleportTarget;
     public Transform pontoMov;
+    private DetectBlocos pontoMovDetector;
+    private Rigidbody rb;
     private bool rotacionando;
     float maxRotTime = 1f;
     float rotTime;
@@ -75,6 +77,8 @@ public class PlayerMove : MonoBehaviour
         pontoMov.position = transform.position;
         pontoEstatico = pontoMov.position;
         jumpingAnim = personagem.transform.GetChild(0).GetComponent<Animator>();
+        pontoMovDetector = pontoMov.GetComponent<DetectBlocos>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -134,7 +138,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (estadoAnterior != estado)
             {
-                RuntimeManager.AttachInstanceToGameObject(passosSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+                RuntimeManager.AttachInstanceToGameObject(passosSfx, transform, rb);
                 passosSfx.start();
                 startRun.Invoke();
                 estadoAnterior = estado;
@@ -153,7 +157,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (!rotacionando)
             {
-                RuntimeManager.AttachInstanceToGameObject(passosSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+                RuntimeManager.AttachInstanceToGameObject(passosSfx, transform, rb);
                 passosSfx.start();
                 rotTime = maxRotTime;
             }
@@ -178,8 +182,8 @@ public class PlayerMove : MonoBehaviour
         else if (estado == State.Caindo)
         {
             //Debug.Log("Caindo");
-            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-            if (DetectBlocos.hitColliders.Length <= 0)
+            pontoMovDetector.MyCollisions();
+            if (pontoMovDetector.hitColliders.Length <= 0)
             {
                 Cair();
                 if (tempoCaindo > maxTempoCaindo)
@@ -189,13 +193,13 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
-                if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Nuvem)
+                if(pontoMovDetector.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Nuvem)
                 {
-                    if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false)
+                    if (pontoMovDetector.hitColliders[0].GetComponent<Bloco>().caindo == false)
                     {
-                        if (DetectBlocos.hitColliders[0].GetComponent<Bloco>().flutuando == false)
+                        if (pontoMovDetector.hitColliders[0].GetComponent<Bloco>().flutuando == false)
                         {
-                            pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                            pontoMov.position = pontoMovDetector.hitColliders[0].transform.position;
                             estado = State.TerminandoQueda;
                         }
                         else
@@ -225,7 +229,7 @@ public class PlayerMove : MonoBehaviour
         }
         else if (estado == State.Teleportando)
         {
-            Debug.Log("Teleportando");
+            //Debug.Log("Teleportando");
             transform.position = Vector3.MoveTowards(transform.position, teleportTarget, 15f * Time.deltaTime);
             transform.Rotate(transform.up * 60f * Time.deltaTime);
             transform.Rotate(transform.forward * 60f * Time.deltaTime);
@@ -277,12 +281,12 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator Pulo()
     {
         //TODO: ANIMACAO DE PULO!
-        RuntimeManager.AttachInstanceToGameObject(puloSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        RuntimeManager.AttachInstanceToGameObject(puloSfx, transform, rb);
         puloSfx.start();
         jumpingAnim.SetBool("Jumping", true);
         yield return new WaitForSeconds(.28f);
         jumpingAnim.SetBool("Jumping", false);
-        RuntimeManager.AttachInstanceToGameObject(quedaSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        RuntimeManager.AttachInstanceToGameObject(quedaSfx, transform, rb);
         quedaSfx.start();
         DerrubarCuboAnterior.Invoke();
         DerrubarCuboAnterior.RemoveAllListeners();
@@ -292,8 +296,6 @@ public class PlayerMove : MonoBehaviour
 
     void Rotacionar()
     {
-        Debug.Log("Personagem.transform.right = " + personagem.transform.right);
-        Debug.Log("rotVel = " + rotVel);
         rotTime -= Time.deltaTime;
         transform.Rotate(personagem.transform.right * (rotVel * Time.deltaTime), Space.World);
         //if (transform.rotation == targetToRotate)
@@ -301,7 +303,6 @@ public class PlayerMove : MonoBehaviour
         //    rotTime = 0;
         //    pontoMov.position = transform.position;
         //}
-        if (!rotacionando) Debug.LogWarning("END: " + targetToRotate);
         rotacionando = true;
     }
 
@@ -362,10 +363,10 @@ public class PlayerMove : MonoBehaviour
     private void AvisarCubo()
     {
         DerrubarCuboAnterior.RemoveAllListeners();
-        if (DetectBlocos.hitColliders.Length > 0)
+        if (pontoMovDetector.hitColliders.Length > 0)
         {
-            DerrubarCuboAnterior.AddListener(DetectBlocos.hitColliders[0].GetComponent<Bloco>().ChecarQueda);
-            DetectBlocos.hitColliders[0].GetComponent<Bloco>().PegarDir(transform.up * -1);
+            DerrubarCuboAnterior.AddListener(pontoMovDetector.hitColliders[0].GetComponent<Bloco>().ChecarQueda);
+            pontoMovDetector.hitColliders[0].GetComponent<Bloco>().PegarDir(transform.up * -1);
         }
     }
 
@@ -381,24 +382,24 @@ public class PlayerMove : MonoBehaviour
         //Debug.Log($"Colocando {pontoMov.position} de rotação {pontoMov.rotation} em {direcao} a {transform.forward}");
         pontoMov.position += personagem.transform.forward * 1;
 
-        pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-        if (DetectBlocos.hitColliders.Length > 0 && DetectBlocos.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Nuvem)
+        pontoMovDetector.MyCollisions();
+        if (pontoMovDetector.hitColliders.Length > 0 && pontoMovDetector.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Nuvem)
         {
-            if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().caindo == false && DetectBlocos.hitColliders[0].GetComponent<Bloco>().flutuando == false)
+            if(pontoMovDetector.hitColliders[0].GetComponent<Bloco>().caindo == false && pontoMovDetector.hitColliders[0].GetComponent<Bloco>().flutuando == false)
             {
-                if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Gelo)
+                if(pontoMovDetector.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Gelo)
                 {
-                    Debug.LogWarning(DetectBlocos.hitColliders.Length);
+                    //Debug.LogWarning(pontoMovDetector.hitColliders.Length);
                     pontoMov.position += personagem.transform.up * 1;
-                    pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-                    if (!(DetectBlocos.hitColliders.Length > 0))
+                    pontoMovDetector.MyCollisions();
+                    if (!(pontoMovDetector.hitColliders.Length > 0))
                     {
-                        Debug.LogWarning(DetectBlocos.hitColliders.Length);
+                        //Debug.LogWarning(pontoMovDetector.hitColliders.Length);
                         pontoMov.position += personagem.transform.up * -1;
-                        pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-                        if (DetectBlocos.hitColliders.Length > 0)
+                        pontoMovDetector.MyCollisions();
+                        if (pontoMovDetector.hitColliders.Length > 0)
                         {
-                            pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                            pontoMov.position = pontoMovDetector.hitColliders[0].transform.position;
                             estado = State.Andando;
                         }
                     }
@@ -414,29 +415,29 @@ public class PlayerMove : MonoBehaviour
                     while(andandoNoGelo == true)
                     {
                         pontoMov.position += personagem.transform.up * 1;
-                        pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-                        if (!(DetectBlocos.hitColliders.Length > 0))
+                        pontoMovDetector.MyCollisions();
+                        if (!(pontoMovDetector.hitColliders.Length > 0))
                         {
                             pontoMov.position += personagem.transform.up * -1;
                             pontoMov.position += personagem.transform.forward * 1;
 
-                            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-                            if (!(DetectBlocos.hitColliders.Length > 0))
+                            pontoMovDetector.MyCollisions();
+                            if (!(pontoMovDetector.hitColliders.Length > 0))
                             {
                                 pontoMov.position += personagem.transform.forward * -1;
 
-                                pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-                                if (DetectBlocos.hitColliders.Length > 0)
+                                pontoMovDetector.MyCollisions();
+                                if (pontoMovDetector.hitColliders.Length > 0)
                                 {
-                                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                                    pontoMov.position = pontoMovDetector.hitColliders[0].transform.position;
                                     andandoNoGelo = false;
                                 }
                             }
                             else
                             {
-                                if(DetectBlocos.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Gelo)
+                                if(pontoMovDetector.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Gelo)
                                 {
-                                    pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                                    pontoMov.position = pontoMovDetector.hitColliders[0].transform.position;
                                     andandoNoGelo = false;
                                 }
                             }
@@ -446,10 +447,10 @@ public class PlayerMove : MonoBehaviour
                             pontoMov.position += personagem.transform.up * -1;
                             pontoMov.position += personagem.transform.forward * -1;
 
-                            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-                            if (DetectBlocos.hitColliders.Length > 0)
+                            pontoMovDetector.MyCollisions();
+                            if (pontoMovDetector.hitColliders.Length > 0)
                             {
-                                pontoMov.position = DetectBlocos.hitColliders[0].transform.position;
+                                pontoMov.position = pontoMovDetector.hitColliders[0].transform.position;
                                 andandoNoGelo = false;
                             }
                         }
@@ -466,10 +467,10 @@ public class PlayerMove : MonoBehaviour
         else
         {
             pontoMov.position += personagem.transform.up * 1;
-            pontoMov.GetComponent<DetectBlocos>().MyCollisions();
-            if (!(DetectBlocos.hitColliders.Length > 0))
+            pontoMovDetector.MyCollisions();
+            if (!(pontoMovDetector.hitColliders.Length > 0))
             {
-                Debug.LogWarning(DetectBlocos.hitColliders.Length);
+                Debug.LogWarning(pontoMovDetector.hitColliders.Length);
                 estado = State.ViraCorpo;
             }
             pontoMov.position = pontoEstatico;

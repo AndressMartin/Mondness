@@ -16,6 +16,8 @@ public class StageManage : MonoBehaviour
     public int i = 0;
     public int f = 0;
     public GameObject player;
+    private PlayerMove playerMove;
+
     private void Awake()
     {
         if (portalTeleport == null)
@@ -29,6 +31,7 @@ public class StageManage : MonoBehaviour
         portalTeleport.AddListener(NextStage);
         if (!stages.Any())FindToList();
         StartCoroutine(FindStageStartPoints());
+        playerMove = player.GetComponent<PlayerMove>();
     }
 
     private void Update()
@@ -42,17 +45,17 @@ public class StageManage : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            player.GetComponent<PlayerMove>().Teleport(startPoints[stages[0]].transform.position);
+            playerMove.Teleport(startPoints[stages[0]].transform.position);
             i = 0;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            player.GetComponent<PlayerMove>().Teleport(startPoints[stages[1]].transform.position);
+            playerMove.Teleport(startPoints[stages[1]].transform.position);
             i = 1;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            player.GetComponent<PlayerMove>().Teleport(startPoints[stages[2]].transform.position);
+            playerMove.Teleport(startPoints[stages[2]].transform.position);
             i = 2;
         }
     }
@@ -91,7 +94,7 @@ public class StageManage : MonoBehaviour
         }
         if (startPoints[stages[i]])
         {
-            player.GetComponent<PlayerMove>().Teleport(startPoints[stages[i]].transform.position);
+            playerMove.Teleport(startPoints[stages[i]].transform.position);
         }
     }
 }

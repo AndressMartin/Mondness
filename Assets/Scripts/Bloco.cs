@@ -12,7 +12,6 @@ public class Bloco : MonoBehaviour
     Rigidbody rigidBody;
     MeshRenderer meshRenderer;
 
-    bool playerEntrou;
     bool caiQuandoPlayerSai = true;
     public bool caindo,
                 flutuando;
@@ -51,7 +50,6 @@ public class Bloco : MonoBehaviour
         transform.rotation = rotIni;
         caindo = false;
         flutuando = false;
-        playerEntrou = false;
 
         boxCollider.enabled = true;
         rigidBody.isKinematic = false;
@@ -98,27 +96,28 @@ public class Bloco : MonoBehaviour
     {
         if (caindo) 
         {
-            Debug.LogWarning("IM COLLINDING");
+            //Debug.LogWarning("IM COLLINDING");
             if (collision.gameObject.tag == "Bloco")
             {
-                Debug.LogWarning("ITS A BLOCK!");
-                if (collision.gameObject.GetComponent<Bloco>().flutuando == false)
+                var bloco = collision.gameObject.GetComponent<Bloco>();
+                //Debug.LogWarning("ITS A BLOCK!");
+                if (bloco.flutuando == false)
                 {
-                    if(collision.gameObject.GetComponent<Bloco>().tipo == TipoBloco.Normal || collision.gameObject.GetComponent<Bloco>().tipo == TipoBloco.Gelo)
+                    if(bloco.tipo == TipoBloco.Normal || bloco.tipo == TipoBloco.Gelo)
                     {
                         caindo = false;
                         transform.position = collision.transform.position;
                         transform.position += quedaDir * -1;
                     }
-                    else if(collision.gameObject.GetComponent<Bloco>().tipo == TipoBloco.Nuvem)
+                    else if(bloco.tipo == TipoBloco.Nuvem)
                     {
                         caindo = false;
                         transform.position = collision.transform.position;
-                        collision.gameObject.GetComponent<Bloco>().Desativar();
+                        bloco.Desativar();
                     }
-                    else if(collision.gameObject.GetComponent<Bloco>().tipo == TipoBloco.Vidro)
+                    else if(bloco.tipo == TipoBloco.Vidro)
                     {
-                        collision.gameObject.GetComponent<Bloco>().Quebrar();
+                        bloco.Quebrar();
                     }
                   
                 }

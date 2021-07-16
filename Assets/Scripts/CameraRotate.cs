@@ -7,7 +7,7 @@ using UnityEngine;
 public class CameraRotate : MonoBehaviour
 {
     FMOD.Studio.EventInstance rotateSfx;
-
+    private Rigidbody rb;
     public static Enums.CameraPos cameraPos = Enums.CameraPos.pos1;
     int posNum = 0;
 
@@ -38,7 +38,7 @@ public class CameraRotate : MonoBehaviour
     void Start()
     {
         rotateSfx = RuntimeManager.CreateInstance("event:/sfx/rotacao_de_camera");
-
+        rb = GetComponent<Rigidbody>();
         rotVel = rotVel / maxRotTime;
     }
 
@@ -54,7 +54,7 @@ public class CameraRotate : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    RuntimeManager.AttachInstanceToGameObject(rotateSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+                    RuntimeManager.AttachInstanceToGameObject(rotateSfx, transform, rb);
                     rotateSfx.start();
                     //transform.Rotate(0, 90, 0);
                     posNum++;
@@ -65,7 +65,7 @@ public class CameraRotate : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    RuntimeManager.AttachInstanceToGameObject(rotateSfx, GetComponent<Transform>(), GetComponent<Rigidbody>());
+                    RuntimeManager.AttachInstanceToGameObject(rotateSfx, transform, rb);
                     rotateSfx.start();
                     //transform.Rotate(0, -90, 0);
                     posNum--;
