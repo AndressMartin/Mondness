@@ -5713,6 +5713,7 @@ MonoBehaviour:
   pontoEstatico: {x: 0, y: 0, z: 0}
   teleportTarget: {x: 0, y: 0, z: 0}
   pontoMov: {fileID: 2117059960}
+  hitCollidersPivot: []
 --- !u!114 &1380196997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7270,7 +7271,7 @@ GameObject:
   - component: {fileID: 1845704068}
   m_Layer: 0
   m_Name: Music
-  m_TagString: Untagged
+  m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
