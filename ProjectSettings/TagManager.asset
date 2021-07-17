@@ -10,6 +10,7 @@ TagManager:
   - Start
   - PlayerModel
   - Estrela
+  - Music
   layers:
   - Default
   - TransparentFX

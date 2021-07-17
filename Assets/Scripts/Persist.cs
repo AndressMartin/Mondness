@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Persist : MonoBehaviour
+public class Persist : SingletonInstance<Persist>
 {
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         DontDestroyOnLoad(gameObject);
     }
