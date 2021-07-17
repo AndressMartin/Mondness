@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MembroAnim : MonoBehaviour
 {
-    Animator anim;
+    public Animator anim;
     //bool waitToSetIdle;
     void Start()
     {
@@ -13,18 +13,18 @@ public class MembroAnim : MonoBehaviour
         PlayerMove.startIdle.AddListener(StartIdle);
         PlayerMove.startRun.AddListener(StartRun);
     }
-    private void StartIdle()
+    public void StartIdle()
     {
         //RUNNING MANY TIMES
-        Debug.LogWarning("IDLE");
+        //Debug.LogWarning("IDLE");
         anim.SetBool("Idle", true);
         anim.SetBool("Run", false);
     }
 
-    private void StartRun()
+    public void StartRun()
     {
         //RUNNING MANY TIMES
-        Debug.LogWarning("RUN");
+        //Debug.LogWarning("RUN");
         anim.SetBool("Run", true);
         anim.SetBool("Idle", false);
     }

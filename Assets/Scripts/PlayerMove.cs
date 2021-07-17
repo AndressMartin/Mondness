@@ -58,6 +58,11 @@ public class PlayerMove : MonoBehaviour
     private int blocoAtualID = 0;
     public Collider[] hitCollidersPivot;
 
+    //Variaveis das Animacoes
+    private MembroAnim bracoDireito;
+    private MembroAnim bracoEsquerdo;
+    private MembroAnim pernaDireita;
+    private MembroAnim pernaEsquerda;
     private ControladorAnimacaoPulo controladorAnimacaoPulo;
 
     Animator jumpingAnim;
@@ -95,6 +100,12 @@ public class PlayerMove : MonoBehaviour
         puloSfx = RuntimeManager.CreateInstance("event:/sfx/salto_pulo");
         quedaSfx = RuntimeManager.CreateInstance("event:/sfx/salto_queda");
         velF = new Vector3(0, 0, 0);
+
+        //Variaveis das Animacoes
+        bracoDireito = transform.Find("Personagem").Find("Maco").Find("Animacoes").Find("BRAÇO_D").GetComponent<MembroAnim>();
+        bracoEsquerdo = transform.Find("Personagem").Find("Maco").Find("Animacoes").Find("BRAÇO_E").GetComponent<MembroAnim>();
+        pernaDireita = transform.Find("Personagem").Find("Maco").Find("Animacoes").Find("PERNA_D").GetComponent<MembroAnim>();
+        pernaEsquerda = transform.Find("Personagem").Find("Maco").Find("Animacoes").Find("PERNA_E").GetComponent<MembroAnim>();
         controladorAnimacaoPulo = GetComponentInChildren<ControladorAnimacaoPulo>();
     }
 
@@ -131,7 +142,8 @@ public class PlayerMove : MonoBehaviour
         {
             if (estadoAnterior != estado)
             {
-                startIdle.Invoke();
+                //startIdle.Invoke();
+                AnimacaoIdle();
                 estadoAnterior = estado;
             }
             if (transform.position == pontoEstatico && CameraRotate.rotacionando == false)
@@ -146,7 +158,8 @@ public class PlayerMove : MonoBehaviour
             {
                 RuntimeManager.AttachInstanceToGameObject(passosSfx, transform, rb);
                 passosSfx.start();
-                startRun.Invoke();
+                //startRun.Invoke();
+                AnimacaoCorrer();
                 estadoAnterior = estado;
             }
             transform.position = Vector3.MoveTowards(transform.position, pontoMov.position, movVel * Time.deltaTime);
@@ -174,6 +187,15 @@ public class PlayerMove : MonoBehaviour
         }
         else if (estado == State.ViraCorpo)
         {
+            if (estadoAnterior != estado)
+            {
+                RuntimeManager.AttachInstanceToGameObject(passosSfx, transform, rb);
+                passosSfx.start();
+                //startRun.Invoke();
+                AnimacaoCorrer();
+                estadoAnterior = estado;
+            }
+
             if (!rotacionando)
             {
                 RuntimeManager.AttachInstanceToGameObject(passosSfx, transform, rb);
@@ -577,5 +599,22 @@ public class PlayerMove : MonoBehaviour
         //Use the OverlapBox to detect if there are any other colliders within this box area.
         //Use the GameObject's centre, half the size (as a radius) and rotation. This creates an invisible box around your GameObject.
         hitCollidersPivot = Physics.OverlapBox(gameObject.transform.position, pontoMovDetector.transform.localScale / 2, Quaternion.identity, pontoMovDetector.m_LayerMask);
+    }
+
+    private void AnimacaoIdle()
+    {
+        bracoDireito.anim.Play("Idle");
+        bracoEsquerdo.anim.Play("Idle");
+        pernaDireita.anim.Play("Idle");
+        pernaEsquerda.anim.Play("Idle");
+    }
+
+    private void AnimacaoCorrer()
+    {
+        Debug.Log(bracoDireito);
+        bracoDireito.anim.Play("Run", 0, (1f / 15) * 10);
+        bracoEsquerdo.anim.Play("Run");
+        pernaDireita.anim.Play("Run", 0, (1f / 10) * 8);
+        pernaEsquerda.anim.Play("Run");
     }
 }
