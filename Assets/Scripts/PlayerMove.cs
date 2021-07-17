@@ -58,6 +58,8 @@ public class PlayerMove : MonoBehaviour
     private int blocoAtualID = 0;
     public Collider[] hitCollidersPivot;
 
+    private ControladorAnimacaoPulo controladorAnimacaoPulo;
+
     Animator jumpingAnim;
     private void Awake()
     {
@@ -93,6 +95,7 @@ public class PlayerMove : MonoBehaviour
         puloSfx = RuntimeManager.CreateInstance("event:/sfx/salto_pulo");
         quedaSfx = RuntimeManager.CreateInstance("event:/sfx/salto_queda");
         velF = new Vector3(0, 0, 0);
+        controladorAnimacaoPulo = GetComponentInChildren<ControladorAnimacaoPulo>();
     }
 
     private void comecar()
@@ -190,8 +193,13 @@ public class PlayerMove : MonoBehaviour
         else if (estado == State.Pulando)
         {
             Debug.Log("Pulando");
+
+            RuntimeManager.AttachInstanceToGameObject(puloSfx, transform, rb);
+            puloSfx.start();
+            controladorAnimacaoPulo.Pular();
+
             AvisarCubo();
-            StartCoroutine(Pulo());
+            //StartCoroutine(Pulo());
             estado = State.Esperando;
 
         }
@@ -307,6 +315,17 @@ public class PlayerMove : MonoBehaviour
         DerrubarCuboAnterior.Invoke();
         DerrubarCuboAnterior.RemoveAllListeners();
         tempoCaindo = 0;
+        estado = State.Caindo;
+    }
+
+    public void TerminarPulo()
+    {
+        quedaSfx.start();
+        DerrubarCuboAnterior.Invoke();
+        DerrubarCuboAnterior.RemoveAllListeners();
+        tempoCaindo = 0;
+        controladorAnimacaoPulo.FicarParado();
+
         estado = State.Caindo;
     }
 

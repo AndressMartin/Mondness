@@ -792,8 +792,6 @@ Transform:
   m_Children:
   - {fileID: 5877606169199506009}
   - {fileID: 1092332207670523107}
-  - {fileID: 7115391781256206799}
-  - {fileID: 411288882}
   m_Father: {fileID: 1380196994}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1544,15 +1542,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411288881}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.049999952, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 523156704}
   - {fileID: 31048917}
   - {fileID: 583711342}
   - {fileID: 1699671001}
-  m_Father: {fileID: 114728474}
-  m_RootOrder: 3
+  m_Father: {fileID: 1092332207670523107}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &411288883
 SpriteRenderer:
@@ -5713,6 +5711,7 @@ MonoBehaviour:
   pontoEstatico: {x: 0, y: 0, z: 0}
   teleportTarget: {x: 0, y: 0, z: 0}
   pontoMov: {fileID: 2117059960}
+  hitCollidersPivot: []
 --- !u!114 &1380196997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8435,7 +8434,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.049999952, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7115391781256206799}
+  - {fileID: 411288882}
   m_Father: {fileID: 114728474}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8991,11 +8992,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020106729737194228}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.176, z: 0.307}
+  m_LocalPosition: {x: 0, y: 0.12600005, z: 0.307}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 114728474}
-  m_RootOrder: 2
+  m_Father: {fileID: 1092332207670523107}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7268376877587469269
 PrefabInstance:
@@ -9121,6 +9122,8 @@ GameObject:
   - component: {fileID: 1092332207670523107}
   - component: {fileID: 2882181744277671337}
   - component: {fileID: 1646676063271151933}
+  - component: {fileID: 8187140759014959065}
+  - component: {fileID: 8187140759014959066}
   m_Layer: 0
   m_Name: Maco
   m_TagString: Untagged
@@ -9128,6 +9131,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &8187140759014959065
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8187140759014959064}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d274a7f68868b734a8b59eaa8b633bff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8187140759014959066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8187140759014959064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1bf3b141282004a9f47df2979a8a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8777349926861431683
 PrefabInstance:
   m_ObjectHideFlags: 0
