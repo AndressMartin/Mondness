@@ -2191,7 +2191,7 @@ Animator:
   m_GameObject: {fileID: 523156703}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cdf667f819e3f99469131cb8718df973, type: 2}
+  m_Controller: {fileID: 9100000, guid: f82ed8b74f3f96c43ba76e380b903046, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2708,7 +2708,7 @@ Animator:
   m_GameObject: {fileID: 583711341}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bfefd9a84c5a1234d8165c4f07711479, type: 2}
+  m_Controller: {fileID: 9100000, guid: eff87fb5a87e59c4db685aac298645b7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3819,6 +3819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416796ed8984fd648a02f3a32413a4ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMove: {fileID: 1380196996}
 --- !u!1 &901765197 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7268376877683674025, guid: fd4e9bde985288740993498f600ce2b0, type: 3}
@@ -8466,7 +8467,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8187140759014959064}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.049999952, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

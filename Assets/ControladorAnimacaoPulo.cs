@@ -13,9 +13,19 @@ public class ControladorAnimacaoPulo : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    public void IniciarPulo()
+    {
+        animator.Play("PuloInicio");
+    }
+
     public void Pular()
     {
         animator.Play("Pulando");
+    }
+
+    public void TerminarPulo()
+    {
+        animator.Play("TerminarPulo");
     }
 
     public void FicarParado()

@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class CuboManager : MonoBehaviour
 {
+    [SerializeField] private PlayerMove playerMove;
     public static UnityEvent ResetarCena;
     private bool gameStarted;
     void Awake()
@@ -35,7 +36,10 @@ public class CuboManager : MonoBehaviour
     }
     public void SendRespawnEvent()
     {
-        Debug.Log("REQUEST TO RESPAWN");
-        ResetarCena.Invoke();
+        if (playerMove.estado != PlayerMove.State.Teleportando)
+        {
+            Debug.Log("REQUEST TO RESPAWN");
+            ResetarCena.Invoke();
+        }
     }
 }

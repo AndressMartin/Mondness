@@ -65,6 +65,8 @@ public class PlayerMove : MonoBehaviour
     private MembroAnim pernaEsquerda;
     private ControladorAnimacaoPulo controladorAnimacaoPulo;
 
+    private bool pulou = false;
+
     Animator jumpingAnim;
     private void Awake()
     {
@@ -133,6 +135,13 @@ public class PlayerMove : MonoBehaviour
         pontoEstatico = transform.position;
         pontoMov.position = transform.position;
         direcao = direcaoIni;
+
+        bracoDireito.anim.speed = 1;
+        bracoEsquerdo.anim.speed = 1;
+        pernaDireita.anim.speed = 1;
+        pernaEsquerda.anim.speed = 1;
+
+        AnimacaoIdle();
     }
     private void Update()
     {
@@ -142,9 +151,17 @@ public class PlayerMove : MonoBehaviour
         {
             if (estadoAnterior != estado)
             {
-                //startIdle.Invoke();
-                AnimacaoIdle();
-                estadoAnterior = estado;
+                if(estadoAnterior == State.TerminandoQueda)
+                {
+                    AnimacaoTerminandoPulo();
+                    estadoAnterior = estado;
+                }
+                else
+                {
+                    //startIdle.Invoke();
+                    AnimacaoIdle();
+                    estadoAnterior = estado;
+                }
             }
             if (transform.position == pontoEstatico && CameraRotate.rotacionando == false)
             {
@@ -214,16 +231,20 @@ public class PlayerMove : MonoBehaviour
         }
         else if (estado == State.Pulando)
         {
-            Debug.Log("Pulando");
-
             RuntimeManager.AttachInstanceToGameObject(puloSfx, transform, rb);
             puloSfx.start();
-            controladorAnimacaoPulo.Pular();
+            //controladorAnimacaoPulo.Pular();
+            pulou = false;
+            controladorAnimacaoPulo.IniciarPulo();
+            bracoDireito.PuloInicio();
+            bracoEsquerdo.PuloInicio();
+            pernaDireita.PuloInicio();
+            pernaEsquerda.PuloInicio();
+            
 
             AvisarCubo();
             //StartCoroutine(Pulo());
             estado = State.Esperando;
-
         }
         else if (estado == State.Caindo)
         {
@@ -247,6 +268,7 @@ public class PlayerMove : MonoBehaviour
                         {
                             pontoMov.position = pontoMovDetector.hitColliders[0].transform.position;
                             estado = State.TerminandoQueda;
+                            estadoAnterior = State.TerminandoQueda;
                         }
                         else
                         {
@@ -348,7 +370,10 @@ public class PlayerMove : MonoBehaviour
         tempoCaindo = 0;
         controladorAnimacaoPulo.FicarParado();
 
+        AnimacaoMembrosPuloLoop();
+
         estado = State.Caindo;
+        estadoAnterior = State.Caindo;
     }
 
     void Rotacionar()
@@ -579,6 +604,9 @@ public class PlayerMove : MonoBehaviour
     public void Teleport(Vector3 position)
     {
         estado = State.Teleportando;
+        estadoAnterior = State.Teleportando;
+        AnimacaoMembrosPuloLoop();
+
         tempoCaindo = 0;
         transform.rotation = Quaternion.Euler(0, 0, 0);
         targetToRotate = transform.rotation;
@@ -591,6 +619,17 @@ public class PlayerMove : MonoBehaviour
     {
         velF = new Vector3(UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-30f, 30f));
         estado = State.Flutuando;
+
+        bracoDireito.anim.Play("PuloLoop", 0, 0);
+        bracoEsquerdo.anim.Play("PuloLoop", 0, 0);
+        pernaDireita.anim.Play("PuloLoop", 0, (1f / 3) * 1);
+        pernaEsquerda.anim.Play("PuloLoop", 0, (1f / 3) * 1);
+
+        bracoDireito.anim.speed = 0;
+        bracoEsquerdo.anim.speed = 0;
+        pernaDireita.anim.speed = 0;
+        pernaEsquerda.anim.speed = 0;
+
         flutuando.Invoke();
     }
 
@@ -603,10 +642,22 @@ public class PlayerMove : MonoBehaviour
 
     private void AnimacaoIdle()
     {
-        bracoDireito.anim.Play("Idle");
-        bracoEsquerdo.anim.Play("Idle");
-        pernaDireita.anim.Play("Idle");
-        pernaEsquerda.anim.Play("Idle");
+        bracoDireito.AnimacaoIdle();
+        bracoEsquerdo.AnimacaoIdle();
+        pernaDireita.AnimacaoIdle();
+        pernaEsquerda.AnimacaoIdle();
+
+        controladorAnimacaoPulo.FicarParado();
+    }
+
+    private void AnimacaoTerminandoPulo()
+    {
+        bracoDireito.TerminandoPulo();
+        bracoEsquerdo.TerminandoPulo();
+        pernaDireita.TerminandoPulo();
+        pernaEsquerda.TerminandoPulo();
+
+        controladorAnimacaoPulo.TerminarPulo();
     }
 
     private void AnimacaoCorrer()
@@ -616,5 +667,25 @@ public class PlayerMove : MonoBehaviour
         bracoEsquerdo.anim.Play("Run");
         pernaDireita.anim.Play("Run", 0, (1f / 10) * 8);
         pernaEsquerda.anim.Play("Run");
+    }
+
+    public void AnimacaoPular()
+    {
+        if(pulou == false)
+        {
+            controladorAnimacaoPulo.Pular();
+            bracoDireito.anim.Play("Pulo");
+            bracoEsquerdo.anim.Play("Pulo");
+
+            pulou = true;
+        }
+    }
+
+    private void AnimacaoMembrosPuloLoop()
+    {
+        bracoDireito.anim.Play("PuloLoop");
+        bracoEsquerdo.anim.Play("PuloLoop");
+        pernaDireita.anim.Play("PuloLoop", 0, (1f / 3) * 2);
+        pernaEsquerda.anim.Play("PuloLoop");
     }
 }
