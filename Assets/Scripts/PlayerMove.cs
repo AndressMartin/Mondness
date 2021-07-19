@@ -662,7 +662,6 @@ public class PlayerMove : MonoBehaviour
 
     private void AnimacaoCorrer()
     {
-        Debug.Log(bracoDireito);
         bracoDireito.anim.Play("Run", 0, (1f / 15) * 10);
         bracoEsquerdo.anim.Play("Run");
         pernaDireita.anim.Play("Run", 0, (1f / 10) * 8);
