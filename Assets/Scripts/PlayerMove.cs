@@ -412,7 +412,7 @@ public class PlayerMove : MonoBehaviour
         //Debug.LogWarning(myCamPos);
         if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("Press Space");
+            //Debug.Log("Press Space");
             estado = State.Pulando;
             return;
         }
