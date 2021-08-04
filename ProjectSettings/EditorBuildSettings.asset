@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/MenuGame.unity
     guid: 1344ddd29b30e15408ad451ca0e83a73
   - enabled: 1
-    path: Assets/Scenes/Stages/Intro.unity
+    path: Assets/Scenes/Stages/Stage_1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Stages/Intermediate.unity
+    path: Assets/Scenes/Stages/Stage_2.unity
     guid: 697d6afdc8d40ab4598ae9bfc5ad5799
   - enabled: 1
     path: Assets/Scenes/UI/LevelSeletion.unity
