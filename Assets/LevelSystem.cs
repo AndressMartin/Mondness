@@ -8,6 +8,7 @@ public class LevelSystem : MonoBehaviour
     public GameObject stagesParent;
     public GameObject starCounter;
     public int totalStars;
+    public int availableLevels;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,13 @@ public class LevelSystem : MonoBehaviour
     private void ShowStars()
     {
         for (int i = 0; i < stagesParent.transform.childCount; i++)
+        {
+            if (stagesParent.transform.GetChild(i).gameObject.activeInHierarchy == true)
+            {
+                availableLevels++;
+            }
+        }
+        for (int i = 0; i < availableLevels; i++)
         {
             var starsToFill = PointManage.GetInstance().customData.levels[i].score;
             var level = stagesParent.transform.GetChild(i);
@@ -33,6 +41,8 @@ public class LevelSystem : MonoBehaviour
             }
             totalStars += starsToFill;
         }
+        Debug.Log("Is this running?");
         starCounter.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = totalStars.ToString();
+        Debug.Log("What about this?");
     }
 }

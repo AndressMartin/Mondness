@@ -51,6 +51,8 @@ public class PointManage : SingletonInstance<PointManage>
     public string identifier = "playerData";
     public string sysIdentifier = "systemPrefs";
     public bool loaded = false;
+    public int temporaryScore = 0;
+
     void Start()
     {
         if (loadOnStart)
@@ -78,11 +80,23 @@ public class PointManage : SingletonInstance<PointManage>
     }
     public void SetLevels(int index, bool unlocked, bool completed, int score)
     {
+        //Get true score
+        var trueScore = score + temporaryScore;
         //Ignore the first two scenes ingame
         index -= 2;
         //Change score only if score is higher than whats saved.
-        if (score > customData.levels[index].score) customData.levels[index] = new Level(unlocked, completed, score);
+        if (trueScore > customData.levels[index].score) customData.levels[index] = new Level(unlocked, completed, trueScore);
         else customData.levels[index] = new Level(unlocked, completed, customData.levels[index].score);
+        resetTempScore();
+    }
+    public void SetTempScore(int score)
+    {
+        temporaryScore += score;
+    }
+
+    public void resetTempScore()
+    {
+        temporaryScore = 0;
     }
 
     public void SaveCustomData()

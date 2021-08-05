@@ -66,13 +66,16 @@ public class Portal : MonoBehaviour
 
     private void TeleportNext()
     {
+        var trueStars = starMax - starNum;
         Debug.Log("Next");
+        PointManage.GetInstance().SetTempScore(trueStars);
         StageManage.portalTeleport.Invoke();
     }
     private void LoadNextScene()
     {
         //Get level stars. Compare with store. Set the biggest.
-        PointManage.GetInstance().SetLevels(SceneManager.GetActiveScene().buildIndex, true, true, starMax - starNum); 
+        var trueStars = starMax - starNum;
+        PointManage.GetInstance().SetLevels(SceneManager.GetActiveScene().buildIndex, true, true, trueStars); 
         PointManage.GetInstance().SetLevels(SceneManager.GetActiveScene().buildIndex + 1, true, false, 0);
         PointManage.GetInstance().SaveCustomData();
         Debug.Log("Last");

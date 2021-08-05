@@ -14,7 +14,7 @@ public class LevelSelectManage : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount-1; i++)
         {
-            ConfigureLevelButton(i);
+            if (transform.GetChild(i).gameObject.activeInHierarchy == true) ConfigureLevelButton(i);
         }
     }
 

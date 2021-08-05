@@ -36,11 +36,19 @@ public class SceneManage : MonoBehaviour
     public void LoadNextScene()
     {
         var nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextScene < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextScene);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+        }
         //if (nextScene > SceneManager.sceneCount)
         //{
         //    nextScene = 0;    
         //}
-        SceneManager.LoadScene(nextScene);
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -52,6 +60,7 @@ public class SceneManage : MonoBehaviour
     static void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         paused = false;
+        PointManage.GetInstance().resetTempScore();
         Debug.Log(System.String.Format("Scene{0} has been loaded ({1})", scene.name, loadSceneMode.ToString()));
         //If was on mainMenu or SelectMenu and isn't anymore
         if (previousScene.buildIndex <= 1 && scene.buildIndex > 1) instantiateMusic = true;
