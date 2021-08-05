@@ -3230,12 +3230,12 @@ GameObject:
   - component: {fileID: 793021082}
   - component: {fileID: 793021084}
   m_Layer: 5
-  m_Name: Block
+  m_Name: Block3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &793021081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3334,7 +3334,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 793021082}
   m_OnClick:
     m_PersistentCalls:
@@ -3364,12 +3364,12 @@ GameObject:
   - component: {fileID: 795453721}
   - component: {fileID: 795453723}
   m_Layer: 5
-  m_Name: Block
+  m_Name: Block4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &795453720
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3468,7 +3468,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 795453721}
   m_OnClick:
     m_PersistentCalls:

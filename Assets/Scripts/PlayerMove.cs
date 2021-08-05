@@ -530,6 +530,17 @@ public class PlayerMove : MonoBehaviour
                                     andandoNoGelo = false;
                                 }
                             }
+                            else if (pontoMovDetector.hitColliders[0].GetComponent<Bloco>().tipo == Bloco.TipoBloco.Nuvem)
+                            {
+                                pontoMov.position += personagem.transform.forward * -1;
+
+                                pontoMovDetector.MyCollisions();
+                                if (pontoMovDetector.hitColliders.Length > 0)
+                                {
+                                    pontoMov.position = pontoMovDetector.hitColliders[0].transform.position;
+                                    andandoNoGelo = false;
+                                }
+                            }
                             else
                             {
                                 if(pontoMovDetector.hitColliders[0].GetComponent<Bloco>().tipo != Bloco.TipoBloco.Gelo)
@@ -567,7 +578,7 @@ public class PlayerMove : MonoBehaviour
             pontoMovDetector.MyCollisions();
             if (!(pontoMovDetector.hitColliders.Length > 0))
             {
-                Debug.LogWarning(pontoMovDetector.hitColliders.Length);
+                //Debug.LogWarning(pontoMovDetector.hitColliders.Length);
                 estado = State.ViraCorpo;
             }
             pontoMov.position = pontoEstatico;
