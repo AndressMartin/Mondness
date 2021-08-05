@@ -56,7 +56,7 @@ public class PointManage : SingletonInstance<PointManage>
     private void Update()
     {
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.P))
+        if (InputExt.GetKeyDown(KeyCode.P))
         {
             customData.levels = new List<Level>()
             {

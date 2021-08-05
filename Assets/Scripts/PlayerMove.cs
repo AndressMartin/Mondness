@@ -165,7 +165,7 @@ public class PlayerMove : MonoBehaviour
             }
             if (transform.position == pontoEstatico && CameraRotate.rotacionando == false)
             {
-                WaitForInput();
+                WaitForInputExt();
             }
         }
         //Movimenta-se se o ponto seguinte tem um bloco para sustentar o player
@@ -405,34 +405,34 @@ public class PlayerMove : MonoBehaviour
         pos = tmp;
     }
 
-    public void WaitForInput()
+    public void WaitForInputExt()
     {
         direcaoAnterior = direcao;
         myCamPos = CameraRotate.cameraPos;
         //Debug.LogWarning(myCamPos);
-        if (Input.GetButtonDown("Jump"))
+        if (InputExt.GetButtonDown("Jump"))
         {
             //Debug.Log("Press Space");
             estado = State.Pulando;
             return;
         }
-        if (Input.GetAxisRaw("Horizontal") > 0)
+        if (InputExt.GetAxisRaw("Horizontal") > 0)
         {
             direcao = Direction.A;
         }
-        else if (Input.GetAxisRaw("Horizontal") < 0)
+        else if (InputExt.GetAxisRaw("Horizontal") < 0)
         {
             direcao = Direction.D;
         }
-        if (Input.GetAxisRaw("Vertical") > 0)
+        if (InputExt.GetAxisRaw("Vertical") > 0)
         {
             direcao = Direction.W;
         }
-        else if (Input.GetAxisRaw("Vertical") < 0)
+        else if (InputExt.GetAxisRaw("Vertical") < 0)
         {
             direcao = Direction.S;
         }
-        if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+        if (InputExt.GetAxisRaw("Horizontal") == 0 && InputExt.GetAxisRaw("Vertical") == 0)
         {
             return;
         }

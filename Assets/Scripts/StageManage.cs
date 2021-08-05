@@ -43,17 +43,17 @@ public class StageManage : MonoBehaviour
 
     private void StageHackTool()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (InputExt.GetKeyDown(KeyCode.Alpha1))
         {
             playerMove.Teleport(startPoints[stages[0]].transform.position);
             i = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (InputExt.GetKeyDown(KeyCode.Alpha2))
         {
             playerMove.Teleport(startPoints[stages[1]].transform.position);
             i = 1;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (InputExt.GetKeyDown(KeyCode.Alpha3))
         {
             playerMove.Teleport(startPoints[stages[2]].transform.position);
             i = 2;

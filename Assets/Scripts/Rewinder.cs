@@ -17,7 +17,7 @@ public class Rewinder : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (InputExt.GetKeyDown(KeyCode.Space))
             StartRewind();
         if (isRewinding)
         {

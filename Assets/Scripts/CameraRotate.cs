@@ -45,14 +45,14 @@ public class CameraRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.F)) SoundTester.PlaySound();
+        //if (InputExt.GetKeyDown(KeyCode.F)) SoundTester.PlaySound();
         //Debug.Log("Came Pos: " + posNum + "\nAngulo: " + 90 * posNum);
 
         if (rotacionando == false)
         {
             if (jogadorParado == true)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (InputExt.GetKeyDown(KeyCode.E))
                 {
                     RuntimeManager.AttachInstanceToGameObject(rotateSfx, transform, rb);
                     rotateSfx.start();
@@ -63,7 +63,7 @@ public class CameraRotate : MonoBehaviour
                     rotacionando = true;
                     rotTime = maxRotTime;
                 }
-                else if (Input.GetKeyDown(KeyCode.Q))
+                else if (InputExt.GetKeyDown(KeyCode.Q))
                 {
                     RuntimeManager.AttachInstanceToGameObject(rotateSfx, transform, rb);
                     rotateSfx.start();

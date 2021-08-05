@@ -14,8 +14,8 @@ public class ExampleScript : MonoBehaviour
     void Update()
     {
         // Smoothly tilts a transform towards a target rotation.
-        float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
-        float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
+        float tiltAroundZ = InputExt.GetAxis("Horizontal") * tiltAngle;
+        float tiltAroundX = InputExt.GetAxis("Vertical") * tiltAngle;
 
         // Rotate the cube by converting the angles into a quaternion.
         Quaternion target = Quaternion.Euler(tiltAroundX, 0, tiltAroundZ);
