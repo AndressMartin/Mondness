@@ -1,6 +1,121 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7906219423472569089
+--- !u!114 &-9043498542931217878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/salto_pulo
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/salto_pulo
+  guid: eec84c8e0133e44992fceb689f32fb81
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 10000
+  Length: 210
+--- !u!114 &-6867595853380195650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/fanfarra_vitoria
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/fanfarra_vitoria
+  guid: 96335b9883fc0140a6026f9780bd3a3c
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 7397
+--- !u!114 &-6756676506866487884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/coleta_de_estrela
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/coleta_de_estrela
+  guid: 7fbe7ee9b155b146b0d1157c0ca5d751
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2511
+--- !u!114 &-6441053552499233236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/salto_queda
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/salto_queda
+  guid: dd6276d99a67ed4fb15dd79690263042
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0.1
+  MaxDistance: 10000
+  Length: 815
+--- !u!114 &-4350372949166845932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/bloco_alien
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/bloco_alien
+  guid: d5bf95722209524ab307259d76d195ec
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 10000
+  Length: 931
+--- !u!114 &-3781095442741512856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15,7 +130,7 @@ MonoBehaviour:
   Path: event:/sfx/morrendo
   guid: 827b58c9f7d77245bc8a5bef3fe2fb73
   Banks:
-  - {fileID: 5019799481293864295}
+  - {fileID: -2339003085754286187}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -23,7 +138,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1380
---- !u!114 &-6525333006713598185
+--- !u!114 &-3367648048897788566
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33,20 +148,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/rotacao_de_camera
+  m_Name: event:/sfx/bloco_gelo
   m_EditorClassIdentifier: 
-  Path: event:/sfx/rotacao_de_camera
-  guid: 80ab9b29d18fb744be6327ec6900e66e
+  Path: event:/sfx/bloco_gelo
+  guid: bda723d6482db54e86da511a7774c515
   Banks:
-  - {fileID: 5019799481293864295}
+  - {fileID: -2339003085754286187}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 10000
-  Length: 126
---- !u!114 &-2717682758832193843
+  Length: 1577
+--- !u!114 &-2339003085754286187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FmodElla/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637637658012365995
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-1823580332044017299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,20 +190,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/music/gameplay
+  m_Name: event:/sfx/entrando_no_portal
   m_EditorClassIdentifier: 
-  Path: event:/music/gameplay
-  guid: 3732f5ec4766264b9dcc131bd7ae5ade
+  Path: event:/sfx/entrando_no_portal
+  guid: 95201d8d91526e46962d8808d551c6fe
   Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
   Parameters: []
   MinDistance: 0
-  MaxDistance: 0
-  Length: 189230
---- !u!114 &-1511679537601651873
+  MaxDistance: 10000
+  Length: 2404
+--- !u!114 &-223873777363858841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/passos
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/passos
+  guid: 30add40f41519c49b6363aaadc635017
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 10000
+  Length: 210
+--- !u!114 &-123194615610562674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,7 +241,7 @@ MonoBehaviour:
   Path: event:/sfx/grito_do_macaco
   guid: 90d8646262dfc04487331fcfd4ae374a
   Banks:
-  - {fileID: 5019799481293864295}
+  - {fileID: -2339003085754286187}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -105,36 +262,36 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 3555187576542341472}
-  - {fileID: 5019799481293864295}
+  - {fileID: 7251754845039497603}
+  - {fileID: -2339003085754286187}
   EditorEvents:
-  - {fileID: 3160828207462255974}
-  - {fileID: 7721127159612477584}
-  - {fileID: -2717682758832193843}
-  - {fileID: 3133465954534549043}
-  - {fileID: 1496022315910878358}
-  - {fileID: -6525333006713598185}
-  - {fileID: -7906219423472569089}
-  - {fileID: -1511679537601651873}
-  - {fileID: 3144770148190525034}
-  - {fileID: 3374014929607410795}
-  - {fileID: 6435031112720186405}
-  - {fileID: 1233440402489926157}
-  - {fileID: 350277731795200833}
-  - {fileID: 4730233125312390664}
-  - {fileID: 8763381433436583831}
-  - {fileID: 2806404583638431605}
-  - {fileID: 4797600703773412302}
-  - {fileID: 5212539473240812596}
-  - {fileID: 800513678307680762}
+  - {fileID: 8371293570125165287}
+  - {fileID: -223873777363858841}
+  - {fileID: 5571177642804681205}
+  - {fileID: 6070349376577468773}
+  - {fileID: -6756676506866487884}
+  - {fileID: 8239910159367460527}
+  - {fileID: -3781095442741512856}
+  - {fileID: -123194615610562674}
+  - {fileID: -1823580332044017299}
+  - {fileID: -6867595853380195650}
+  - {fileID: 6032617662217930234}
+  - {fileID: 4793814346274444711}
+  - {fileID: -3367648048897788566}
+  - {fileID: 3962767566429620714}
+  - {fileID: -4350372949166845932}
+  - {fileID: -6441053552499233236}
+  - {fileID: 2369619163433560212}
+  - {fileID: -9043498542931217878}
+  - {fileID: 5972721926371575605}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 5019799481293864295}
+  - {fileID: -2339003085754286187}
   StringsBanks:
-  - {fileID: 3555187576542341472}
-  stringsBankWriteTime: 637616093759243082
+  - {fileID: 7251754845039497603}
+  stringsBankWriteTime: 637637658012395998
   cacheVersion: 6
---- !u!114 &350277731795200833
+--- !u!114 &2369619163433560212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,7 +306,7 @@ MonoBehaviour:
   Path: event:/sfx/interface_selecao
   guid: e820a34a6ea7364ea626043846b29531
   Banks:
-  - {fileID: 5019799481293864295}
+  - {fileID: -2339003085754286187}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -157,277 +314,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 40
---- !u!114 &800513678307680762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/bloco_alien
-  m_EditorClassIdentifier: 
-  Path: event:/sfx/bloco_alien
-  guid: d5bf95722209524ab307259d76d195ec
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 10000
-  Length: 931
---- !u!114 &1233440402489926157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/salto_queda
-  m_EditorClassIdentifier: 
-  Path: event:/sfx/salto_queda
-  guid: dd6276d99a67ed4fb15dd79690263042
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0.1
-  MaxDistance: 10000
-  Length: 815
---- !u!114 &1496022315910878358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/coleta_de_estrela
-  m_EditorClassIdentifier: 
-  Path: event:/sfx/coleta_de_estrela
-  guid: 7fbe7ee9b155b146b0d1157c0ca5d751
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 2511
---- !u!114 &2806404583638431605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/bloco_nuvem
-  m_EditorClassIdentifier: 
-  Path: event:/sfx/bloco_nuvem
-  guid: 97699aede8228242acbc691231451d98
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 10000
-  Length: 1980
---- !u!114 &3133465954534549043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/interface_click
-  m_EditorClassIdentifier: 
-  Path: event:/sfx/interface_click
-  guid: 44157f45d4f6b94f95c723c4851b2729
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 2200
---- !u!114 &3144770148190525034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/entrando_no_portal
-  m_EditorClassIdentifier: 
-  Path: event:/sfx/entrando_no_portal
-  guid: 95201d8d91526e46962d8808d551c6fe
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 10000
-  Length: 2404
---- !u!114 &3160828207462255974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/music/menu
-  m_EditorClassIdentifier: 
-  Path: event:/music/menu
-  guid: 13de3baf8edfc74f9bebae72f6c155e0
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 78461
---- !u!114 &3374014929607410795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/fanfarra_vitoria
-  m_EditorClassIdentifier: 
-  Path: event:/sfx/fanfarra_vitoria
-  guid: 96335b9883fc0140a6026f9780bd3a3c
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 7397
---- !u!114 &3555187576542341472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/FmodElla/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637616093759243082
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1744
-  Exists: 1
---- !u!114 &4730233125312390664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/salto_pulo
-  m_EditorClassIdentifier: 
-  Path: event:/sfx/salto_pulo
-  guid: eec84c8e0133e44992fceb689f32fb81
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 10000
-  Length: 210
---- !u!114 &4797600703773412302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/bloco_gelo
-  m_EditorClassIdentifier: 
-  Path: event:/sfx/bloco_gelo
-  guid: bda723d6482db54e86da511a7774c515
-  Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 10000
-  Length: 1577
---- !u!114 &5019799481293864295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/FmodElla/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637616093759213077
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &5212539473240812596
+--- !u!114 &3962767566429620714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -442,7 +329,7 @@ MonoBehaviour:
   Path: event:/sfx/bloco_vidro_quebrando
   guid: c0158e9ccdcedb45a53b6ec6d8a4c4f8
   Banks:
-  - {fileID: 5019799481293864295}
+  - {fileID: -2339003085754286187}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -450,7 +337,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 10000
   Length: 715
---- !u!114 &6435031112720186405
+--- !u!114 &4793814346274444711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -465,7 +352,7 @@ MonoBehaviour:
   Path: event:/sfx/pop_up_de_texto_ui
   guid: adffe5294a719d4888d7d36e40b0ac9a
   Banks:
-  - {fileID: 5019799481293864295}
+  - {fileID: -2339003085754286187}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -473,7 +360,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 883
---- !u!114 &7721127159612477584
+--- !u!114 &5571177642804681205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -483,20 +370,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sfx/passos
+  m_Name: event:/music/gameplay
   m_EditorClassIdentifier: 
-  Path: event:/sfx/passos
-  guid: 30add40f41519c49b6363aaadc635017
+  Path: event:/music/gameplay
+  guid: 3732f5ec4766264b9dcc131bd7ae5ade
   Banks:
-  - {fileID: 5019799481293864295}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
+  - {fileID: -2339003085754286187}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
   Parameters: []
   MinDistance: 0
-  MaxDistance: 10000
-  Length: 210
---- !u!114 &8763381433436583831
+  MaxDistance: 0
+  Length: 189230
+--- !u!114 &5972721926371575605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -511,7 +398,7 @@ MonoBehaviour:
   Path: event:/sfx/bloquinho_caindo
   guid: efc713760ff2f841aa1912d6b1893dac
   Banks:
-  - {fileID: 5019799481293864295}
+  - {fileID: -2339003085754286187}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -519,3 +406,116 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 10000
   Length: 1395
+--- !u!114 &6032617662217930234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/bloco_nuvem
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/bloco_nuvem
+  guid: 97699aede8228242acbc691231451d98
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 10000
+  Length: 1980
+--- !u!114 &6070349376577468773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/interface_click
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/interface_click
+  guid: 44157f45d4f6b94f95c723c4851b2729
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2200
+--- !u!114 &7251754845039497603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FmodElla/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637637658012395998
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1744
+  Exists: 1
+--- !u!114 &8239910159367460527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/rotacao_de_camera
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/rotacao_de_camera
+  guid: 80ab9b29d18fb744be6327ec6900e66e
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 10000
+  Length: 126
+--- !u!114 &8371293570125165287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/music/menu
+  m_EditorClassIdentifier: 
+  Path: event:/music/menu
+  guid: 13de3baf8edfc74f9bebae72f6c155e0
+  Banks:
+  - {fileID: -2339003085754286187}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 78461
