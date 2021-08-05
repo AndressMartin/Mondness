@@ -3,12 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CameraRotate : MonoBehaviour
 {
     FMOD.Studio.EventInstance rotateSfx;
     private Rigidbody rb;
     public static Enums.CameraPos cameraPos = Enums.CameraPos.pos1;
+    public static UnityEvent rotateCam;
     int posNum = 0;
 
     public static bool rotacionando = false,
@@ -38,6 +40,11 @@ public class CameraRotate : MonoBehaviour
     void Start()
     {
         rotateSfx = RuntimeManager.CreateInstance("event:/sfx/rotacao_de_camera");
+        if (rotateCam == null)
+        {
+            rotateCam = new UnityEvent();
+        }
+        rotateCam.AddListener(RotateClockwiseWithButton);
         rb = GetComponent<Rigidbody>();
         rotVel = rotVel / maxRotTime;
     }
@@ -54,25 +61,11 @@ public class CameraRotate : MonoBehaviour
             {
                 if (InputExt.GetKeyDown(KeyCode.E))
                 {
-                    RuntimeManager.AttachInstanceToGameObject(rotateSfx, transform, rb);
-                    rotateSfx.start();
-                    //transform.Rotate(0, 90, 0);
-                    posNum++;
-
-                    direcao = 1f;
-                    rotacionando = true;
-                    rotTime = maxRotTime;
+                    RotateClockwise();
                 }
                 else if (InputExt.GetKeyDown(KeyCode.Q))
                 {
-                    RuntimeManager.AttachInstanceToGameObject(rotateSfx, transform, rb);
-                    rotateSfx.start();
-                    //transform.Rotate(0, -90, 0);
-                    posNum--;
-
-                    direcao = -1f;
-                    rotacionando = true;
-                    rotTime = maxRotTime;
+                    RotateCounterClockwise();
                 }
                 else return;
             }
@@ -102,6 +95,47 @@ public class CameraRotate : MonoBehaviour
         //SetCameraNewPos();
     }
 
+    private void RotateCounterClockwise()
+    {
+        RuntimeManager.AttachInstanceToGameObject(rotateSfx, transform, rb);
+        rotateSfx.start();
+        //transform.Rotate(0, -90, 0);
+        posNum--;
+
+        direcao = -1f;
+        rotacionando = true;
+        rotTime = maxRotTime;
+    }
+
+    private void RotateClockwise()
+    {
+        RuntimeManager.AttachInstanceToGameObject(rotateSfx, transform, rb);
+        rotateSfx.start();
+        //transform.Rotate(0, 90, 0);
+        posNum++;
+
+        direcao = 1f;
+        rotacionando = true;
+        rotTime = maxRotTime;
+    }
+    private void RotateClockwiseWithButton()
+    {
+        if (rotacionando == false)
+        {
+            if (jogadorParado == true)
+            {
+                RuntimeManager.AttachInstanceToGameObject(rotateSfx, transform, rb);
+                rotateSfx.start();
+                //transform.Rotate(0, 90, 0);
+                posNum++;
+
+                direcao = 1f;
+                rotacionando = true;
+                rotTime = maxRotTime;
+            }
+        }
+    }
+    
     /*
     private void SetCameraNewPos()
     {

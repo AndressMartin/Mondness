@@ -74,7 +74,7 @@ public class Portal : MonoBehaviour
         //Get level stars. Compare with store. Set the biggest.
         PointManage.GetInstance().SetLevels(SceneManager.GetActiveScene().buildIndex, true, true, starMax - starNum);
         PointManage.GetInstance().SetLevels(SceneManager.GetActiveScene().buildIndex + 1, true, false, 0);
-        PointManage.GetInstance().Save();
+        PointManage.GetInstance().SaveCustomData();
         Debug.Log("Last");
         SceneManage.nextScene.Invoke();
     }

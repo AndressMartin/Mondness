@@ -26,4 +26,9 @@ public class mainMenu : MonoBehaviour
     {
         SceneManage.TogglePause();
     }
+
+    public void callRotate()
+    {
+        CameraRotate.rotateCam.Invoke();
+    }
 }

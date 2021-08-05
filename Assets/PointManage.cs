@@ -13,7 +13,6 @@ public class PointManage : SingletonInstance<PointManage>
         public bool unlocked;
         public bool completed;
         public int score;
-
         public Level(bool unlocked, bool completed, int score)
         {
             this.unlocked = unlocked;
@@ -28,7 +27,6 @@ public class PointManage : SingletonInstance<PointManage>
         public List<Level> levels;
         public CustomData()
         {
-
             // Dummy data
             levels = new List<Level>() 
             {
@@ -38,19 +36,28 @@ public class PointManage : SingletonInstance<PointManage>
                     new Level ( false, false, 0 )
             };
         }
-
+        
     }
 
+    [System.Serializable]
+    public class SysConfig
+    {
+        public bool musicMuted;
+        public bool sfxMuted;
+    }
     public CustomData customData;
+    public SysConfig sysConfig;
     public bool loadOnStart = true;
     public string identifier = "playerData";
-
-
+    public string sysIdentifier = "systemPrefs";
+    public bool loaded = false;
     void Start()
     {
         if (loadOnStart)
         {
-            Load();
+            LoadCustomData();
+            LoadSys();
+            loaded = true;
         }
     }
     private void Update()
@@ -65,7 +72,7 @@ public class PointManage : SingletonInstance<PointManage>
                     new Level ( false, false, 0 ),
                     new Level ( false, false, 0 )
             };
-            Save();
+            SaveCustomData();
         }
 #endif
     }
@@ -78,16 +85,26 @@ public class PointManage : SingletonInstance<PointManage>
         else customData.levels[index] = new Level(unlocked, completed, customData.levels[index].score);
     }
 
-    public void Save()
+    public void SaveCustomData()
     {
         SaveGame.Save<CustomData>(identifier, customData/*, SerializerDropdown.Singleton.ActiveSerializer*/);
     }
-
-    public void Load()
+    public void SaveSys()
+    {
+        SaveGame.Save<SysConfig>(sysIdentifier, sysConfig/*, SerializerDropdown.Singleton.ActiveSerializer*/);
+    }
+    public void LoadCustomData()
     {
         customData = SaveGame.Load<CustomData>(
             identifier,
             new CustomData()
+            /*,SerializerDropdown.Singleton.ActiveSerializer*/);
+    }
+    public void LoadSys()
+    {
+        sysConfig = SaveGame.Load<SysConfig>(
+            sysIdentifier,
+            new SysConfig()
             /*,SerializerDropdown.Singleton.ActiveSerializer*/);
     }
 }
