@@ -14,12 +14,18 @@ public class LevelSelectManage : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount-1; i++)
         {
-            int x = i; //Store in a temporary value to pass to the onClick event
-            var button = transform.GetChild(i).GetComponent<Button>();
-            button.onClick.AddListener(() => { LoadCorrectLevel(x); });
-            levelsAndIndexes.Add(button, i);
-            tempList.Add(i);
+            ConfigureLevelButton(i);
         }
+    }
+
+    private void ConfigureLevelButton(int i)
+    {
+        int x = i; //Store in a temporary value to pass to the onClick event
+        var button = transform.GetChild(i).GetComponent<Button>();
+        button.onClick.AddListener(() => { LoadCorrectLevel(x); });
+        levelsAndIndexes.Add(button, i);
+        tempList.Add(i);
+        button.interactable = PointManage.GetInstance().customData.levels[i].unlocked;
     }
 
     public void LoadCorrectLevel(int index)

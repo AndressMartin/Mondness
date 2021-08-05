@@ -10,7 +10,15 @@ public class mainMenu : MonoBehaviour
     public void PlayGame ()
     {
         //Jump two indexes because of the two menus in the beginning
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene(2);
+    }
+    public void GoToSelectionScr()
+    {
+        SceneManager.LoadScene(1);
     }
 
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

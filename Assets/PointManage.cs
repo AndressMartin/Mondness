@@ -46,7 +46,6 @@ public class PointManage : SingletonInstance<PointManage>
     public string identifier = "playerData";
 
 
-    // Start is called before the first frame update
     void Start()
     {
         if (loadOnStart)
@@ -54,16 +53,29 @@ public class PointManage : SingletonInstance<PointManage>
             Load();
         }
     }
-
-    //public void SetScore(string score)
-    //{
-    //    customData.score = int.Parse(score);
-    //}
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            customData.levels = new List<Level>()
+            {
+                    new Level ( true, false, 0 ),
+                    new Level ( false, false, 0 ),
+                    new Level ( false, false, 0 ),
+                    new Level ( false, false, 0 )
+            };
+            Save();
+        }
+#endif
+    }
     public void SetLevels(int index, bool unlocked, bool completed, int score)
     {
+        //Ignore the first two scenes ingame
+        index -= 2;
         //Change score only if score is higher than whats saved.
-        if (score > customData.levels[index - 1].score) customData.levels[index-1] = new Level(unlocked, completed, score);
-        else customData.levels[index - 1] = new Level(unlocked, completed, customData.levels[index - 1].score);
+        if (score > customData.levels[index].score) customData.levels[index] = new Level(unlocked, completed, score);
+        else customData.levels[index] = new Level(unlocked, completed, customData.levels[index].score);
     }
 
     public void Save()
@@ -77,7 +89,5 @@ public class PointManage : SingletonInstance<PointManage>
             identifier,
             new CustomData()
             /*,SerializerDropdown.Singleton.ActiveSerializer*/);
-        //scoreInputField.text = customData.score.ToString();
-        //highScoreInputField.text = customData.highScore.ToString();
     }
 }
