@@ -24,6 +24,6 @@ public class LevelSelectManage : MonoBehaviour
 
     public void LoadCorrectLevel(int index)
     {
-        SceneManager.LoadScene(index+1);
+        SceneManager.LoadScene(index+2); //Jump two indexes because of the two menus in the beginning
     }
 }

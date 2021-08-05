@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MusicManage : SingletonInstance<MusicManage>
+public class MusicManage : MonoBehaviour
 {
     void Start()
     {
@@ -12,7 +12,7 @@ public class MusicManage : SingletonInstance<MusicManage>
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex <= 1)
         {
             Destroy(gameObject);
         }

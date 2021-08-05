@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
@@ -70,6 +71,10 @@ public class Portal : MonoBehaviour
     }
     private void LoadNextScene()
     {
+        //Get level stars. Compare with store. Set the biggest.
+        PointManage.GetInstance().SetLevels(SceneManager.GetActiveScene().buildIndex, true, true, starMax - starNum);
+        PointManage.GetInstance().SetLevels(SceneManager.GetActiveScene().buildIndex + 1, true, false, 0);
+        PointManage.GetInstance().Save();
         Debug.Log("Last");
         SceneManage.nextScene.Invoke();
     }

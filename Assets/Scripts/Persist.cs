@@ -6,16 +6,8 @@ using UnityEngine.SceneManagement;
 public class Persist : SingletonInstance<Persist>
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(gameObject);
-    }
-
-    private void Update()
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            Destroy(gameObject);
-        }
     }
 }
