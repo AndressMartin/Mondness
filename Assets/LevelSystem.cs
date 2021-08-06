@@ -41,8 +41,6 @@ public class LevelSystem : MonoBehaviour
             }
             totalStars += starsToFill;
         }
-        Debug.Log("Is this running?");
         starCounter.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = totalStars.ToString();
-        Debug.Log("What about this?");
     }
 }

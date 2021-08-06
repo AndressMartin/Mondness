@@ -33,6 +33,7 @@ public class PointManage : SingletonInstance<PointManage>
                     new Level ( true, false, 0 ),
                     new Level ( false, false, 0 ),
                     new Level ( false, false, 0 ),
+                    new Level ( false, false, 0 ),
                     new Level ( false, false, 0 )
             };
         }
@@ -72,7 +73,8 @@ public class PointManage : SingletonInstance<PointManage>
                     new Level ( true, false, 0 ),
                     new Level ( false, false, 0 ),
                     new Level ( false, false, 0 ),
-                    new Level ( false, false, 0 )
+                    new Level ( false, false, 0 ),
+                    new Level (false, false, 0)
             };
             SaveCustomData();
         }
