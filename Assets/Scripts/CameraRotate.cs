@@ -47,6 +47,7 @@ public class CameraRotate : MonoBehaviour
         rotateCam.AddListener(RotateClockwiseWithButton);
         rb = GetComponent<Rigidbody>();
         rotVel = rotVel / maxRotTime;
+        cameraPos = Enums.CameraPos.pos1;
     }
 
     // Update is called once per frame
@@ -54,6 +55,8 @@ public class CameraRotate : MonoBehaviour
     {
         //if (InputExt.GetKeyDown(KeyCode.F)) SoundTester.PlaySound();
         //Debug.Log("Came Pos: " + posNum + "\nAngulo: " + 90 * posNum);
+
+        //Debug.Log("Y: " + transform.rotation.y + "\nPos: " + cameraPos);
 
         if (rotacionando == false)
         {
