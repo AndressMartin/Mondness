@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ public class Bloco : MonoBehaviour
     BoxCollider boxCollider;
     Rigidbody rigidBody;
     MeshRenderer meshRenderer;
+
+    FMOD.Studio.EventInstance quebrarSfx;
 
     bool caiQuandoPlayerSai = true;
     public bool caindo,
@@ -28,6 +31,8 @@ public class Bloco : MonoBehaviour
         posIni = transform.position;
         rotIni = transform.rotation;
         CuboManager.ResetarCena.AddListener(ResetParams);
+
+        quebrarSfx = RuntimeManager.CreateInstance("event:/sfx/bloco_vidro_quebrando");
 
         velF = new Vector3(0, 0, 0);
 
@@ -138,6 +143,7 @@ public class Bloco : MonoBehaviour
 
     private void Quebrar()
     {
+        quebrarSfx.start();
         boxCollider.enabled = false;
         rigidBody.isKinematic = true;
         meshRenderer.enabled = false;
