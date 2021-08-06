@@ -14,7 +14,8 @@ public class SceneManage : MonoBehaviour
 
     static bool instantiateMusic = false;
     public static bool paused = false;
-    static Scene previousScene;
+    static int previousScene;
+    static int currentScene;
     private void Awake()
     {
         if (nextScene == null)
@@ -24,7 +25,8 @@ public class SceneManage : MonoBehaviour
 
     private void Start()
     {
-        previousScene = SceneManager.GetActiveScene();
+        previousScene = SceneManager.GetActiveScene().buildIndex;
+        currentScene = SceneManager.GetActiveScene().buildIndex;
         //If game starting or level chosen: 
         //if (FindObjectOfType<MusicManage>() == null) 
     }
@@ -59,11 +61,17 @@ public class SceneManage : MonoBehaviour
     }
     static void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
+        currentScene = scene.buildIndex;
         paused = false;
         PointManage.GetInstance().resetTempScore();
         Debug.Log(System.String.Format("Scene{0} has been loaded ({1})", scene.name, loadSceneMode.ToString()));
         //If was on mainMenu or SelectMenu and isn't anymore
-        if (previousScene.buildIndex <= 1 && scene.buildIndex > 1) instantiateMusic = true;
+        if (previousScene <= 1 && currentScene > 1)
+        {
+            Debug.Log(previousScene + " and " + currentScene);
+            instantiateMusic = true;
+        }
+        previousScene = currentScene;
     }
     void InstantiateMusic()
     {
