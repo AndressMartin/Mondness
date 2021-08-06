@@ -88,11 +88,16 @@ public class CameraRotate : MonoBehaviour
             return;
         }
 
+        AtualizarPosicaoCamera();
+        //y = 90 * posNum;
+        //SetCameraNewPos();
+    }
+
+    private void AtualizarPosicaoCamera()
+    {
         if (posNum > 3) posNum = 0;
         if (posNum < 0) posNum = 3;
         cameraPos = (Enums.CameraPos)posNum;
-        //y = 90 * posNum;
-        //SetCameraNewPos();
     }
 
     private void RotateCounterClockwise()
@@ -132,6 +137,8 @@ public class CameraRotate : MonoBehaviour
                 direcao = 1f;
                 rotacionando = true;
                 rotTime = maxRotTime;
+
+                AtualizarPosicaoCamera();
             }
         }
     }
