@@ -28,8 +28,8 @@ See more about this project:  [Click Here to View the Document](https://drive.go
 #### 🎮 [Click here to learn more about the project and to play the game.](https://mewmewdevart.itch.io/mondness) 🎮
 
 #### 🎮 Screenshot Gameplay:
-![lQwar9](https://user-images.githubusercontent.com/50052600/125291204-83be0500-e2f7-11eb-89aa-2018284d62fe.jpeg)
+![lQwar9](https://user-images.githubusercontent.com/50052600/128603494-429a75af-8e94-48e0-bf7a-068ca1814a12.gif)
 
 <p align="center"> Developed with 💜 by The JellyVixes
  </p>
- 
+
